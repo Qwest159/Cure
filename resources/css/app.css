@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+typographie titre => playfair Display
+typographie paragraphe => Roboto
+*/
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@100..900&display=swap");
+
+[x-cloak] {
+    display: none;
+}
+
+:root {
+    --couleur_blue: #00bfdf;
+    --couleur_orange: #f9cc5a;
+    --couleur_orange_hover: #f7d377;
+}
+
+/* Typhographie */
+h1,
+h2,
+nav {
+    font-family: "Playfair Display", serif;
+    @apply text-4xl;
+    @apply font-extrabold;
+}
+button,
+p,
+figcaption {
+    font-family: "Roboto", sans-serif;
+    @apply text-2xl;
+}
+
+nav {
+    background-color: var(--couleur_blue);
+}
+nav .nav_text:hover {
+    color: var(--couleur_orange);
+}
+nav a {
+    @apply text-xl !important;
+    @apply font-bold !important;
+}
+@media (max-width: 600px) {
+    h1,
+    h2 {
+        @apply text-3xl;
+    }
+}
+
+#description_accueil {
+    background-image: url("/storage/accueil/paysage_accueil_transparent.jpg");
+    height: 100vh;
+    padding: 3.5em;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    @apply flex;
+    @apply flex-col;
+}
+/* placement des elements */
+
+#h1_description,
+#h2_description {
+    @apply relative;
+    @apply text-center;
+    @apply font-extrabold;
+    @apply m-auto;
+    @apply rounded-xl;
+}
+#h1_description {
+    @apply text-5xl;
+    line-height: 1.5em;
+    word-spacing: 10px;
+}
+article#description_accueil h1 {
+    max-width: 800px;
+}
+article#description_accueil #h2_description {
+    bottom: 10vh;
+    width: 50vw;
+    @apply bg-black;
+    @apply bg-opacity-65;
+    @apply text-white;
+    @apply p-5;
+}
+#contactez {
+    align-self: center;
+}
+button:hover {
+    background-color: var(--couleur_orange_hover);
+}
+button:not(nav button) {
+    background-color: var(--couleur_orange);
+    padding: 10px 25px;
+    @apply rounded-3xl;
+    @apply text-2xl;
+    @apply font-extrabold;
+}
+/* --------------------- */
+#proposons h1,
+#proposons p {
+    max-width: 550px;
+    margin: auto;
+    text-align: center;
+}
+
+main article:nth-of-type(n + 2) {
+    @apply my-28 !important;
+}
+article h1 + p {
+    @apply mt-9 !important;
+}
+/* ---------------------------- */
+article#univers {
+    background-color: black;
+
+    @apply mx-5;
+    @apply py-12;
+    @apply rounded-xl;
+    display: flex;
+    flex-direction: column;
+}
+article#univers h1 {
+    @apply text-white;
+    @apply pb-9;
+    @apply pl-16;
+}
+article#univers h1 span {
+    @apply pl-16;
+}
+article#univers figure img {
+    @apply rounded-t-xl;
+    height: 50vh;
+    object-fit: cover;
+}
+article#univers figure:nth-of-type(n + 1) {
+    margin-left: 2em;
+}
+article#univers figure:last-of-type {
+    margin-right: 2em;
+}
+article#univers div {
+    position: relative;
+}
+article#univers figcaption {
+    background-color: #ececec;
+    color: black;
+    @apply pt-12;
+    @apply px-5;
+    height: 12em;
+    @apply rounded-b-xl;
+    @apply text-center;
+}
+
+article#univers section,
+article#produits section {
+    display: grid;
+    @apply grid-cols-3;
+    justify-content: space-evenly;
+}
+
+article#univers p {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    color: black;
+    @apply font-extrabold;
+    @apply py-2;
+}
+article#univers figure:nth-of-type(2) p {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    color: white;
+}
+article#univers button {
+    @apply self-end;
+    margin-right: 2em;
+    margin-top: 1.5em;
+    padding: 0.5em 2em;
+}
+/* ------------------- */
+article#produits {
+    background-color: #ececec;
+    @apply mx-5;
+    @apply py-12;
+    @apply rounded-xl;
+    display: flex;
+    flex-direction: column;
+}
+article#produits h1 {
+    @apply pb-9;
+    @apply text-center;
+}
+article#produits figure {
+    @apply rounded-xl;
+    @apply justify-self-center;
+}
+article#produits figure img {
+    height: 30em;
+    width: 23rem;
+    @apply object-cover;
+}
+article#produits button {
+    @apply self-end;
+    margin-right: 2em;
+    margin-top: 1.5em;
+    padding: 0.5em 2em;
+}
+/* ------map------ */
+#localisation h1 {
+    text-align: center;
+    @apply pb-9;
+}
+iframe {
+    margin: auto;
+}
+
+/* ------------footer-------- */
+footer {
+    color: white;
+    background-color: var(--couleur_blue);
+}
+footer article {
+    display: flex;
+    @apply justify-evenly;
+}
+footer article section {
+    @apply py-9;
+}
+footer article section h2 {
+    @apply pb-5;
+}
