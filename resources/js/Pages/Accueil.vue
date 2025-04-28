@@ -111,15 +111,15 @@ import { Head, Link } from "@inertiajs/vue3";
         </article>
         <article id="localisation">
             <h1>Localisation</h1>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d81694.43245120201!2d5.339842000000001!3d50.21813585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c026825ad1d17b%3A0xfbf7763207a668ea!2s6900%20Marche-en-Famenne!5e0!3m2!1sfr!2sbe!4v1745522564920!5m2!1sfr!2sbe"
-                width="800"
-                height="450"
-                style="border: 0"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <section>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d81694.43245120201!2d5.339842000000001!3d50.21813585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c026825ad1d17b%3A0xfbf7763207a668ea!2s6900%20Marche-en-Famenne!5e0!3m2!1sfr!2sbe!4v1745522564920!5m2!1sfr!2sbe"
+                    style="border: 0"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+            </section>
         </article>
     </GuestLayout>
 </template>

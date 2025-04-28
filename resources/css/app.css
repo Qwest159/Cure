@@ -16,6 +16,7 @@ typographie paragraphe => Roboto
     --couleur_blue: #00bfdf;
     --couleur_orange: #f9cc5a;
     --couleur_orange_hover: #f7d377;
+    --couleur_gris: #ececec;
 }
 
 /* Typhographie */
@@ -42,12 +43,6 @@ nav .nav_text:hover {
 nav a {
     @apply text-xl !important;
     @apply font-bold !important;
-}
-@media (max-width: 600px) {
-    h1,
-    h2 {
-        @apply text-3xl;
-    }
 }
 
 #description_accueil {
@@ -117,7 +112,6 @@ article h1 + p {
 /* ---------------------------- */
 article#univers {
     background-color: black;
-
     @apply mx-5;
     @apply py-12;
     @apply rounded-xl;
@@ -147,11 +141,11 @@ article#univers div {
     position: relative;
 }
 article#univers figcaption {
-    background-color: #ececec;
+    background-color: var(--couleur_gris);
     color: black;
     @apply pt-12;
     @apply px-5;
-    height: 12em;
+    height: 30rem;
     @apply rounded-b-xl;
     @apply text-center;
 }
@@ -185,7 +179,8 @@ article#univers button {
 }
 /* ------------------- */
 article#produits {
-    background-color: #ececec;
+    background-color: var(--couleur_gris);
+    position: relative;
     @apply mx-5;
     @apply py-12;
     @apply rounded-xl;
@@ -199,6 +194,7 @@ article#produits h1 {
 article#produits figure {
     @apply rounded-xl;
     @apply justify-self-center;
+    @apply mx-5;
 }
 article#produits figure img {
     height: 30em;
@@ -212,11 +208,14 @@ article#produits button {
     padding: 0.5em 2em;
 }
 /* ------map------ */
+
 #localisation h1 {
     text-align: center;
     @apply pb-9;
 }
 iframe {
+    width: 50vw;
+    height: 50vh;
     margin: auto;
 }
 
@@ -226,12 +225,68 @@ footer {
     background-color: var(--couleur_blue);
 }
 footer article {
-    display: flex;
-    @apply justify-evenly;
+    display: grid;
+    @apply grid-cols-3;
+    @apply justify-items-center;
 }
 footer article section {
     @apply py-9;
 }
 footer article section h2 {
     @apply pb-5;
+}
+
+/* ----------Bien-être------------- */
+
+main .h1_titre {
+    @apply pt-36;
+    text-align: center;
+}
+main .h1_titre ~ p:hover {
+    color: var(--couleur_orange_hover);
+    text-align: center;
+}
+main .h1_titre ~ p {
+    text-align: center;
+    @apply mb-12;
+    @apply font-bold;
+}
+main article#bien_être {
+    @apply py-12;
+    display: grid;
+    @apply grid-cols-3;
+    /* @apply flex-wrap; */
+    @apply justify-evenly;
+    /* gap: 2em; */
+}
+main article#bien_être section {
+    border: 1px rgb(173, 173, 173) solid;
+    background-color: var(--couleur_gris);
+    @apply rounded-xl;
+    @apply mx-10;
+    /* width: 25vw; */
+}
+main article#bien_être figure {
+    /* @apply rounded-xl; */
+    /* width: 80%; */
+    /* height: 50vh; */
+}
+article#bien_être figure img {
+    height: 33rem;
+    @apply w-full;
+    @apply object-cover;
+    @apply rounded-t-xl;
+}
+article#bien_être div {
+    display: flex;
+    @apply justify-between;
+}
+
+article#bien_être section h2,
+article#bien_être section p {
+    @apply py-6;
+    @apply px-6;
+}
+article#bien_être section h2 {
+    text-align: center;
 }

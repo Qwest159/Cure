@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+typographie titre => playfair Display
+typographie paragraphe => Roboto
+*/
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@100..900&display=swap");
+
+[x-cloak] {
+    display: none;
+}
+
+:root {
+    --couleur_blue: #00bfdf;
+    --couleur_orange: #f9cc5a;
+    --couleur_orange_hover: #f7d377;
+    --couleur_gris: #ececec;
+}
+@media (max-width: 1024px) {
+    /* -----universs------ */
+    article#univers h1,
+    article#univers h1 span {
+        text-align: center !important;
+        @apply pl-0 !important;
+    }
+    article#univers section {
+        @apply grid-cols-1 !important;
+        gap: 2em;
+    }
+    article#univers figure {
+        margin: 0.5em !important;
+    }
+    article#univers figure img {
+        width: 100%;
+    }
+    article#univers button {
+        @apply self-center !important;
+        margin-right: 0 !important;
+    }
+    article#univers figcaption {
+        @apply py-5 !important;
+        height: auto !important;
+    }
+
+    main article#bien_être {
+        @apply grid-cols-2 !important;
+    }
+}
+@media (max-width: 800px) {
+    /* -----------accueil---------------- */
+    h1,
+    h2,
+    nav {
+        @apply text-3xl !important;
+    }
+    button,
+    p,
+    figcaption {
+        @apply text-xl !important;
+    }
+    #description_accueil {
+        padding: 0 !important;
+    }
+    #h2_description {
+        width: 100% !important;
+        /* @apply my-2 !important; */
+        @apply px-0 !important;
+    }
+    #contactez {
+        margin-bottom: 2em;
+    }
+
+    /* -------PRODUITS-ACCUEIL----- */
+    article#produits section {
+        @apply grid-cols-2 !important;
+    }
+    article#produits figure {
+        width: 100% !important;
+    }
+    article#produits section img {
+        height: 19rem !important;
+        @apply p-4;
+    }
+    article#produits button {
+        position: absolute;
+        bottom: 3em;
+        right: 1rem;
+        margin: 0 0 5em 0 !important;
+        /* padding: 0.5em 1.5em !important; */
+    }
+    iframe {
+        width: 100% !important;
+    }
+    footer article {
+        @apply grid-cols-2 !important;
+    }
+
+    /* ----------------PRODUITS-------------- */
+    main article#bien_être {
+        @apply grid-cols-1 !important;
+        gap: 3em;
+    }
+}

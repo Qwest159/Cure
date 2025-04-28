@@ -26,9 +26,9 @@ const showingNavigationDropdown = ref(false);
                     <div class="flex w-full">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
-                            <!-- <Link :href="route('/')">
+                            <Link :href="route('accueil')">
                                 <ApplicationMark />
-                            </Link> -->
+                            </Link>
                         </div>
 
                         <!-- Navigation Links -->
@@ -39,25 +39,24 @@ const showingNavigationDropdown = ref(false);
                             >
                                 Accueil
                             </NavLink>
-                            <!-- <NavLink
-                                :href="route('couleurs')"
-                                :active="route().current('couleurs')"
+                            <NavLink
+                                :href="route('bien_etre')"
+                                :active="route().current('bien_etre')"
                             >
-                                Jeux des couleurs
-                            </NavLink> -->
-
-                            <!--<NavLink
+                                Bien-être
+                            </NavLink>
+                            <NavLink
+                                :href="route('chambre')"
+                                :active="route().current('chambre')"
+                            >
+                                Chambres
+                            </NavLink>
+                            <NavLink
                                 :href="route('contact')"
                                 :active="route().current('contact')"
                             >
                                 Contact
                             </NavLink>
-                            <NavLink
-                                :href="route('lfclean_job')"
-                                :active="route().current('lfclean_job')"
-                            >
-                                Jobs
-                            </NavLink> -->
                         </div>
                     </div>
 
@@ -119,25 +118,25 @@ const showingNavigationDropdown = ref(false);
                     >
                         Accueil
                     </ResponsiveNavLink>
-                    <!-- <ResponsiveNavLink
-                        :href="route('couleurs')"
-                        :active="route().current('couleurs')"
+                    <ResponsiveNavLink
+                        :href="route('bien_etre')"
+                        :active="route().current('bien_etre')"
                     >
-                        Jeux des couleurs
-                    </ResponsiveNavLink> -->
+                        Bien-être
+                    </ResponsiveNavLink>
 
-                    <!--  <ResponsiveNavLink
+                    <ResponsiveNavLink
+                        :href="route('chambre')"
+                        :active="route().current('chambre')"
+                    >
+                        Chambres
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink
                         :href="route('contact')"
                         :active="route().current('contact')"
                     >
                         Contact
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink
-                        :href="route('lfclean_job')"
-                        :active="route().current('lfclean_job')"
-                    >
-                        Jobs
-                    </ResponsiveNavLink>  -->
                 </div>
             </div>
         </nav>
@@ -156,11 +155,6 @@ const showingNavigationDropdown = ref(false);
                     <p><i class="fa-brands fa-instagram"></i> instagram</p>
                 </section>
                 <section>
-                    <h2>Me suivre</h2>
-                    <p>Cure&airbnb@insta.com</p>
-                    <p>facebook.Cure&Airbnb.com</p>
-                </section>
-                <section>
                     <h2>À PROPOS</h2>
                     <p @click="() => $inertia.get(route('mentions_legales'))">
                         Mentions légales
@@ -172,6 +166,11 @@ const showingNavigationDropdown = ref(false);
                     >
                         Données personnelles
                     </p>
+                </section>
+                <section>
+                    <h2>Me suivre</h2>
+                    <p>Cure&airbnsta.com</p>
+                    <p>facebook.Cure&A.com</p>
                 </section>
             </article>
             <h3 class="text-center pt-5">© Cure, Made by Duchesne R.</h3>
