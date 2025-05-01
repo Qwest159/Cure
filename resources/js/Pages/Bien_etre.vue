@@ -30,7 +30,7 @@ const form = useForm(props);
                 <p>{{ produit.description }}</p>
             </section>
         </article>
-        <p>
+        <p class="important">
             <a href="http://" target="_blank" rel="noopener noreferrer">
                 Pour d'autres articles, n'hésitez pas à jeter un œil sur mon
                 site de vente.</a

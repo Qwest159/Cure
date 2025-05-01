@@ -16,7 +16,7 @@ typographie paragraphe => Roboto
     --couleur_blue: #00bfdf;
     --couleur_orange: #f9cc5a;
     --couleur_orange_hover: #f7d377;
-    --couleur_gris: #ececec;
+    --couleur_argenté: #f6f6f6;
 }
 
 /* Typhographie */
@@ -26,6 +26,9 @@ nav {
     font-family: "Playfair Display", serif;
     @apply text-4xl;
     @apply font-extrabold;
+}
+.important {
+    font-family: "Playfair Display", serif;
 }
 button,
 p,
@@ -120,7 +123,7 @@ article#univers {
 }
 article#univers h1 {
     @apply text-white;
-    @apply pb-9;
+
     @apply pl-16;
 }
 article#univers h1 span {
@@ -141,7 +144,7 @@ article#univers div {
     position: relative;
 }
 article#univers figcaption {
-    background-color: var(--couleur_gris);
+    background-color: var(--couleur_argenté);
     color: black;
     @apply pt-12;
     @apply px-5;
@@ -179,7 +182,7 @@ article#univers button {
 }
 /* ------------------- */
 article#produits {
-    background-color: var(--couleur_gris);
+    background-color: var(--couleur_argenté);
     position: relative;
     @apply mx-5;
     @apply py-12;
@@ -187,10 +190,7 @@ article#produits {
     display: flex;
     flex-direction: column;
 }
-article#produits h1 {
-    @apply pb-9;
-    @apply text-center;
-}
+
 article#produits figure {
     @apply rounded-xl;
     @apply justify-self-center;
@@ -240,16 +240,16 @@ footer article section h2 {
 
 main .h1_titre {
     @apply pt-36;
+    @apply pb-9;
     text-align: center;
 }
 main .h1_titre ~ p:hover {
     color: var(--couleur_orange_hover);
-    text-align: center;
 }
 main .h1_titre ~ p {
     text-align: center;
     @apply mb-12;
-    @apply font-bold;
+    /* @apply font-bold; */
 }
 main article#bien_être {
     @apply py-12;
@@ -261,18 +261,12 @@ main article#bien_être {
 }
 main article#bien_être section {
     border: 1px rgb(173, 173, 173) solid;
-    background-color: var(--couleur_gris);
+    background-color: var(--couleur_argenté);
     @apply rounded-xl;
-    @apply mx-10;
-    /* width: 25vw; */
-}
-main article#bien_être figure {
-    /* @apply rounded-xl; */
-    /* width: 80%; */
-    /* height: 50vh; */
+    @apply mx-16;
 }
 article#bien_être figure img {
-    height: 33rem;
+    height: 30em;
     @apply w-full;
     @apply object-cover;
     @apply rounded-t-xl;
@@ -280,6 +274,7 @@ article#bien_être figure img {
 article#bien_être div {
     display: flex;
     @apply justify-between;
+    @apply font-bold;
 }
 
 article#bien_être section h2,
@@ -289,4 +284,149 @@ article#bien_être section p {
 }
 article#bien_être section h2 {
     text-align: center;
+}
+/* --------CHAMBRE----------- */
+article#chambres section {
+    display: grid;
+    @apply grid-cols-3;
+    @apply rounded-xl;
+    border: gray 1px solid;
+    @apply m-9;
+}
+
+/* -------partie gauche ------- */
+article#chambres figure#partie_gauche {
+    @apply col-span-1;
+}
+article#chambres figure#partie_gauche img {
+    height: 100%;
+    @apply object-cover;
+    @apply rounded-l-xl;
+}
+/* ----------partie droite ---------- */
+article#chambres div#partie_droite {
+    @apply col-span-2;
+    @apply mx-14;
+    @apply mx-14;
+    position: relative;
+}
+article#chambres div#partie_droite {
+    @apply col-span-2;
+    @apply mx-14;
+    @apply py-6;
+}
+article#chambres div#partie_droite p {
+    @apply py-1;
+}
+article#chambres div#partie_droite h2 {
+    @apply pb-6;
+    text-align: center;
+}
+article#chambres div#partie_droite #jours_prix {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.gras_span {
+    @apply font-bold;
+}
+
+/* ----------- CONTACT---------- */
+article#contact {
+    width: 60%;
+    margin: auto;
+}
+
+article#contact form {
+    @apply rounded-xl;
+    border: 1px solid rgba(128, 128, 128, 0.548);
+    background-color: var(--couleur_argenté);
+    display: grid;
+    padding: 3em;
+    gap: 3em;
+    @apply grid-cols-2;
+    grid-template-areas:
+        "nom prenom"
+        "email tel"
+        "nombres cure"
+        "chambre  . "
+        "comment comment"
+        "bouton bouton";
+}
+
+/* Mapping des zones */
+#nom {
+    grid-area: nom;
+}
+#prenom {
+    grid-area: prenom;
+}
+#email {
+    grid-area: email;
+}
+#tel {
+    grid-area: tel;
+}
+#nombres {
+    grid-area: nombres;
+}
+#cure {
+    grid-area: cure;
+}
+#chambre {
+    grid-area: chambre;
+}
+#comment {
+    grid-area: comment;
+}
+.bouton {
+    grid-area: bouton;
+}
+
+/* ---------- Contact ---------- */
+article#contact form section {
+    display: flex;
+    flex-direction: column;
+}
+
+article#contact form input,
+article#contact form textarea {
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-size: 1em;
+}
+
+/* Gestion erreurs sans décalage */
+article#contact form section p:not(#titre_cure) {
+    color: red;
+    font-size: 0.9em;
+    min-height: 1.5em; /* réserve l'espace */
+    margin: 0.3em 0 0;
+}
+
+article#contact form .grouper {
+    display: flex;
+    @apply mt-3;
+}
+article#contact form .grouper label {
+    @apply ml-1;
+}
+article#contact form .grouper input {
+    @apply ml-2;
+}
+/* Bouton */
+
+article#contact form button {
+    width: 16rem;
+    margin: auto;
+}
+
+p#information {
+    border: 1px solid rgba(128, 128, 128, 0.548);
+    background-color: var(--couleur_argenté);
+    margin: auto;
+    @apply rounded-xl;
+    width: 65%;
+    padding: 2em 2em;
+    @apply my-9 !important;
 }

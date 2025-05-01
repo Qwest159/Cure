@@ -2,11 +2,12 @@
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
 import { defineProps, ref, onMounted } from "@vue/runtime-core";
+import Chambre from "./Chambre.vue";
 
 // agrandir le text area auto
 const textarea = ref(null);
 
-const props = defineProps(["flash", "date_heure"]);
+const props = defineProps(["flash", "chambre_dispo"]);
 
 function adjustHeight() {
     textarea.value.style.height = "auto";
@@ -21,12 +22,18 @@ let form = useForm({
     Prénom: "",
     Email: "",
     Téléphone: "",
-    nombres: "",
+    Nombres: "",
+    Cure: "",
+    Chambre: "",
     Commentaire: "",
 });
 
+let bouton_envoyer = ref(true);
+let affichage_resultat = ref(false);
 function succes() {
     bouton_envoyer.value = false;
+    console.log(form.Cure);
+
     form.post(route("mail.email"), {
         // Condition avant de passer à onSuccess
         onSuccess: () => {
@@ -36,19 +43,11 @@ function succes() {
                 Prénom: "",
                 Email: "",
                 Téléphone: "",
-
-                nombres: "",
-                Nettoyage: "",
-                Habitat: "",
-                Fréquence: "",
-                Installation: "",
-                Nombre: "",
-                images: "",
-                Date: "",
-                Heure: "",
+                Nombres: "",
+                Chambre: "",
                 Commentaire: "",
             });
-            heuresDisponibles_totale.value = "";
+            // heuresDisponibles_totale.value = "";
 
             affichage_resultat.value = true; // Afficher le message "Veuillez patienter"
             bouton_envoyer.value = true; // Afficher le bouton d'envoi
@@ -62,9 +61,9 @@ function succes() {
         },
 
         onError: () => {
-            erreurs.value = {
-                error: usePage().props.errors,
-            };
+            // erreurs.value = {
+            //     error: usePage().props.errors,
+            // };
             bouton_envoyer.value = true;
         },
     });
@@ -72,198 +71,168 @@ function succes() {
 </script>
 <template>
     <GuestLayout title="Contact">
-        <h1 id="h1" class="text-center">Contact</h1>
-        <div v-if="affichage_resultat">
-            <p class="w-full p-2 bg-green-500 text-white text-center">
-                Message envoyée
-            </p>
-        </div>
-        <article
-            id="img_form"
-            class="w-5/6 m-auto border-4 border-solid border-black"
+        <h1 class="h1_titre">Contact</h1>
+
+        <p
+            v-if="affichage_resultat"
+            class="w-full p-2 bg-green-500 text-white text-center"
         >
-            <section id="image_contact" class="">
-                <figure class="h-full">
-                    <img
-                        class="h-full"
-                        src="/storage/contact/image_contact.jpg"
-                        alt="image de présentation"
+            Message envoyée
+        </p>
+
+        <article id="contact">
+            <form @submit.prevent="succes()" enctype="multipart/form-data">
+                <!-- Nom -->
+                <section id="nom">
+                    <label for="Nom">Nom</label>
+                    <input
+                        type="text"
+                        id="Nom"
+                        v-model="form.Nom"
+                        placeholder="Votre nom"
                     />
-                </figure>
-            </section>
-            <section id="formulaire" class="">
-                <form
-                    @submit.prevent="succes()"
-                    enctype="multipart/form-data"
-                    class="space-y-6 w-4/6 m-auto"
-                >
-                    <h2 class="mt-3">Informations personnelles</h2>
+                    <p v-show="form.errors.Nom">{{ form.errors.Nom }}</p>
+                </section>
 
-                    <div class="">
-                        <!-- Nom -->
-                        <label
-                            for="Nom"
-                            class="block text-sm font-medium text-gray-700"
-                        >
-                            Nom
-                        </label>
+                <!-- Prénom -->
+                <section id="prenom">
+                    <label for="Prenom">Prénom</label>
+                    <input
+                        type="text"
+                        id="Prenom"
+                        v-model="form.Prénom"
+                        placeholder="Votre prénom"
+                    />
+                    <p v-show="form.errors.Prénom">
+                        {{ form.errors.Prénom }}
+                    </p>
+                </section>
+
+                <!-- Email -->
+                <section id="email">
+                    <label for="Email">Email</label>
+                    <input
+                        type="email"
+                        id="Email"
+                        v-model="form.Email"
+                        placeholder="Votre email"
+                    />
+                    <p v-show="form.errors.Email">
+                        {{ form.errors.Email }}
+                    </p>
+                </section>
+
+                <!-- Téléphone -->
+                <section id="tel">
+                    <label for="Téléphone">Téléphone</label>
+                    <input
+                        type="tel"
+                        id="Téléphone"
+                        v-model="form.Téléphone"
+                        placeholder="Votre téléphone"
+                    />
+                    <p v-show="form.errors.Téléphone">
+                        {{ form.errors.Téléphone }}
+                    </p>
+                </section>
+
+                <!-- Nombres -->
+                <section id="nombres">
+                    <label for="Nombres">Nombres Adultes</label>
+                    <input
+                        type="text"
+                        id="Nombres"
+                        v-model="form.Nombres"
+                        placeholder="Combien de personnes"
+                    />
+                    <p v-show="form.errors.Nombres">
+                        {{ form.errors.Nombres }}
+                    </p>
+                </section>
+
+                <!-- Cure -->
+                <section id="cure">
+                    <label id="titre_cure">Cure Complète</label>
+
+                    <div class="grouper">
                         <input
-                            type="text"
-                            id="Nom"
-                            v-model="form.Nom"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            type="radio"
+                            id="oui"
+                            value="Oui"
+                            v-model="form.Cure"
+                            name="Cure"
                         />
-                        <div
-                            v-if="form.errors.Nom"
-                            class="text-sm text-red-500 mt-1"
-                        >
-                            {{ form.errors.Nom }}
-                        </div>
-                    </div>
-                    <!-- Prénom -->
-                    <div class="">
-                        <label
-                            for="Prénom"
-                            class="block text-sm font-medium text-gray-700"
-                        >
-                            Prénom
-                        </label>
+                        <label for="oui">Oui</label>
+
                         <input
-                            type="text"
-                            id="Prénom"
-                            v-model="form.Prénom"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            type="radio"
+                            id="Non"
+                            value="Non"
+                            v-model="form.Cure"
+                            name="Cure"
                         />
-                        <div
-                            v-if="form.errors.Prénom"
-                            class="text-sm text-red-500 mt-1"
-                        >
-                            {{ form.errors.Prénom }}
-                        </div>
+                        <label for="Non">Non</label>
                     </div>
+                    <p v-show="form.errors.Cure" class="mt-5">
+                        {{ form.errors.Cure }}
+                    </p>
+                </section>
 
-                    <!-- Email -->
-                    <div class="">
-                        <label
-                            for="Email"
-                            class="block text-sm font-medium text-gray-700"
+                <!-- chambre -->
+                <section id="chambre">
+                    <label for="chambre"> Chambre </label>
+                    <select v-model="form.Chambre" class="">
+                        <option
+                            v-for="chambre in chambre_dispo"
+                            :key="chambre"
+                            :value="chambre"
                         >
-                            Email
-                        </label>
-                        <input
-                            type="Email"
-                            id="Email"
-                            v-model="form.Email"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <div
-                            v-if="form.errors.Email"
-                            class="text-sm text-red-500 mt-1"
-                        >
-                            {{ form.errors.Email }}
-                        </div>
+                            {{ heure }}
+                        </option>
+                    </select>
+                    <div
+                        v-if="form.errors.Chambre"
+                        class="text-sm text-red-500 mt-1"
+                    >
+                        {{ form.errors.Chambre }}
                     </div>
+                </section>
+                <!-- Commentaire -->
+                <section id="comment">
+                    <label for="commentaire">Commentaire</label>
+                    <textarea
+                        ref="textarea"
+                        @input="adjustHeight"
+                        name="message"
+                        id="message"
+                        v-model="form.Commentaire"
+                        placeholder="Votre commentaire"
+                    ></textarea>
+                    <p v-show="form.errors.Commentaire">
+                        {{ form.errors.Commentaire }}
+                    </p>
+                </section>
 
-                    <!-- Téléphone -->
-                    <div>
-                        <label
-                            for="Téléphone"
-                            class="block text-sm font-medium text-gray-700"
-                        >
-                            Téléphone
-                        </label>
-                        <input
-                            type="tel"
-                            id="Téléphone"
-                            v-model="form.Téléphone"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <div
-                            v-if="form.errors.Téléphone"
-                            class="text-sm text-red-500 mt-1"
-                        >
-                            {{ form.errors.Téléphone }}
-                        </div>
-                    </div>
+                <!-- Bouton -->
 
-                    <!-- nombres -->
-                    <div class="">
-                        <label
-                            for="nombres"
-                            class="block text-sm font-medium text-gray-700"
-                        >
-                            Nombres Adultes
-                        </label>
-                        <input
-                            type="text"
-                            id="nombres"
-                            v-model="form.nombres"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        />
-                        <div
-                            v-if="form.errors.nombres"
-                            class="text-sm text-red-500 mt-1"
-                        >
-                            {{ form.errors.nombres }} adultes
-                        </div>
-                    </div>
+                <button class="bouton" type="submit">Envoyer</button>
+                <!-- <button class="bouton" v-show="bouton_envoyer" type="submit">
+                    Envoyer
+                </button> -->
+                <!-- <button class="bouton" disabled v-show="!bouton_envoyer">
+                    Veuillez patienter
+                </button> -->
+            </form>
 
-                    <h2 class="mt-3">Détails de la maison / immeuble</h2>
-
-                    <!-- Commentaire -->
-                    <div>
-                        <label
-                            for="commentaire"
-                            class="block text-sm font-medium text-gray-700"
-                        >
-                            Commentaire
-                        </label>
-                        <textarea
-                            ref="textarea"
-                            @input="adjustHeight"
-                            name="message"
-                            id="message"
-                            v-model="form.Commentaire"
-                            class="border border-gray-300 w-full overflow-hidden"
-                        ></textarea>
-                        <div
-                            v-if="form.errors.Commentaire"
-                            class="text-sm text-red-500 mt-1"
-                        >
-                            {{ form.errors.Commentaire }}
-                        </div>
-                    </div>
-
-                    <!-- Bouton -->
-                    <div class="py-5 m-auto flex flex-col w-52">
-                        <button
-                            id="envoyer_button"
-                            v-show="bouton_envoyer"
-                            type="submit"
-                            class="rounded-none font-bold"
-                        >
-                            Envoyer
-                        </button>
-                        <button
-                            disabled
-                            id="envoyer_p"
-                            v-show="!bouton_envoyer"
-                            class="rounded-none font-bold text-center z-10"
-                        >
-                            Veuillez patienter
-                        </button>
-                    </div>
-                </form>
-            </section>
-        </article>
-        <section class="my-10">
-            <p id="informations" class="text-white text-center w-80 m-auto p-6">
+            <p id="information">
                 Pour toute information complémentaire, veuillez me contacter au
-                <a id="tel" href="tel:+1234567890" class="hover:bg-red-700"
+                <a href="tel:+1234567890" class="hover:bg-red-700"
                     >234 567 890</a
                 >
+                ou bien par émail :
+                <a href="tfe@hotmail.be.">tfe@hotmail.be.</a>
             </p>
-        </section>
+        </article>
     </GuestLayout>
 </template>
 <style scoped></style>

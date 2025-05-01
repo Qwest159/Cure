@@ -14,10 +14,18 @@ return new class extends Migration
         Schema::create('chambres', function (Blueprint $table) {
             $table->id();
             // ou se trouve l'image
-            $table->string('section');
+            $table->string('nom');
             // path = /storage/$section/$nom_image
             $table->string('img_path');
-            $table->string('img_path2')->nullable();
+            $table->string('nbr_personnes');
+            $table->string('nbr_lit');
+            $table->string('nbr_sdb');
+            $table->string('date_debut');
+            $table->string('date_fin');
+            $table->string('description');
+            $table->string('prix');
+            $table->string('jours');
+            $table->boolean('disponible')->default(true);
             $table->timestamps();
         });
     }
