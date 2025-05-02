@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bien_etre;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,14 +13,12 @@ class Bien_etreController extends Controller
     {
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
 
-        $produits = Bien_etre::all();
-
-        // Retourner la vue avec les données
+        $formules = Bien_etre::with('produits')->get();
 
 
         return Inertia::render('Bien_etre', [
             'jetstream' => $jetstream,
-            'produits' => $produits,
+            'formules' => $formules,
             'auth' => auth()->user(),
         ]);
     }

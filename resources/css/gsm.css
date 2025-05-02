@@ -64,7 +64,9 @@ typographie paragraphe => Roboto
     }
     button,
     p:not(form p),
-    figcaption {
+    figcaption,
+    li,
+    ul {
         @apply text-xl !important;
     }
     #description_accueil {
@@ -79,18 +81,18 @@ typographie paragraphe => Roboto
         margin-bottom: 2em;
     }
 
-    /* -------PRODUITS-ACCUEIL----- */
-    article#produits section {
+    /* -------formules-ACCUEIL----- */
+    article#formules section {
         @apply grid-cols-2 !important;
     }
-    article#produits figure {
+    article#formules figure {
         width: 100% !important;
     }
-    article#produits section img {
+    article#formules section img {
         height: 19rem !important;
         @apply p-4;
     }
-    article#produits button {
+    article#formules button {
         position: absolute;
         bottom: 3em;
         right: 1rem;

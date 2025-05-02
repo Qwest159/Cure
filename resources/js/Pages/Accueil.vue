@@ -1,6 +1,11 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
+import { defineProps } from "@vue/runtime-core";
+
+// agrandir le text area auto
+
+const props = defineProps(["formules"]);
 </script>
 
 <template>
@@ -79,34 +84,27 @@ import { Head, Link } from "@inertiajs/vue3";
                     </figcaption>
                 </figure>
             </section>
-            <button @click="() => $inertia.get(route('contact'))">
+            <button @click="() => $inertia.get(route('chambre'))">
                 Voir plus
             </button>
         </article>
-        <article id="produits">
-            <h1>Produits phares</h1>
+        <article id="formules">
+            <h1>Les incontournables Bien-Être</h1>
             <section>
-                <figure>
+                <figure
+                    v-for="formule in props.formules"
+                    :key="formule.id"
+                    :value="formule.nom"
+                >
                     <img
-                        src="storage/produits/alofa.jpg"
-                        alt="forever Alofa Fine"
+                        :src="`storage/${formule.img_path}`"
+                        :alt="formule.nom"
                     />
-                </figure>
-                <figure>
-                    <img
-                        src="storage/produits/malosi.jpg"
-                        alt="Forever Malosi Fine"
-                    />
-                </figure>
-                <figure>
-                    <img
-                        src="storage/produits/olofi.jpg"
-                        alt="Forever Olofi Fine"
-                    />
+                    <figcaption>{{ formule.nom }}</figcaption>
                 </figure>
             </section>
-            <button @click="() => $inertia.get(route('contact'))">
-                Autres<span class="block">produits</span>
+            <button @click="() => $inertia.get(route('bien_etre'))">
+                Autres<span class="block">formules</span>
             </button>
         </article>
         <article id="localisation">
@@ -120,6 +118,7 @@ import { Head, Link } from "@inertiajs/vue3";
                     referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
             </section>
+            <p>Le transport de la gare à mon domicile est offert.</p>
         </article>
     </GuestLayout>
 </template>

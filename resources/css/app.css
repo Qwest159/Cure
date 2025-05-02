@@ -32,7 +32,9 @@ nav {
 }
 button,
 p,
-figcaption {
+figcaption,
+ul,
+li {
     font-family: "Roboto", sans-serif;
     @apply text-2xl;
 }
@@ -106,7 +108,7 @@ button:not(nav button) {
     text-align: center;
 }
 
-main article:nth-of-type(n + 2) {
+main article:not(#devis_fictif):nth-of-type(n + 2) {
     @apply my-28 !important;
 }
 article h1 + p {
@@ -154,12 +156,15 @@ article#univers figcaption {
 }
 
 article#univers section,
-article#produits section {
+article#formules section {
     display: grid;
     @apply grid-cols-3;
     justify-content: space-evenly;
 }
-
+article#univers h1,
+article#formules h1 {
+    @apply mb-9;
+}
 article#univers p {
     position: absolute;
     bottom: 0;
@@ -180,8 +185,8 @@ article#univers button {
     margin-top: 1.5em;
     padding: 0.5em 2em;
 }
-/* ------------------- */
-article#produits {
+/* ---------formules ACCUEIL---------- */
+article#formules {
     background-color: var(--couleur_argenté);
     position: relative;
     @apply mx-5;
@@ -190,18 +195,24 @@ article#produits {
     display: flex;
     flex-direction: column;
 }
-
-article#produits figure {
+article#formules h1 {
+    text-align: center;
+}
+article#formules figure {
     @apply rounded-xl;
     @apply justify-self-center;
     @apply mx-5;
 }
-article#produits figure img {
+article#formules figure img {
     height: 30em;
     width: 23rem;
     @apply object-cover;
 }
-article#produits button {
+article#formules figcaption {
+    @apply font-bold;
+    text-align: center;
+}
+article#formules button {
     @apply self-end;
     margin-right: 2em;
     margin-top: 1.5em;
@@ -212,6 +223,9 @@ article#produits button {
 #localisation h1 {
     text-align: center;
     @apply pb-9;
+}
+#localisation p {
+    text-align: center;
 }
 iframe {
     width: 50vw;
@@ -236,7 +250,7 @@ footer article section h2 {
     @apply pb-5;
 }
 
-/* ----------Bien-être------------- */
+/* ----------Bien-être Formule------------- */
 
 main .h1_titre {
     @apply pt-36;
@@ -264,6 +278,8 @@ main article#bien_être section {
     background-color: var(--couleur_argenté);
     @apply rounded-xl;
     @apply mx-16;
+    display: flex;
+    flex-direction: column;
 }
 article#bien_être figure img {
     height: 30em;
@@ -271,16 +287,20 @@ article#bien_être figure img {
     @apply object-cover;
     @apply rounded-t-xl;
 }
-article#bien_être div {
-    display: flex;
-    @apply justify-between;
-    @apply font-bold;
-}
 
 article#bien_être section h2,
 article#bien_être section p {
     @apply py-6;
     @apply px-6;
+}
+article#bien_être section p:last-child {
+    @apply self-center !important;
+    margin-top: auto;
+}
+article#bien_être section li,
+article#bien_être section ul {
+    @apply px-6;
+    /* @apply py-1; */
 }
 article#bien_être section h2 {
     text-align: center;
@@ -348,8 +368,8 @@ article#contact form {
     grid-template-areas:
         "nom prenom"
         "email tel"
-        "nombres cure"
-        "chambre  . "
+        "nombres chambre"
+        "cure  type_cure"
         "comment comment"
         "bouton bouton";
 }
@@ -376,6 +396,9 @@ article#contact form {
 #chambre {
     grid-area: chambre;
 }
+#type_cure {
+    grid-area: type_cure;
+}
 #comment {
     grid-area: comment;
 }
@@ -390,20 +413,22 @@ article#contact form section {
 }
 
 article#contact form input,
-article#contact form textarea {
-    border-radius: 0.5em;
-    padding: 0.5em;
-    font-size: 1em;
+article#contact form textarea,
+article#contact form select {
+    @apply rounded-xl;
 }
 
 /* Gestion erreurs sans décalage */
-article#contact form section p:not(#titre_cure) {
+article#contact form section p:not(.titre_cure) {
     color: red;
     font-size: 0.9em;
     min-height: 1.5em; /* réserve l'espace */
     margin: 0.3em 0 0;
 }
 
+article#contact form section span {
+    color: red;
+}
 article#contact form .grouper {
     display: flex;
     @apply mt-3;
@@ -413,6 +438,7 @@ article#contact form .grouper label {
 }
 article#contact form .grouper input {
     @apply ml-2;
+    margin-top: 0.2em;
 }
 /* Bouton */
 
@@ -429,4 +455,23 @@ p#information {
     width: 65%;
     padding: 2em 2em;
     @apply my-9 !important;
+}
+
+p#devis {
+    cursor: pointer;
+    margin: 1em !important;
+}
+
+/* ----------devis_fictif-------- */
+section#devis_fictif {
+    background-color: var(--couleur_argenté);
+    border-left: 1px solid;
+    /* height: 100%; */
+    position: absolute;
+    @apply pt-36;
+    @apply px-9;
+    display: grid;
+    /* @apply grid-cols-1; */
+    right: 0;
+    z-index: 2;
 }

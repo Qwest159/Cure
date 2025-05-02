@@ -11,7 +11,6 @@ use Inertia\Inertia;
 
 Route::get('/', [AccueilController::class, 'index'])->name('accueil');
 
-
 Route::get('/bien_etre', [Bien_etreController::class, 'index'])->name('bien_etre');
 Route::get('/chambre', [ChambreController::class, 'index'])->name('chambre');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

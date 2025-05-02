@@ -3,36 +3,59 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { ref, onMounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
-const props = defineProps(["produits"]);
+const props = defineProps(["formules"]);
 const form = useForm(props);
+console.log(props.formules);
+function valeur_total(tableau_produit) {
+    let prix_total = 0;
+    tableau_produit.forEach((produit) => {
+        console.log(produit.prix);
+        prix_total += produit.prix;
+    });
+    return prix_total;
+}
 </script>
 <template>
-    <GuestLayout title="Les produits bien-être"
-        ><h1 class="h1_titre">Les produits bien-être</h1>
+    <GuestLayout title="Les formules bien-être"
+        ><h1 class="h1_titre">Les formules bien-être</h1>
         <article id="bien_être">
             <section
-                v-for="produit in form.produits"
-                :key="produit.id"
+                v-for="formule in form.formules"
+                :key="formule.id"
                 class=""
             >
                 <figure>
                     <img
-                        :src="`storage/${produit.img_path}`"
-                        :alt="produit.nom"
+                        :src="`storage/${formule.img_path}`"
+                        :alt="formule.nom"
                     />
                 </figure>
-                <h2>{{ produit.nom }}</h2>
-                <div>
-                    <p>{{ produit.litre }}ml</p>
-                    <p>{{ produit.prix }}€</p>
-                </div>
+                <h2>{{ formule.nom }}</h2>
 
-                <p>{{ produit.description }}</p>
+                <ul>
+                    Produits:
+                </ul>
+                <li
+                    v-for="produit in formule.produits"
+                    :key="produit.id"
+                    class=""
+                >
+                    {{ produit.nom }}
+                </li>
+                <p>{{ formule.description }}</p>
+                <p class="">
+                    Valeur totale de la formule:
+                    {{ valeur_total(formule.produits) }}€
+                </p>
             </section>
         </article>
         <p class="important">
-            <a href="http://" target="_blank" rel="noopener noreferrer">
-                Pour d'autres articles, n'hésitez pas à jeter un œil sur mon
+            <a
+                href="http://310002138977.fbo.foreverliving.com/bel/fr-be/home"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Pour d'autres produits, n'hésitez pas à jeter un œil sur mon
                 site de vente.</a
             >
         </p>

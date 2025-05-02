@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Email;
+use App\Models\Chambre;
 use Illuminate\Mail\Mailable;
 
 use Illuminate\Http\Request;
@@ -15,9 +16,13 @@ class ContactController extends Controller
     {
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
 
+        $chambre_dispo = Chambre::select("id", "nom", "date_debut", "date_fin")
+            ->where("disponible", true)
+            ->get();
 
         return Inertia::render('Contact', [
             'jetstream' => $jetstream,
+            'chambre_dispo' => $chambre_dispo,
             'auth' => auth()->user(),
         ]);
     }
@@ -30,8 +35,10 @@ class ContactController extends Controller
             'Prénom' => 'required|string|min:2|max:30',
             'Email' => 'required|email|max:255',
             'Téléphone' => 'required|string|min:10|max:20',
-            'Nombres' => 'required|integer|min:1',
+            'Nombres' => 'required|integer|min:1|max:10',
+            'Chambre' => 'required',
             'Cure' => 'required|string|in:Oui,Non',
+            'Formule' => 'nullable|string|required_if:Cure,Oui',
             'Commentaire' => 'nullable|string|max:200|min:5',
         ]);
         function netoyageCharactere($donnee_input)

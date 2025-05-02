@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bien_etre;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,11 +14,13 @@ class AccueilController extends Controller
 
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
 
-        // Retourner la vue avec les données
-
+        $formules = Bien_etre::inRandomOrder()->select('id', 'img_path', 'nom')
+            ->limit(3)
+            ->get();
 
         return Inertia::render('Accueil', [
             'jetstream' => $jetstream,
+            'formules' =>  $formules,
             'auth' => auth()->user(),
         ]);
     }

@@ -1,8 +1,8 @@
 <script setup>
+import Devis_fictif from "@/Components/Devis_fictif.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
 import { defineProps, ref, onMounted } from "@vue/runtime-core";
-import Chambre from "./Chambre.vue";
 
 // agrandir le text area auto
 const textarea = ref(null);
@@ -25,19 +25,23 @@ let form = useForm({
     Nombres: "",
     Cure: "",
     Chambre: "",
+    Formule: "",
     Commentaire: "",
 });
-
+// ref
+let devis = ref(false);
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
+
 function succes() {
     bouton_envoyer.value = false;
-    console.log(form.Cure);
 
     form.post(route("mail.email"), {
         // Condition avant de passer à onSuccess
         onSuccess: () => {
             // Vérification des données et des erreurs
+            console.log("réussi");
+
             form = useForm({
                 Nom: "",
                 Prénom: "",
@@ -71,7 +75,9 @@ function succes() {
 </script>
 <template>
     <GuestLayout title="Contact">
+        <Devis_fictif v-if="devis" :chambre_detail="props.chambre_dispo" />
         <h1 class="h1_titre">Contact</h1>
+        <p id="devis" @click="devis = !devis">Faire une estimation rapide</p>
 
         <p
             v-if="affichage_resultat"
@@ -84,7 +90,7 @@ function succes() {
             <form @submit.prevent="succes()" enctype="multipart/form-data">
                 <!-- Nom -->
                 <section id="nom">
-                    <label for="Nom">Nom</label>
+                    <label for="Nom">Nom <span>*</span></label>
                     <input
                         type="text"
                         id="Nom"
@@ -96,7 +102,7 @@ function succes() {
 
                 <!-- Prénom -->
                 <section id="prenom">
-                    <label for="Prenom">Prénom</label>
+                    <label for="Prenom">Prénom <span>*</span></label>
                     <input
                         type="text"
                         id="Prenom"
@@ -110,7 +116,7 @@ function succes() {
 
                 <!-- Email -->
                 <section id="email">
-                    <label for="Email">Email</label>
+                    <label for="Email">Email <span>*</span></label>
                     <input
                         type="email"
                         id="Email"
@@ -124,7 +130,7 @@ function succes() {
 
                 <!-- Téléphone -->
                 <section id="tel">
-                    <label for="Téléphone">Téléphone</label>
+                    <label for="Téléphone">Téléphone <span>*</span></label>
                     <input
                         type="tel"
                         id="Téléphone"
@@ -138,7 +144,7 @@ function succes() {
 
                 <!-- Nombres -->
                 <section id="nombres">
-                    <label for="Nombres">Nombres Adultes</label>
+                    <label for="Nombres">Nombres Adultes <span>*</span></label>
                     <input
                         type="text"
                         id="Nombres"
@@ -150,9 +156,30 @@ function succes() {
                     </p>
                 </section>
 
+                <!-- chambre -->
+                <section id="chambre">
+                    <label for="chambre"> Chambre <span>*</span></label>
+                    <select v-model="form.Chambre" class="">
+                        <option
+                            v-for="chambre in chambre_dispo"
+                            :key="chambre.id"
+                            :value="`${chambre.nom} | ${chambre.date_debut} / ${chambre.date_fin}`"
+                        >
+                            {{ chambre.nom }} {{ chambre.date_debut }} /
+                            {{ chambre.date_fin }}
+                        </option>
+                    </select>
+                    <div
+                        v-if="form.errors.Chambre"
+                        class="text-sm text-red-500 mt-1"
+                    >
+                        {{ form.errors.Chambre }}
+                    </div>
+                </section>
+
                 <!-- Cure -->
                 <section id="cure">
-                    <label id="titre_cure">Cure Complète</label>
+                    <label id="titre_cure">Cure Complète <span>*</span></label>
 
                     <div class="grouper">
                         <input
@@ -178,25 +205,35 @@ function succes() {
                     </p>
                 </section>
 
-                <!-- chambre -->
-                <section id="chambre">
-                    <label for="chambre"> Chambre </label>
-                    <select v-model="form.Chambre" class="">
-                        <option
-                            v-for="chambre in chambre_dispo"
-                            :key="chambre"
-                            :value="chambre"
-                        >
-                            {{ heure }}
-                        </option>
-                    </select>
-                    <div
-                        v-if="form.errors.Chambre"
-                        class="text-sm text-red-500 mt-1"
+                <section id="type_cure" v-if="form.Cure === 'Oui'">
+                    <label class="titre_cure"
+                        >Type de cure <span>*</span></label
                     >
-                        {{ form.errors.Chambre }}
+
+                    <div class="grouper">
+                        <input
+                            type="radio"
+                            id="Freedom"
+                            value="Freedom"
+                            v-model="form.Formule"
+                            name="Formule"
+                        />
+                        <label for="Freedom">Freedom</label>
+
+                        <input
+                            type="radio"
+                            id="Aloe Vera"
+                            value="Aloe Vera"
+                            v-model="form.Formule"
+                            name="Formule"
+                        />
+                        <label for="Aloe Vera">Aloe Vera</label>
                     </div>
+                    <p v-show="form.errors.Cure" class="mt-5">
+                        {{ form.errors.Cure }}
+                    </p>
                 </section>
+
                 <!-- Commentaire -->
                 <section id="comment">
                     <label for="commentaire">Commentaire</label>
