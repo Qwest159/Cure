@@ -11,7 +11,7 @@ class ChambreController extends Controller
     public function index()
     {
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
-        $chambres = Chambre::all();
+        $chambres = Chambre::where("disponible", true)->get();
 
         // Retourner la vue avec les données
 

@@ -1,13 +1,13 @@
 <script setup>
 import Devis_fictif from "@/Components/Devis_fictif.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 import { defineProps, ref, onMounted } from "@vue/runtime-core";
 
 // agrandir le text area auto
 const textarea = ref(null);
 
-const props = defineProps(["flash", "chambre_dispo"]);
+const props = defineProps(["flash", "chambre_dispo", "formules"]);
 
 function adjustHeight() {
     textarea.value.style.height = "auto";
@@ -33,6 +33,14 @@ let devis = ref(false);
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
 
+function valeur_total(tableau_produit) {
+    let prix_total = 0;
+    tableau_produit.forEach((produit) => {
+        prix_total += produit.prix;
+    });
+    return prix_total.toString().replace(".", ",");
+}
+
 function succes() {
     bouton_envoyer.value = false;
 
@@ -40,7 +48,6 @@ function succes() {
         // Condition avant de passer à onSuccess
         onSuccess: () => {
             // Vérification des données et des erreurs
-            console.log("réussi");
 
             form = useForm({
                 Nom: "",
@@ -75,8 +82,16 @@ function succes() {
 </script>
 <template>
     <GuestLayout title="Contact">
-        <Devis_fictif v-if="devis" :chambre_detail="props.chambre_dispo" />
+        <Devis_fictif
+            v-show="devis"
+            :chambre_detail="props.chambre_dispo"
+            :formules="props.formules"
+        />
         <h1 class="h1_titre">Contact</h1>
+        <button id="test" @click="devis = !devis" class="absolute right-0">
+            FLECHE
+        </button>
+
         <p id="devis" @click="devis = !devis">Faire une estimation rapide</p>
 
         <p
@@ -205,33 +220,28 @@ function succes() {
                     </p>
                 </section>
 
+                <!-- chambre -->
                 <section id="type_cure" v-if="form.Cure === 'Oui'">
                     <label class="titre_cure"
                         >Type de cure <span>*</span></label
                     >
 
-                    <div class="grouper">
-                        <input
-                            type="radio"
-                            id="Freedom"
-                            value="Freedom"
-                            v-model="form.Formule"
-                            name="Formule"
-                        />
-                        <label for="Freedom">Freedom</label>
-
-                        <input
-                            type="radio"
-                            id="Aloe Vera"
-                            value="Aloe Vera"
-                            v-model="form.Formule"
-                            name="Formule"
-                        />
-                        <label for="Aloe Vera">Aloe Vera</label>
+                    <select v-model="form.Formule" class="">
+                        <option
+                            v-for="formule in formules"
+                            :key="formule.id"
+                            :value="formule.nom"
+                        >
+                            {{ formule.nom }}
+                            ({{ valeur_total(formule.produits) }}€)
+                        </option>
+                    </select>
+                    <div
+                        v-if="form.errors.formule"
+                        class="text-sm text-red-500 mt-1"
+                    >
+                        {{ form.errors.formule }}
                     </div>
-                    <p v-show="form.errors.Cure" class="mt-5">
-                        {{ form.errors.Cure }}
-                    </p>
                 </section>
 
                 <!-- Commentaire -->

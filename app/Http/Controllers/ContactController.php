@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Email;
+use App\Models\Bien_etre;
 use App\Models\Chambre;
 use Illuminate\Mail\Mailable;
 
@@ -16,13 +17,18 @@ class ContactController extends Controller
     {
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
 
-        $chambre_dispo = Chambre::select("id", "nom", "date_debut", "date_fin")
+        $chambre_dispo = Chambre::select("id", "nom", "date_debut", "date_fin", "prix")
             ->where("disponible", true)
             ->get();
+
+        $formules = Bien_etre::with('produits')->where("disponible", true)
+            ->get();
+
 
         return Inertia::render('Contact', [
             'jetstream' => $jetstream,
             'chambre_dispo' => $chambre_dispo,
+            'formules' => $formules,
             'auth' => auth()->user(),
         ]);
     }

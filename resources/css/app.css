@@ -150,7 +150,7 @@ article#univers figcaption {
     color: black;
     @apply pt-12;
     @apply px-5;
-    height: 30rem;
+    height: 22rem;
     @apply rounded-b-xl;
     @apply text-center;
 }
@@ -269,6 +269,7 @@ main article#bien_être {
     @apply py-12;
     display: grid;
     @apply grid-cols-3;
+    gap: 3em;
     /* @apply flex-wrap; */
     @apply justify-evenly;
     /* gap: 2em; */
@@ -277,7 +278,7 @@ main article#bien_être section {
     border: 1px rgb(173, 173, 173) solid;
     background-color: var(--couleur_argenté);
     @apply rounded-xl;
-    @apply mx-16;
+    @apply mx-9;
     display: flex;
     flex-direction: column;
 }
@@ -465,13 +466,21 @@ p#devis {
 /* ----------devis_fictif-------- */
 section#devis_fictif {
     background-color: var(--couleur_argenté);
-    border-left: 1px solid;
+    border-left: 3px solid;
     /* height: 100%; */
-    position: absolute;
+    position: fixed;
     @apply pt-36;
-    @apply px-9;
-    display: grid;
+    height: 100%;
+    width: 40%;
     /* @apply grid-cols-1; */
     right: 0;
     z-index: 2;
+}
+section#devis_fictif div {
+    display: grid;
+    @apply mx-9;
+    gap: 0.5em;
+}
+section#devis_fictif div h1 {
+    @apply mb-9;
 }

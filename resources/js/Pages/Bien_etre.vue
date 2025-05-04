@@ -5,14 +5,13 @@ import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps(["formules"]);
 const form = useForm(props);
-console.log(props.formules);
+
 function valeur_total(tableau_produit) {
     let prix_total = 0;
     tableau_produit.forEach((produit) => {
-        console.log(produit.prix);
         prix_total += produit.prix;
     });
-    return prix_total;
+    return prix_total.toString().replace(".", ",");
 }
 </script>
 <template>

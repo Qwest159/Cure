@@ -13,7 +13,8 @@ class Bien_etreController extends Controller
     {
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
 
-        $formules = Bien_etre::with('produits')->get();
+        $formules = Bien_etre::with('produits')->where("disponible", true)
+            ->get();
 
 
         return Inertia::render('Bien_etre', [

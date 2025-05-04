@@ -14,7 +14,7 @@ class AccueilController extends Controller
 
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
 
-        $formules = Bien_etre::inRandomOrder()->select('id', 'img_path', 'nom')
+        $formules = Bien_etre::inRandomOrder()->select('id', 'img_path', 'nom')->where("disponible", true)
             ->limit(3)
             ->get();
 

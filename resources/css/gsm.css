@@ -46,7 +46,6 @@ typographie paragraphe => Roboto
 
     main article#bien_être {
         @apply grid-cols-2 !important;
-        gap: 3em;
     }
     /* article#contact form {
         padding: 1em !important;
@@ -111,6 +110,18 @@ typographie paragraphe => Roboto
         @apply grid-cols-1 !important;
     }
 
+    /* ------CHAMBRE--------- */
+    article#chambres section {
+        @apply grid-cols-1 !important;
+        padding-bottom: 1em !important;
+    }
+    article#chambres figure#partie_gauche img {
+        @apply rounded-none !important;
+        @apply rounded-t-xl !important;
+    }
+    article#chambres div#partie_droite {
+        @apply pb-9 !important;
+    }
     /* -------FOMULAIRE--------- */
     article#contact {
         width: 90vw !important;
@@ -118,7 +129,6 @@ typographie paragraphe => Roboto
     }
     article#contact form {
         display: block !important;
-
         padding: 1em 2em !important;
     }
     article#contact form section {

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
@@ -27,16 +28,19 @@ class DatabaseSeeder extends Seeder
             'nom' => 'Aloe Vera ',
             'img_path' => 'produits/alofa.jpg',
             'description' => 'Choix judidieux, frais et délicatement sucré',
+            'disponible' => true,
         ]);
         Bien_etre::factory()->create([
             'nom' => 'Mixte pour tous',
             'img_path' => 'produits/malosi.jpg',
             'description' => 'Une formule au parfum masculin et féminin, simple et doux pour la peau',
+            'disponible' => true,
         ]);
         Bien_etre::factory()->create([
             'nom' => 'Freedom Olofi Fine',
             'img_path' => 'produits/olofi.jpg',
             'description' => 'Une formule parfaite, idéal pour les massages',
+            'disponible' => true,
         ]);
         Produit::factory()->create([
             'nom' => 'Aloe Vera gel',
@@ -78,7 +82,7 @@ class DatabaseSeeder extends Seeder
             'date_fin' => '06-06-25',
             'prix' => '540',
             'jours' => '5',
-            'disponible' => '1',
+            'disponible' => true,
             'description' => 'Chambres avec beaucoup de charme, près de la fenêtre et du côté jardin.',
         ]);
         Chambre::factory()->create([
@@ -91,8 +95,78 @@ class DatabaseSeeder extends Seeder
             'date_fin' => '06-06-25',
             'prix' => '500',
             'jours' => '5',
-            'disponible' => '1',
+            'disponible' => true,
             'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
         ]);
+
+
+        // ---------effaceer-------------------------------------------
+        Bien_etre::factory()->create([
+            'nom' => 'Faux',
+            'img_path' => 'produits/olofi.jpg',
+            'description' => 'Une formule parfaite, idéal pour les massages',
+            'disponible' => false,
+        ]);
+        Bien_etre::factory()->create([
+            'nom' => 'vrai',
+            'img_path' => 'produits/olofi.jpg',
+            'description' => 'Une formule parfaite, idéal pour les massages',
+            'disponible' => true,
+        ]);
+        Produit::factory()->create([
+            'nom' => 'Aloe MSM',
+            'prix' => '50.19',
+            'bien_etre_id' => '3',
+        ]);
+        Produit::factory()->create([
+            'nom' => 'AloM',
+            'prix' => '50.19',
+            'bien_etre_id' => '3',
+        ]);
+
+        Chambre::factory()->create([
+            'nom' => 'Pre',
+            'img_path' => 'chambres/prince.jpg',
+            'nbr_personnes' => '2',
+            'nbr_lit' => '1',
+            'nbr_sdb' => '1',
+            'date_debut' => '01-06-25',
+            'date_fin' => '06-06-25',
+            'prix' => '500',
+            'jours' => '5',
+            'disponible' => true,
+            'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
+        ]);
+
+
+        Chambre::factory()->create([
+            'nom' => 'Prce',
+            'img_path' => 'chambres/prince.jpg',
+            'nbr_personnes' => '2',
+            'nbr_lit' => '1',
+            'nbr_sdb' => '1',
+            'date_debut' => '01-06-25',
+            'date_fin' => '06-06-25',
+            'prix' => '500',
+            'jours' => '5',
+            'disponible' => true,
+            'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
+        ]);
+
+
+        Chambre::factory()->create([
+            'nom' => 'FAUX',
+            'img_path' => 'chambres/prince.jpg',
+            'nbr_personnes' => '2',
+            'nbr_lit' => '1',
+            'nbr_sdb' => '1',
+            'date_debut' => '01-06-25',
+            'date_fin' => '06-06-25',
+            'prix' => '500',
+            'jours' => '5',
+            'disponible' => false,
+            'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
+        ]);
+        // ------------------------------------------------------------------
     }
 }

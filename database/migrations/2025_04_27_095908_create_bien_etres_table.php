@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('img_path');
             $table->string('description');
+            $table->boolean('disponible')->default(true);
             $table->timestamps();
         });
     }
