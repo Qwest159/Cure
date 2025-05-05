@@ -144,4 +144,9 @@ typographie paragraphe => Roboto
         width: 100% !important;
         padding: 1em !important;
     }
+
+    /* ------- DEVIS------ */
+    section#devis_fictif {
+        width: 85% !important;
+    }
 }

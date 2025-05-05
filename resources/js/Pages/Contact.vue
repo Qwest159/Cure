@@ -79,27 +79,39 @@ function succes() {
         },
     });
 }
+
+function montrer_disparait() {
+    const devis_block = document.querySelector(".element");
+    if (!devis.value) {
+        devis_block.classList.remove("disparait");
+        devis_block.classList.add("apparait");
+    } else {
+        devis_block.classList.remove("apparait");
+        devis_block.classList.add("disparait");
+    }
+    devis.value = !devis.value;
+}
 </script>
 <template>
     <GuestLayout title="Contact">
         <Devis_fictif
-            v-show="devis"
+            class="element"
             :chambre_detail="props.chambre_dispo"
             :formules="props.formules"
+            @ref_devis_disparait="devis = $event"
         />
         <h1 class="h1_titre">Contact</h1>
-        <button id="test" @click="devis = !devis" class="absolute right-0">
-            FLECHE
-        </button>
 
-        <p id="devis" @click="devis = !devis">Faire une estimation rapide</p>
+        <p id="devis" @click="montrer_disparait()">
+            Faire une estimation rapide
+        </p>
 
-        <p
+        <button
             v-if="affichage_resultat"
             class="w-full p-2 bg-green-500 text-white text-center"
         >
             Message envoyée
-        </p>
+        </button>
 
         <article id="contact">
             <form @submit.prevent="succes()" enctype="multipart/form-data">

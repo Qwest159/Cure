@@ -363,6 +363,7 @@ article#contact form {
     border: 1px solid rgba(128, 128, 128, 0.548);
     background-color: var(--couleur_argenté);
     display: grid;
+    @apply mt-9;
     padding: 3em;
     gap: 3em;
     @apply grid-cols-2;
@@ -460,9 +461,16 @@ p#information {
 
 p#devis {
     cursor: pointer;
-    margin: 1em !important;
+    display: block;
+    width: max-content;
+    margin: auto;
 }
-
+p#croix {
+    position: absolute;
+    right: 5%;
+    top: 13%;
+    cursor: pointer;
+}
 /* ----------devis_fictif-------- */
 section#devis_fictif {
     background-color: var(--couleur_argenté);
@@ -483,4 +491,34 @@ section#devis_fictif div {
 }
 section#devis_fictif div h1 {
     @apply mb-9;
+}
+.element {
+    display: none;
+}
+.apparait {
+    animation: devis_apparait 2s;
+    display: block;
+}
+.disparait {
+    display: block;
+    animation: devis_disparait 1s forwards;
+}
+
+@keyframes devis_disparait {
+    0% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+@keyframes devis_apparait {
+    0% {
+        transform: translateX(100%);
+    }
+    50% {
+        transform: translateX(0%);
+    }
 }

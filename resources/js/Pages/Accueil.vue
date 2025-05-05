@@ -30,8 +30,8 @@ const props = defineProps(["formules"]);
             <h1>Ce que nous vous proposons</h1>
             <p>
                 Rejoignez-nous pour une retraite en pleine nature avec la cure
-                C9 Forever ! Pendant neuf jours, transformez votre vie grâce à
-                un programme complet : alimentation saine, sport quotidien et
+                C9 Forever ! Durant plusieurs jours, transformez votre vie grâce
+                à un programme complet : alimentation saine, sport quotidien et
                 ressourcement au cœur de la campagne.
             </p>
         </article>
