@@ -2,9 +2,16 @@
 
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\Admin\CureController;
+use App\Http\Controllers\Admin\RajoutController;
 use App\Http\Controllers\Bien_etreController;
 use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\ContactController;
+use App\Models\Chambre;
+
+// ADMIN
+use App\Http\Controllers\Admin\ChambreController as AdminChambreController;
+use App\Http\Controllers\Admin\FormuleController as AdminFormuleController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,18 +44,20 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/cure_virginie', [CureController::class, 'index'])->name('cure_accueil');
-    Route::get('/cure_chambre', [RajoutController::class, 'chambre'])->name('cure_chambre');
+    // ----- Chambre-----
+    Route::get('/cure_chambre', [AdminChambreController::class, 'index'])->name('cure_chambre');
+    Route::get('/cure_chambre/create', [AdminChambreController::class, "create"])->name('cure_chambre.create');
+    Route::post('/cure_chambre/store', [AdminChambreController::class, "store"])->name('cure_chambre.store');
+    Route::get('/cure_chambre/edit/{id}', [AdminChambreController::class, "edit"])->name('cure_chambre.edit');
+    Route::post('/cure_chambre/update/{Chambre}', [AdminChambreController::class, "update"])->name('cure_chambre.update');
+    Route::delete('/cure_chambre/detsroy/{id}', [AdminChambreController::class, 'destroy'])->name('cure_chambre.destroy');
 
 
-    // //image
-    // Route::get('/lfclean_paysage', [ImageController::class, 'index_Endroit_paysage'])->name('lfclean_paysage');
-    // Route::get('/lfclean_partenaire', [ImageController::class, 'index_Partenaire'])->name('lfclean_partenaire');
-    // Route::post('/lfclean_store/{section}', [ImageController::class, 'store'])->name('lfclean_store');
-    // Route::delete('/lfclean_destroy_image/{id}', [ImageController::class, 'destroy'])->name('lfclean.destroy');
-
-    // //job
-    // Route::get('/lfclean_jobcreate_index', [TravailController::class, 'index'])->name('lfclean_create_job');
-    // Route::post('/lfclean_jobcreate_store', [TravailController::class, 'store'])->name('lfclean_store_job');
-    // Route::delete('/lfclean_destroy/{id}', [TravailController::class, 'destroy'])->name('lfclean_destroy_job');
-
+    // ----- Formule-----
+    Route::get('/cure_formule', [AdminFormuleController::class, 'index'])->name('cure_formule');
+    Route::get('/cure_formule/create', [AdminFormuleController::class, "create"])->name('cure_formule.create');
+    Route::post('/cure_formule/store', [AdminFormuleController::class, "store"])->name('cure_formule.store');
+    Route::get('/cure_formule/edit/{id}', [AdminFormuleController::class, "edit"])->name('cure_formule.edit');
+    Route::post('/cure_formule/update/{formule}', [AdminFormuleController::class, "update"])->name('cure_formule.update');
+    Route::delete('/cure_formule/detsroy/{id}', [AdminFormuleController::class, 'destroy'])->name('cure_formule.destroy');
 });

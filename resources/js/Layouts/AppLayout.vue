@@ -60,6 +60,12 @@ const logout = () => {
                                 >
                                     Accueil
                                 </NavLink>
+                                <NavLink
+                                    :href="route('cure_chambre')"
+                                    :active="route().current('cure_chambre')"
+                                >
+                                    Chambre
+                                </NavLink>
                             </div>
                         </div>
 
@@ -348,6 +354,12 @@ const logout = () => {
                             :active="route().current('cure_accueil')"
                         >
                             Accueil
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('cure_chambre')"
+                            :active="route().current('cure_chambre')"
+                        >
+                            Chambre
                         </ResponsiveNavLink>
                     </div>
 

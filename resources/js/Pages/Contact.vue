@@ -274,13 +274,12 @@ function montrer_disparait() {
 
                 <!-- Bouton -->
 
-                <button class="bouton" type="submit">Envoyer</button>
-                <!-- <button class="bouton" v-show="bouton_envoyer" type="submit">
+                <button class="bouton" v-show="bouton_envoyer" type="submit">
                     Envoyer
-                </button> -->
-                <!-- <button class="bouton" disabled v-show="!bouton_envoyer">
+                </button>
+                <button class="bouton" disabled v-show="!bouton_envoyer">
                     Veuillez patienter
-                </button> -->
+                </button>
             </form>
 
             <p id="information">
