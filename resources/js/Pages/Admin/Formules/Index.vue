@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { ref, watch } from "vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 //MODAL
 import DialogModal from "@/Components/DialogModal.vue";
@@ -33,22 +33,6 @@ function deleteformule() {
 }
 let erreurs = ref();
 
-// function succes(formule) {
-//     form.post(route("mail.email", formule), {
-//         onSuccess: () => {
-//             erreurs.value = null;
-//             formuleRecherche = props.formules;
-//             searchinput.value = "";
-//             closeModal();
-//         },
-//         onError: () => {
-//             erreurs.value = {
-//                 id: usePage().props.errors.id,
-//                 error: usePage().props.errors.error,
-//             };
-//         },
-//     });
-// }
 const closeModal = () => {
     confirmingformuleDeletion.value = false;
 };

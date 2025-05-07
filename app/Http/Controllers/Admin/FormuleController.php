@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
-use App\Models\Chambre;
+use App\Models\Bien_etre;
 use App\Models\Cure;
 
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +23,10 @@ class FormuleController extends Controller
 
         Gate::authorize('viewAny', Cure::class);
 
-        $chambres = Chambre::all();
+        $formules = Bien_etre::all();
 
-        return Inertia::render('Admin/Chambre/Index', [
-            'chambres' => $chambres,
+        return Inertia::render('Admin/Formules/Index', [
+            'formules' => $formules,
         ]);
     }
     /**
@@ -34,7 +34,7 @@ class FormuleController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Chambre/Create');
+        return Inertia::render('Admin/Formules/Create');
     }
 
     public function store(Request $request)
@@ -72,20 +72,20 @@ class FormuleController extends Controller
             return $day . '-' . $month . '-' . $year;
         }
 
-        // Création et sauvegarde du Chambre
+        // Création et sauvegarde d'une formule
 
-        $Chambre = new Chambre();
-        $Chambre->nom = $validatedData['nom'];
-        $Chambre->img_path = $request->file('img_path')->store('chambres', 'public');
-        $Chambre->nbr_personnes = $validatedData['nbr_personnes'];
-        $Chambre->nbr_lit = $validatedData['nbr_lit'];
-        $Chambre->nbr_sdb = $validatedData['nbr_sdb'];
-        $Chambre->date_debut = convertDate($validatedData['date_debut']);;
-        $Chambre->date_fin = convertDate($validatedData['date_fin']);
-        $Chambre->description = $validatedData['description'];
-        $Chambre->prix = $validatedData['prix'];
-        $Chambre->jours = $validatedData['jours'];
-        $Chambre->save();
+        $formule = new Bien_etre();
+        $formule->nom = $validatedData['nom'];
+        $formule->img_path = $request->file('img_path')->store('produits', 'public');
+        $formule->nbr_personnes = $validatedData['nbr_personnes'];
+        $formule->nbr_lit = $validatedData['nbr_lit'];
+        $formule->nbr_sdb = $validatedData['nbr_sdb'];
+        $formule->date_debut = convertDate($validatedData['date_debut']);;
+        $formule->date_fin = convertDate($validatedData['date_fin']);
+        $formule->description = $validatedData['description'];
+        $formule->prix = $validatedData['prix'];
+        $formule->jours = $validatedData['jours'];
+        $formule->save();
 
         // Redirection
         return redirect()->back();
@@ -93,8 +93,8 @@ class FormuleController extends Controller
 
     public function edit($id)
     {
-        // dd($Chambre);
-        $Chambre = Chambre::findOrFail($id);
+
+        $formule = Bien_etre::findOrFail($id);
 
         function convertDate_system($date)
         {
@@ -105,14 +105,12 @@ class FormuleController extends Controller
             return $year . '-' . $month . '-' . $day;
         }
 
-        return Inertia::render('Admin/Chambre/Edit', [
-            'chambre' => $Chambre,
-            'date_fin' => convertDate_system($Chambre['date_fin']),
-            'date_debut' => convertDate_system($Chambre['date_debut']),
+        return Inertia::render('Admin/Formules/Edit', [
+            'formule' => $formule,
         ]);
     }
 
-    public function update(Request $request, Chambre $Chambre)
+    public function update(Request $request, Bien_etre $formule)
     {
         $validatedData = $request->validate([
             'nom' => 'required|string|max:15|min:1',
@@ -126,16 +124,16 @@ class FormuleController extends Controller
             'jours' => 'required|string|max:10|min:1',
             'description' => 'required|string|max:150',
         ]);
-        $Chambre->nom = $validatedData['nom'];
+        $formule->nom = $validatedData['nom'];
 
         // Si une nouvelle image est envoyée, mettre à jour le chemin de l'image
         if ($request->hasFile('img_path')) {
-            $Chambre->img_path = $request->file('img_path')->store('chambres', 'public');
+            $formule->img_path = $request->file('img_path')->store('produits', 'public');
         }
 
-        $Chambre->nbr_personnes = $validatedData['nbr_personnes'];
-        $Chambre->nbr_lit = $validatedData['nbr_lit'];
-        $Chambre->nbr_sdb = $validatedData['nbr_sdb'];
+        $formule->nbr_personnes = $validatedData['nbr_personnes'];
+        $formule->nbr_lit = $validatedData['nbr_lit'];
+        $formule->nbr_sdb = $validatedData['nbr_sdb'];
 
 
         function convertDate_serv($date)
@@ -148,23 +146,23 @@ class FormuleController extends Controller
         }
 
         // Convertir et mettre à jour les dates
-        $Chambre->date_debut = convertDate_serv($validatedData['date_debut']);
-        $Chambre->date_fin = convertDate_serv($validatedData['date_fin']);
+        $formule->date_debut = convertDate_serv($validatedData['date_debut']);
+        $formule->date_fin = convertDate_serv($validatedData['date_fin']);
 
-        $Chambre->description = $validatedData['description'];
-        $Chambre->prix = $validatedData['prix'];
-        $Chambre->jours = $validatedData['jours'];
+        $formule->description = $validatedData['description'];
+        $formule->prix = $validatedData['prix'];
+        $formule->jours = $validatedData['jours'];
 
         // Sauvegarder les modifications dans la base de données
-        $Chambre->save();
+        $formule->save();
 
         return redirect()->back();
     }
     public function destroy($id)
     {
         // Gate::authorize('delete', $article);
-        $Chambre = Chambre::findOrFail($id);
-        $Chambre->delete();
+        $formule = Bien_etre::findOrFail($id);
+        $formule->delete();
 
         return redirect()->back();
     }

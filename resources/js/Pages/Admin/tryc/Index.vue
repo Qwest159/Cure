@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { ref, watch } from "vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 //MODAL
 import DialogModal from "@/Components/DialogModal.vue";

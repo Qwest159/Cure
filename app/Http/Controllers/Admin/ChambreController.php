@@ -25,7 +25,7 @@ class ChambreController extends Controller
 
         $chambres = Chambre::all();
 
-        return Inertia::render('Admin/Chambre/Index', [
+        return Inertia::render('Admin/Chambres/Index', [
             'chambres' => $chambres,
         ]);
     }
@@ -34,7 +34,7 @@ class ChambreController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Chambre/Create');
+        return Inertia::render('Admin/Chambres/Create');
     }
 
     public function store(Request $request)
@@ -105,7 +105,7 @@ class ChambreController extends Controller
             return $year . '-' . $month . '-' . $day;
         }
 
-        return Inertia::render('Admin/Chambre/Edit', [
+        return Inertia::render('Admin/Chambres/Edit', [
             'chambre' => $Chambre,
             'date_fin' => convertDate_system($Chambre['date_fin']),
             'date_debut' => convertDate_system($Chambre['date_debut']),
