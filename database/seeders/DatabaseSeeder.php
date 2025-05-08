@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Bien_etre;
 use App\Models\Chambre;
+use App\Models\FormuleProduit;
 use App\Models\Produit;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -44,33 +45,27 @@ class DatabaseSeeder extends Seeder
         ]);
         Produit::factory()->create([
             'nom' => 'Aloe Vera gel',
-            'prix' => '34.55',
-            'bien_etre_id' => '3',
+            'prix' => '34,55',
         ]);
         Produit::factory()->create([
             'nom' => 'Aloe MSM Gel',
-            'prix' => '25.19',
-            'bien_etre_id' => '3',
+            'prix' => '25,19',
         ]);
         Produit::factory()->create([
             'nom' => 'Deep Cream',
-            'prix' => '20.79',
-            'bien_etre_id' => '3',
+            'prix' => '20,79',
         ]);
         Produit::factory()->create([
             'nom' => 'Berry nectar',
-            'prix' => '30.00',
-            'bien_etre_id' => '1',
+            'prix' => '30,00',
         ]);
         Produit::factory()->create([
             'nom' => 'Aloe Peaches',
-            'prix' => '30.00',
-            'bien_etre_id' => '1',
+            'prix' => '30,00',
         ]);
         Produit::factory()->create([
             'nom' => 'Bee Honey',
-            'prix' => '35.00',
-            'bien_etre_id' => '2',
+            'prix' => '35,00',
         ]);
         Chambre::factory()->create([
             'nom' => 'Escadrons',
@@ -78,8 +73,8 @@ class DatabaseSeeder extends Seeder
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
-            'date_debut' => '01-06-2025',
-            'date_fin' => '06-06-2025',
+            'date_debut' => '02-06-2025',
+            'date_fin' => '07-06-2025',
             'prix' => '540',
             'jours' => '5',
             'disponible' => true,
@@ -91,14 +86,53 @@ class DatabaseSeeder extends Seeder
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
-            'date_debut' => '01-06-2025',
-            'date_fin' => '06-06-2025',
+            'date_debut' => '02-06-2025',
+            'date_fin' => '07-06-2025',
             'prix' => '500',
             'jours' => '5',
             'disponible' => true,
             'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
         ]);
-
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 1,
+            'produit_id' => 1,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 1,
+            'produit_id' => 2,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 1,
+            'produit_id' => 3,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 1,
+            'produit_id' => 4,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 1,
+            'produit_id' => 5,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 2,
+            'produit_id' => 1,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 2,
+            'produit_id' => 2,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 2,
+            'produit_id' => 3,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 3,
+            'produit_id' => 4,
+        ]);
+        FormuleProduit::factory()->create([
+            'bien_etre_id' => 3,
+            'produit_id' => 5,
+        ]);
 
         // ---------effaceer-------------------------------------------
         Bien_etre::factory()->create([
@@ -115,14 +149,14 @@ class DatabaseSeeder extends Seeder
         ]);
         Produit::factory()->create([
             'nom' => 'Aloe MSM',
-            'prix' => '50.19',
-            'bien_etre_id' => '3',
+            'prix' => '50,19',
         ]);
         Produit::factory()->create([
             'nom' => 'AloM',
-            'prix' => '50.19',
-            'bien_etre_id' => '3',
+            'prix' => '50,19',
         ]);
+
+
 
         Chambre::factory()->create([
             'nom' => 'Pre',
@@ -130,8 +164,8 @@ class DatabaseSeeder extends Seeder
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
-            'date_debut' => '01-06-2025',
-            'date_fin' => '06-06-2025',
+            'date_debut' => '02-06-2025',
+            'date_fin' => '07-06-2025',
             'prix' => '500',
             'jours' => '5',
             'disponible' => true,
@@ -145,8 +179,8 @@ class DatabaseSeeder extends Seeder
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
-            'date_debut' => '01-06-2025',
-            'date_fin' => '06-06-2025',
+            'date_debut' => '02-06-2025',
+            'date_fin' => '07-06-2025',
             'prix' => '500',
             'jours' => '5',
             'disponible' => true,
@@ -160,8 +194,8 @@ class DatabaseSeeder extends Seeder
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
-            'date_debut' => '01-06-2025',
-            'date_fin' => '06-06-2025',
+            'date_debut' => '02-06-2025',
+            'date_fin' => '07-06-2025',
             'prix' => '500',
             'jours' => '5',
             'disponible' => false,

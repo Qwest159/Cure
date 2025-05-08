@@ -16,6 +16,7 @@ let form = useForm({
     prix: "",
     jours: "",
 });
+
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
 function succes() {
@@ -70,6 +71,12 @@ function handlefilechange(event) {
 
         <!-- Création d'une chambre -->
         <article class="max-w-5xl m-auto p-9">
+            <button
+                class="my-4"
+                @click="() => $inertia.get(route('cure_chambre'))"
+            >
+                Retour en arrière
+            </button>
             <button
                 v-if="affichage_resultat"
                 class="w-full p-2 bg-green-500 text-white text-center"

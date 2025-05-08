@@ -9,8 +9,8 @@ class Produit extends Model
 {
     /** @use HasFactory<\Database\Factories\ProduitFactory> */
     use HasFactory;
-    public function bienEtre()
+    public function formules()
     {
-        return $this->belongsTo(Bien_etre::class);
+        return $this->belongsToMany(Bien_etre::class, 'formule_produits');
     }
 }

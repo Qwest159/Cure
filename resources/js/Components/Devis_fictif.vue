@@ -13,11 +13,11 @@ let tableaux_donnée = {
 };
 function valeur_total_produits(tableau_produit) {
     let prix_total = 0;
-    // ATTENTION CONVERT EN STRINF CHANGE la virgule en point test apres avec admin !!!!!!!!!!!!!!!!!
     tableau_produit.forEach((produit) => {
-        prix_total += produit.prix;
+        let changement_virgule = produit.prix.replace(",", ".");
+        prix_total += parseFloat(changement_virgule);
     });
-    return prix_total.toString().replace(".", ",");
+    return prix_total.toFixed(2).toString().replace(".", ",");
 }
 
 function valeur_rajout(tableaux_donnée) {

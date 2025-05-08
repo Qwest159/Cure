@@ -8,6 +8,7 @@ import DialogModal from "@/Components/DialogModal.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import ActionModal from "@/Components/ActionModal.vue";
+let affichage_resultat = ref(false);
 
 const props = defineProps(["formules"]);
 const form = useForm(props);
@@ -28,26 +29,40 @@ function deleteformule() {
             formuleRecherche = props.formules;
             searchinput.value = "";
             closeModal();
+            affichage_resultat.value = true; // Afficher le message "Veuillez patienter"
+            // Réinitialiser après 5 secondes
+            setTimeout(() => {
+                affichage_resultat.value = false;
+            }, 5000);
         },
     });
 }
-let erreurs = ref();
+
 
 const closeModal = () => {
     confirmingformuleDeletion.value = false;
 };
 
-let searchinput = ref("");
 
 // Résultats de la recherche
-let formuleRecherche = ref(props.formules);
 
 // Fonction de recherche
+let formuleRecherche = ref(props.formules);
+let searchinput = ref("");
+
 function function_rechercher() {
     const searchValue = searchinput.value.toLowerCase();
     formuleRecherche.value = props.formules.filter((formule) => {
         return formule.nom.toLowerCase().includes(searchValue);
     });
+}
+function valeur_total(tableau_produit) {
+    let prix_total = 0;
+    tableau_produit.forEach((produit) => {
+        let changement_virgule = produit.prix.replace(",", ".");
+        prix_total += parseFloat(changement_virgule);
+    });
+    return prix_total.toFixed(2).toString().replace(".", ",");
 }
 </script>
 
@@ -69,9 +84,7 @@ function function_rechercher() {
             placeholder="Rechercher une formule"
             @input="function_rechercher"
         />
-        <h1 v-if="erreurs?.id" class="text-red-500 text-2xl text-center">
-            <p v-html="erreurs.error"></p>
-        </h1>
+
         <button
             class="mt-2"
             id="formule_recherche"
@@ -79,25 +92,55 @@ function function_rechercher() {
         >
             Ajouter formule
         </button>
+        <button
+                v-if="affichage_resultat"
+                class="w-full p-2 bg-green-500 text-white text-center"
+            >
+                Supprimer réussi
+            </button>
         <article
-            class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text_button"
         >
+
             <section
                 v-for="formule in formuleRecherche"
                 :key="formule.id"
-                class="border-4 p-4"
+                class="border-4 p-4 space-y-2 grid"
             >
-                <p>Nom: {{ formule.nom }} ({{ formule.prix }}€)</p>
-                <p>
-                    Date :
-                    <span class="text-cyan-500">{{ formule.date_debut }}</span>
-                    /
-                    <span class="text-orange-400">{{ formule.date_fin }}</span>
+                <p>Nom: {{ formule.nom }}</p>
+                <ul>
+                    Produits:
+                </ul>
+                <li
+                    v-for="produit in formule.produits"
+                    :key="produit.id"
+                    class=""
+                >
+                    {{ produit.nom }}
+                </li>
+
+                <p class="">
+                    Valeur totale de la formule:
+                    {{ valeur_total(formule.produits) }}€
                 </p>
-                <div class="flex space-x-4 mt-4">
+                <p>Disponible : {{ formule.disponible ? "Oui" : "Non" }}</p>
+                <div class="flex space-x-4 m-auto items-center">
                     <!-- Bouton Modifier -->
                     <button
-                        class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                        class="inline-flex items-center justify-center px-4 py-2 bg-pink-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-600 active:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:ring-offset-2 transition ease-in-out duration-150 self-center"
+                        @click="
+                            () =>
+                                $inertia.get(
+                                    route('cure_formule.edit_produit', formule.id)
+                                )
+                        "
+                    >
+                        Produits
+                    </button class="">
+
+                    <!-- Ajout de produit  -->
+                    <button
+                        class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150 self-center"
                         @click="
                             () =>
                                 $inertia.get(
@@ -105,8 +148,8 @@ function function_rechercher() {
                                 )
                         "
                     >
-                        Moddifier
-                    </button>
+                        Modifier
+                    </button class="">
                     <!-- Bouton Supprimer -->
 
                     <ActionModal>

@@ -54,13 +54,7 @@ class ChambreController extends Controller
             'description' => 'required|string|max:150',
         ]);
 
-        //nettoyage
-        function netoyageCharactere($donnee)
-        {
-            $donnee = trim($donnee);
-            $donnee =  htmlspecialchars($donnee);
-            return $donnee;
-        }
+
         // ------------DATE-------------
 
         function convertDate($date)

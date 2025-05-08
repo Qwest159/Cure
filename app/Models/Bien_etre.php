@@ -11,6 +11,6 @@ class Bien_etre extends Model
     use HasFactory;
     public function produits()
     {
-        return $this->hasMany(Produit::class);
+        return $this->belongsToMany(Produit::class, 'formule_produits');
     }
 }

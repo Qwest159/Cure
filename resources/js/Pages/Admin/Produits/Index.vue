@@ -1,7 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { ref, watch } from "vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 //MODAL
 import DialogModal from "@/Components/DialogModal.vue";
@@ -9,69 +9,58 @@ import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import ActionModal from "@/Components/ActionModal.vue";
 
-const props = defineProps(["chambres"]);
+const props = defineProps(["produits"]);
 const form = useForm(props);
 // DELETE AVEC MODAL
-const confirmingchambreDeletion = ref(false);
+const confirmingproduitDeletion = ref(false);
+let affichage_resultat = ref(false);
 
-let selected_chambre_id = 0;
-let selected_chambre_nom = "";
-const confirmchambreDeletion = (id, nom) => {
-    selected_chambre_id = id;
-    selected_chambre_nom = nom;
-    confirmingchambreDeletion.value = true;
+let selected_produit_id = 0;
+let selected_produit_nom = "";
+const confirmproduitDeletion = (id, nom) => {
+    selected_produit_id = id;
+    selected_produit_nom = nom;
+    confirmingproduitDeletion.value = true;
 };
 
-function deletechambre() {
-    form.delete(route("cure_chambre.destroy", selected_chambre_id), {
+function deleteproduit() {
+    form.delete(route("cure_produit.destroy", selected_produit_id), {
         onSuccess: () => {
-            chambreRecherche = props.chambres;
+            produitRecherche = props.produits;
             searchinput.value = "";
             closeModal();
+            affichage_resultat.value = true; // Afficher le message "Veuillez patienter"
+            // Réinitialiser après 5 secondes
+            setTimeout(() => {
+                affichage_resultat.value = false;
+            }, 5000);
         },
     });
 }
-let erreurs = ref();
 
-// function succes(chambre) {
-//     form.post(route("mail.email", chambre), {
-//         onSuccess: () => {
-//             erreurs.value = null;
-//             chambreRecherche = props.chambres;
-//             searchinput.value = "";
-//             closeModal();
-//         },
-//         onError: () => {
-//             erreurs.value = {
-//                 id: usePage().props.errors.id,
-//                 error: usePage().props.errors.error,
-//             };
-//         },
-//     });
-// }
 const closeModal = () => {
-    confirmingchambreDeletion.value = false;
+    confirmingproduitDeletion.value = false;
 };
 
 let searchinput = ref("");
 
 // Résultats de la recherche
-let chambreRecherche = ref(props.chambres);
+let produitRecherche = ref(props.produits);
 
 // Fonction de recherche
 function function_rechercher() {
     const searchValue = searchinput.value.toLowerCase();
-    chambreRecherche.value = props.chambres.filter((chambre) => {
-        return chambre.nom.toLowerCase().includes(searchValue);
+    produitRecherche.value = props.produits.filter((produit) => {
+        return produit.nom.toLowerCase().includes(searchValue);
     });
 }
 </script>
 
 <template>
-    <AppLayout title="Chambres">
+    <AppLayout title="produits">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Les chambres
+                Les produits
             </h2>
         </template>
 
@@ -82,34 +71,33 @@ function function_rechercher() {
             name="search"
             id="search"
             v-model="searchinput"
-            placeholder="Rechercher une chambre"
+            placeholder="Rechercher un produit"
             @input="function_rechercher"
         />
-        <h1 v-if="erreurs?.id" class="text-red-500 text-2xl text-center">
-            <p v-html="erreurs.error"></p>
-        </h1>
+
         <button
-            class="mt-2"
-            id="chambre_recherche"
-            @click="() => $inertia.get(route('cure_chambre.create'))"
+            class="my-4"
+            id="produit_recherche"
+            @click="() => $inertia.get(route('cure_produit.create'))"
         >
-            Ajouter chambre
+            Ajouter produit
+        </button>
+        <button
+            v-if="affichage_resultat"
+            class="w-full p-2 bg-green-500 text-white text-center"
+        >
+            Supprimer réussi
         </button>
         <article
             class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
             <section
-                v-for="chambre in chambreRecherche"
-                :key="chambre.id"
+                v-for="produit in produitRecherche"
+                :key="produit.id"
                 class="border-4 p-4"
             >
-                <p>Nom: {{ chambre.nom }} ({{ chambre.prix }}€)</p>
-                <p>
-                    Date :
-                    <span class="text-cyan-500">{{ chambre.date_debut }}</span>
-                    /
-                    <span class="text-orange-400">{{ chambre.date_fin }}</span>
-                </p>
+                <p>Nom: {{ produit.nom }}</p>
+                <p>Prix : {{ produit.prix }}€</p>
                 <div class="flex space-x-4 mt-4">
                     <!-- Bouton Modifier -->
                     <button
@@ -117,11 +105,11 @@ function function_rechercher() {
                         @click="
                             () =>
                                 $inertia.get(
-                                    route('cure_chambre.edit', chambre.id)
+                                    route('cure_produit.edit', produit.id)
                                 )
                         "
                     >
-                        Moddifier
+                        Modifier
                     </button>
                     <!-- Bouton Supprimer -->
 
@@ -131,9 +119,9 @@ function function_rechercher() {
                                 <DangerButton
                                     id="open-modal-button"
                                     @click="
-                                        confirmchambreDeletion(
-                                            chambre.id,
-                                            chambre.nom
+                                        confirmproduitDeletion(
+                                            produit.id,
+                                            produit.nom
                                         )
                                     "
                                 >
@@ -146,14 +134,14 @@ function function_rechercher() {
             </section>
         </article>
 
-        <DialogModal :show="confirmingchambreDeletion" @close="closeModal">
+        <DialogModal :show="confirmingproduitDeletion" @close="closeModal">
             <template #title>
                 Supprimer
-                {{ selected_chambre_nom }}</template
+                {{ selected_produit_nom }}</template
             >
 
             <template #content>
-                La chambre <strong>"{{ selected_chambre_nom }}"</strong> va être
+                La produit <strong>"{{ selected_produit_nom }}"</strong> va être
                 supprimée
             </template>
 
@@ -165,7 +153,7 @@ function function_rechercher() {
                     :class="{
                         'opacity-25': form.processing,
                     }"
-                    @click="deletechambre()"
+                    @click="deleteproduit()"
                 >
                     Supprimer
                 </DangerButton>

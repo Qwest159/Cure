@@ -36,9 +36,10 @@ let affichage_resultat = ref(false);
 function valeur_total(tableau_produit) {
     let prix_total = 0;
     tableau_produit.forEach((produit) => {
-        prix_total += produit.prix;
+        let changement_virgule = produit.prix.replace(",", ".");
+        prix_total += parseFloat(changement_virgule);
     });
-    return prix_total.toString().replace(".", ",");
+    return prix_total.toFixed(2).toString().replace(".", ",");
 }
 
 function succes() {

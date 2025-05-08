@@ -149,4 +149,12 @@ typographie paragraphe => Roboto
     section#devis_fictif {
         width: 85% !important;
     }
+
+    /* --------ADMIN-------- */
+    .text_button button {
+        @apply text-sm !important;
+    }
+    #gsm_li {
+        display: block;
+    }
 }

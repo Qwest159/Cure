@@ -4,31 +4,25 @@ import { ref, defineProps } from "@vue/runtime-core";
 
 import AppLayout from "@/Layouts/AppLayout.vue";
 
-const props = defineProps(["chambre", "date_fin", "date_debut"]);
+const props = defineProps(["formule"]);
 
 let form = useForm({
-    nom: props.chambre.nom,
-    img_path: props.chambre.img,
-    nbr_personnes: props.chambre.nbr_personnes,
-    nbr_lit: props.chambre.nbr_lit,
-    nbr_sdb: props.chambre.nbr_sdb,
-    date_debut: props.date_debut,
-    date_fin: props.date_fin,
-    description: props.chambre.description,
-    prix: props.chambre.prix,
-    jours: props.chambre.jours,
+    nom: props.formule.nom,
+    img_path: props.formule.img,
+    description: props.formule.description,
+    disponible: props.formule.disponible,
 });
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
-let ancienne_image = props.chambre.img_path;
+let ancienne_image = props.formule.img_path;
 
 function succes() {
     bouton_envoyer.value = false;
-    form.post(route("cure_chambre.update", props.chambre.id), {
+    form.post(route("cure_formule.update", props.formule.id), {
         // Condition avant de passer à onSuccess
         onSuccess: () => {
             // Vérification des données et des erreurs
-            ancienne_image = props.chambre.img_path;
+            ancienne_image = props.formule.img_path;
             affichage_resultat.value = true; // Afficher le message "Veuillez patienter"
             // Réinitialiser après 5 secondes
             setTimeout(() => {
@@ -53,15 +47,22 @@ function handlefilechange(event) {
 </script>
 
 <template>
-    <AppLayout title="chambre">
+    <AppLayout title="formule">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Modification d'une chambre
+                Modification de la formule
+                <span class="text-orange-400">{{ formule.nom }}</span>
             </h2>
         </template>
 
-        <!-- Création d'une chambre -->
+        <!-- Création d'une formule -->
         <article class="max-w-5xl m-auto p-9">
+            <button
+                class="my-4"
+                @click="() => $inertia.get(route('cure_formule'))"
+            >
+                Retour en arrière
+            </button>
             <button
                 v-if="affichage_resultat"
                 class="w-full p-2 bg-green-500 text-white text-center"
@@ -128,143 +129,33 @@ function handlefilechange(event) {
                 </div>
 
                 <div>
-                    <label
-                        for="nbr_personnes"
-                        class="block text-sm font-medium text-gray-700"
-                        >Nombre de personnes</label
-                    >
-                    <input
-                        type="text"
-                        id="nbr_personnes"
-                        v-model="form.nbr_personnes"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.nbr_personnes"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.nbr_personnes }}
-                    </div>
-                </div>
+                    <label>Disponible</label>
 
-                <div>
-                    <label
-                        for="nbr_lit"
-                        class="block text-sm font-medium text-gray-700"
-                        >Nombre de lits</label
-                    >
-                    <input
-                        type="text"
-                        id="nbr_lit"
-                        v-model="form.nbr_lit"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.nbr_lit"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.nbr_lit }}
-                    </div>
-                </div>
+                    <div class="grouper">
+                        <input
+                            type="radio"
+                            id="true"
+                            :value="1"
+                            v-model="form.disponible"
+                            name="disponible"
+                        />
+                        <label for="true">Oui</label>
 
-                <div>
-                    <label
-                        for="nbr_sdb"
-                        class="block text-sm font-medium text-gray-700"
-                        >Nombre de salles de bain</label
-                    >
-                    <input
-                        type="text"
-                        id="nbr_sdb"
-                        v-model="form.nbr_sdb"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.nbr_sdb"
+                        <input
+                            type="radio"
+                            id="false"
+                            :value="0"
+                            v-model="form.disponible"
+                            name="disponible"
+                        />
+                        <label for="false">Non</label>
+                    </div>
+                    <p
+                        v-show="form.errors.disponible"
                         class="text-sm text-red-500 mt-1"
                     >
-                        {{ form.errors.nbr_sdb }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="date_debut"
-                        class="block text-sm font-medium text-gray-700"
-                        >Date de début</label
-                    >
-                    <input
-                        type="date"
-                        id="date_debut"
-                        v-model="form.date_debut"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.date_debut"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.date_debut }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="date_fin"
-                        class="block text-sm font-medium text-gray-700"
-                        >Date de fin</label
-                    >
-                    <input
-                        type="date"
-                        id="date_fin"
-                        v-model="form.date_fin"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.date_fin"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.date_fin }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="prix"
-                        class="block text-sm font-medium text-gray-700"
-                        >Prix</label
-                    >
-                    <input
-                        type="text"
-                        id="prix"
-                        v-model="form.prix"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.prix"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.prix }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="jours"
-                        class="block text-sm font-medium text-gray-700"
-                        >Nombre de jour</label
-                    >
-                    <input
-                        type="text"
-                        id="jours"
-                        v-model="form.jours"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.jours"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.jours }}
-                    </div>
+                        {{ form.errors.disponible }}
+                    </p>
                 </div>
 
                 <div>

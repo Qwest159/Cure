@@ -8,6 +8,7 @@ import DialogModal from "@/Components/DialogModal.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import ActionModal from "@/Components/ActionModal.vue";
+let affichage_resultat = ref(false);
 
 const props = defineProps(["chambres"]);
 const form = useForm(props);
@@ -27,28 +28,17 @@ function deletechambre() {
         onSuccess: () => {
             chambreRecherche = props.chambres;
             searchinput.value = "";
+
             closeModal();
+            affichage_resultat.value = true; // Afficher le message "Veuillez patienter"
+            // Réinitialiser après 5 secondes
+            setTimeout(() => {
+                affichage_resultat.value = false;
+            }, 5000);
         },
     });
 }
-let erreurs = ref();
 
-// function succes(chambre) {
-//     form.post(route("mail.email", chambre), {
-//         onSuccess: () => {
-//             erreurs.value = null;
-//             chambreRecherche = props.chambres;
-//             searchinput.value = "";
-//             closeModal();
-//         },
-//         onError: () => {
-//             erreurs.value = {
-//                 id: usePage().props.errors.id,
-//                 error: usePage().props.errors.error,
-//             };
-//         },
-//     });
-// }
 const closeModal = () => {
     confirmingchambreDeletion.value = false;
 };
@@ -85,15 +75,19 @@ function function_rechercher() {
             placeholder="Rechercher une chambre"
             @input="function_rechercher"
         />
-        <h1 v-if="erreurs?.id" class="text-red-500 text-2xl text-center">
-            <p v-html="erreurs.error"></p>
-        </h1>
+
         <button
             class="mt-2"
             id="chambre_recherche"
             @click="() => $inertia.get(route('cure_chambre.create'))"
         >
             Ajouter chambre
+        </button>
+        <button
+            v-if="affichage_resultat"
+            class="w-full p-2 bg-green-500 text-white text-center"
+        >
+            Supprimer réussi
         </button>
         <article
             class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -121,7 +115,7 @@ function function_rechercher() {
                                 )
                         "
                     >
-                        Moddifier
+                        Modifier
                     </button>
                     <!-- Bouton Supprimer -->
 

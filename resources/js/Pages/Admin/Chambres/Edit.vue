@@ -56,12 +56,19 @@ function handlefilechange(event) {
     <AppLayout title="chambre">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Modification d'une chambre
+                Modification de la chambre
+                <span class="text-orange-400">{{ chambre.nom }}</span>
             </h2>
         </template>
 
         <!-- Création d'une chambre -->
         <article class="max-w-5xl m-auto p-9">
+            <button
+                class="my-4"
+                @click="() => $inertia.get(route('cure_chambre'))"
+            >
+                Retour en arrière
+            </button>
             <button
                 v-if="affichage_resultat"
                 class="w-full p-2 bg-green-500 text-white text-center"
