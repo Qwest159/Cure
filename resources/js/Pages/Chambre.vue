@@ -35,7 +35,9 @@ const form = useForm(props);
                         Du {{ chambre.date_debut }} Au {{ chambre.date_fin }}
                     </p>
 
-                    <p>{{ chambre.description }}</p>
+                    <p>
+                        {{ chambre.description }}
+                    </p>
                     <p id="jours_prix">
                         <strong
                             >{{ chambre.prix }}€ {{ chambre.jours }} jours
@@ -45,7 +47,7 @@ const form = useForm(props);
             </section>
         </article>
         <p class="important">
-            <a href="http://" rel="noopener noreferrer">
+            <a :href="route('contact')">
                 Séduit ? Passez à l’étape suivante en remplissant le
                 <span class="gras_span">formulaire</span>.</a
             >

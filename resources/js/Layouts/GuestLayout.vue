@@ -21,16 +21,24 @@ const showingNavigationDropdown = ref(false);
 
         <nav class="fixed w-full z-50">
             <!-- Primary Navigation Menu -->
-            <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                id="nav_back"
+                class="mx-auto px-4 sm:px-6 lg:px-8 nav_background"
+            >
                 <div class="flex justify-between h-16">
-                    <div class="flex w-full">
+                    <div class="flex w-full py-2">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <Link :href="route('accueil')">
                                 <ApplicationMark />
                             </Link>
                         </div>
-
+                        <a
+                            id="tel"
+                            class="items-center border-b-2 border-transparent text-base font-medium leading-5 text-white focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                            href="tel:+1234567890"
+                            >Tél: 234 567 890</a
+                        >
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:ms-10 sm:flex">
                             <NavLink
@@ -63,14 +71,14 @@ const showingNavigationDropdown = ref(false);
                     <!-- Hamburger -->
                     <div class="-me-2 flex items-center sm:hidden">
                         <button
-                            class="inline-flex items-center justify-center p-2 rounded-md hover:text-gray-300 transition duration-150 ease-in-out"
+                            class="inline-flex items-center justify-center p-2 rounded-md transition duration-150 ease-in-out button_svg"
                             @click="
                                 showingNavigationDropdown =
                                     !showingNavigationDropdown
                             "
                         >
                             <svg
-                                class="size-6 text-black"
+                                class="size-7 text-black"
                                 stroke="currentColor"
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -109,9 +117,9 @@ const showingNavigationDropdown = ref(false);
                     block: showingNavigationDropdown,
                     hidden: !showingNavigationDropdown,
                 }"
-                class="sm:hidden grid w-52 justify-self-end"
+                class="sm:hidden grid justify-self-end"
             >
-                <div class="pb-2 space-y-1">
+                <div class="pb-2 space-y-1 nav_background">
                     <ResponsiveNavLink
                         :href="route('accueil')"
                         :active="route().current('accueil')"
@@ -151,26 +159,56 @@ const showingNavigationDropdown = ref(false);
             <article class="">
                 <section id="reseau">
                     <h2>Me Contacter</h2>
-                    <p><i class="fa-brands fa-facebook-f"></i> facebook</p>
-                    <p><i class="fa-brands fa-instagram"></i> instagram</p>
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i
+                            ><a href="http://"> email</a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone"></i
+                            ><a href="http://"> téléphone</a>
+                        </li>
+                    </ul>
                 </section>
                 <section>
                     <h2>À PROPOS</h2>
-                    <p @click="() => $inertia.get(route('mentions_legales'))">
-                        Mentions légales
-                    </p>
-                    <p
-                        @click="
-                            () => $inertia.get(route('donnees_personnelles'))
-                        "
-                    >
-                        Données personnelles
-                    </p>
+                    <ul>
+                        <li>
+                            <a
+                                @click="
+                                    () =>
+                                        $inertia.get(route('mentions_legales'))
+                                "
+                                >Mentions légales</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                @click="
+                                    () =>
+                                        $inertia.get(
+                                            route('donnees_personnelles')
+                                        )
+                                "
+                                >Données personnelles</a
+                            >
+                        </li>
+                    </ul>
+
+                    <p></p>
                 </section>
                 <section>
                     <h2>Me suivre</h2>
-                    <p>Cure&airbnsta.com</p>
-                    <p>facebook.Cure&A.com</p>
+                    <ul>
+                        <li>
+                            <i class="fa-brands fa-facebook text-2xl"></i>
+                            <a href="http://"> Cure&airbnsta.com</a>
+                        </li>
+                        <li>
+                            <i class="fa-brands fa-instagram text-2xl"></i
+                            ><a href="http://"> facebook.Cure&A.com</a>
+                        </li>
+                    </ul>
                 </section>
             </article>
             <h3 class="text-center pt-5">© Cure, Made by Duchesne R.</h3>

@@ -40,7 +40,10 @@ const logout = () => {
         <div class="min-h-screen bg-gray-100">
             <nav class="">
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    id="back"
+                    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav_background"
+                >
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
@@ -274,9 +277,7 @@ const logout = () => {
 
                                     <template #content>
                                         <!-- Account Management -->
-                                        <div
-                                            class="block px-4 py-2 text-xs text-gray-400"
-                                        >
+                                        <div class="block px-4 py-2 text-xs">
                                             Manage Account
                                         </div>
 
@@ -360,7 +361,7 @@ const logout = () => {
                     }"
                     class="sm:hidden"
                 >
-                    <div class="pt-2 pb-3 space-y-1">
+                    <div class="pt-2 pb-3 space-y-1 nav_background">
                         <ResponsiveNavLink
                             :href="route('cure_accueil')"
                             :active="route().current('cure_accueil')"
@@ -417,7 +418,7 @@ const logout = () => {
                             </div>
                         </div>
 
-                        <div class="mt-3 space-y-1">
+                        <div class="mt-3 space-y-1 nav_background">
                             <ResponsiveNavLink
                                 :href="route('profile.show')"
                                 :active="route().current('profile.show')"

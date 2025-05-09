@@ -35,18 +35,19 @@ class ContactController extends Controller
     public function envoyer_mail(Request $request)
     {
 
-
         $validatedData = $request->validate([
-            'Nom' => 'required|string|min:2|max:30',
-            'Prénom' => 'required|string|min:2|max:30',
-            'Email' => 'required|email|max:255',
-            'Téléphone' => 'required|string|min:10|max:20',
-            'Nombres' => 'required|integer|min:1|max:10',
-            'Chambre' => 'required',
-            'Cure' => 'required|string|in:Oui,Non',
-            'Formule' => 'nullable|string|required_if:Cure,Oui',
-            'Commentaire' => 'nullable|string|max:200|min:5',
+            'nom' => 'required|string|min:2|max:30',
+            'prénom' => 'required|string|min:2|max:30',
+            'email' => 'required|email|max:255',
+            'téléphone' => 'required|string|min:6|max:20',
+            'nombres' => 'required|integer|min:1|max:10',
+            'chambre' => 'required',
+            'cure' => 'required|string|in:Oui,Non',
+            'formule1' => 'nullable|string|required_if:Cure,Oui',
+            'formule2' => 'nullable|string',
+            'commentaire' => 'nullable|string|max:200|min:5',
         ]);
+
         function netoyageCharactere($donnee_input)
         {
             $donnee = trim($donnee_input);

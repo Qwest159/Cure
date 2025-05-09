@@ -55,11 +55,16 @@ typographie paragraphe => Roboto
     }
 }
 @media (max-width: 800px) {
+    nav #tel {
+        position: static !important;
+        margin: auto !important;
+    }
+
     /* -----------accueil---------------- */
     h1,
     h2,
     nav {
-        @apply text-3xl !important;
+        @apply text-3xl;
     }
     button,
     p:not(form p),
@@ -71,11 +76,19 @@ typographie paragraphe => Roboto
     #description_accueil {
         padding: 0 !important;
     }
-    #h2_description {
-        width: 100% !important;
-        /* @apply my-2 !important; */
-        @apply px-0 !important;
+    #h1_description {
+        padding-top: 0.8em !important;
+        @apply text-3xl !important;
+        line-height: 1.3em;
+        word-spacing: 8px;
     }
+    #h2_description {
+        @apply text-2xl !important;
+        width: 100% !important;
+        @apply px-0 !important;
+        bottom: 20vh;
+    }
+
     #contactez {
         margin-bottom: 2em;
     }
@@ -104,7 +117,9 @@ typographie paragraphe => Roboto
     footer article {
         @apply grid-cols-2 !important;
     }
-
+    footer article h2 {
+        @apply text-3xl !important;
+    }
     /* ----------------PRODUITS-------------- */
     main article#bien_être {
         @apply grid-cols-1 !important;

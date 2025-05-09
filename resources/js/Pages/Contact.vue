@@ -18,15 +18,16 @@ onMounted(adjustHeight);
 // définir les données
 
 let form = useForm({
-    Nom: "",
-    Prénom: "",
-    Email: "",
-    Téléphone: "",
-    Nombres: "",
-    Cure: "",
-    Chambre: "",
-    Formule: "",
-    Commentaire: "",
+    nom: "",
+    prénom: "",
+    email: "",
+    téléphone: "",
+    nombres: "",
+    cure: "",
+    chambre: "",
+    formule1: "",
+    formule2: "",
+    commentaire: "",
 });
 // ref
 let devis = ref(false);
@@ -46,25 +47,24 @@ function succes() {
     bouton_envoyer.value = false;
 
     form.post(route("mail.email"), {
-        // Condition avant de passer à onSuccess
         onSuccess: () => {
-            // Vérification des données et des erreurs
-
+            // Réinitialise le formulaire
             form = useForm({
-                Nom: "",
-                Prénom: "",
-                Email: "",
-                Téléphone: "",
-                Nombres: "",
-                Chambre: "",
-                Commentaire: "",
+                nom: "",
+                prénom: "",
+                email: "",
+                téléphone: "",
+                nombres: "",
+                cure: "",
+                chambre: "",
+                formule1: "",
+                formule2: "",
+                commentaire: "",
             });
-            // heuresDisponibles_totale.value = "";
 
-            affichage_resultat.value = true; // Afficher le message "Veuillez patienter"
-            bouton_envoyer.value = true; // Afficher le bouton d'envoi
+            affichage_resultat.value = true;
 
-            // Réinitialiser après 5 secondes
+            // Réinitialise après 5 secondes
             setTimeout(() => {
                 affichage_resultat.value = false;
             }, 5000);
@@ -73,9 +73,6 @@ function succes() {
         },
 
         onError: () => {
-            // erreurs.value = {
-            //     error: usePage().props.errors,
-            // };
             bouton_envoyer.value = true;
         },
     });
@@ -122,10 +119,10 @@ function montrer_disparait() {
                     <input
                         type="text"
                         id="Nom"
-                        v-model="form.Nom"
+                        v-model="form.nom"
                         placeholder="Votre nom"
                     />
-                    <p v-show="form.errors.Nom">{{ form.errors.Nom }}</p>
+                    <p v-show="form.errors.nom">{{ form.errors.nom }}</p>
                 </section>
 
                 <!-- Prénom -->
@@ -134,11 +131,11 @@ function montrer_disparait() {
                     <input
                         type="text"
                         id="Prenom"
-                        v-model="form.Prénom"
+                        v-model="form.prénom"
                         placeholder="Votre prénom"
                     />
-                    <p v-show="form.errors.Prénom">
-                        {{ form.errors.Prénom }}
+                    <p v-show="form.errors.prénom">
+                        {{ form.errors.prénom }}
                     </p>
                 </section>
 
@@ -148,11 +145,11 @@ function montrer_disparait() {
                     <input
                         type="email"
                         id="Email"
-                        v-model="form.Email"
+                        v-model="form.email"
                         placeholder="Votre email"
                     />
-                    <p v-show="form.errors.Email">
-                        {{ form.errors.Email }}
+                    <p v-show="form.errors.email">
+                        {{ form.errors.email }}
                     </p>
                 </section>
 
@@ -162,32 +159,31 @@ function montrer_disparait() {
                     <input
                         type="tel"
                         id="Téléphone"
-                        v-model="form.Téléphone"
+                        v-model="form.téléphone"
                         placeholder="Votre téléphone"
                     />
-                    <p v-show="form.errors.Téléphone">
-                        {{ form.errors.Téléphone }}
+                    <p v-show="form.errors.téléphone">
+                        {{ form.errors.téléphone }}
                     </p>
                 </section>
 
                 <!-- Nombres -->
+
                 <section id="nombres">
                     <label for="Nombres">Nombres Adultes <span>*</span></label>
-                    <input
-                        type="text"
-                        id="Nombres"
-                        v-model="form.Nombres"
-                        placeholder="Combien de personnes"
-                    />
-                    <p v-show="form.errors.Nombres">
-                        {{ form.errors.Nombres }}
+                    <select v-model="form.nombres">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                    <p v-show="form.errors.nombres">
+                        {{ form.errors.nombres }}
                     </p>
                 </section>
 
                 <!-- chambre -->
                 <section id="chambre">
                     <label for="chambre"> Chambre <span>*</span></label>
-                    <select v-model="form.Chambre" class="">
+                    <select v-model="form.chambre" class="">
                         <option
                             v-for="chambre in chambre_dispo"
                             :key="chambre.id"
@@ -198,10 +194,10 @@ function montrer_disparait() {
                         </option>
                     </select>
                     <div
-                        v-if="form.errors.Chambre"
+                        v-if="form.errors.chambre"
                         class="text-sm text-red-500 mt-1"
                     >
-                        {{ form.errors.Chambre }}
+                        {{ form.errors.chambre }}
                     </div>
                 </section>
 
@@ -212,34 +208,35 @@ function montrer_disparait() {
                     <div class="grouper">
                         <input
                             type="radio"
-                            id="oui"
+                            id="Oui"
                             value="Oui"
-                            v-model="form.Cure"
-                            name="Cure"
+                            v-model="form.cure"
+                            name="cure"
                         />
-                        <label for="oui">Oui</label>
+                        <label for="Oui">Oui</label>
 
                         <input
                             type="radio"
                             id="Non"
                             value="Non"
-                            v-model="form.Cure"
-                            name="Cure"
+                            v-model="form.cure"
+                            name="cure"
                         />
                         <label for="Non">Non</label>
                     </div>
-                    <p v-show="form.errors.Cure" class="mt-5">
-                        {{ form.errors.Cure }}
+                    <p v-show="form.errors.cure" class="mt-5">
+                        {{ form.errors.cure }}
                     </p>
                 </section>
 
                 <!-- chambre -->
-                <section id="type_cure" v-if="form.Cure === 'Oui'">
+                <section id="type_cure" v-show="form.cure === 'Oui'">
                     <label class="titre_cure"
-                        >Type de cure <span>*</span></label
-                    >
+                        >Type de cure <span>*</span>
+                        <p v-if="form.nombres === '2'">Une par personne</p>
+                    </label>
 
-                    <select v-model="form.Formule" class="">
+                    <select v-model="form.formule1" class="">
                         <option
                             v-for="formule in formules"
                             :key="formule.id"
@@ -250,10 +247,34 @@ function montrer_disparait() {
                         </option>
                     </select>
                     <div
-                        v-if="form.errors.formule"
+                        v-if="form.errors.formule1"
                         class="text-sm text-red-500 mt-1"
                     >
-                        {{ form.errors.formule }}
+                        {{ form.errors.formule1 }}
+                    </div>
+
+                    <select
+                        v-show="form.nombres === '2'"
+                        v-model="form.formule2"
+                        class="mt-2"
+                    >
+                        <option
+                            v-for="formule in formules"
+                            :key="formule.id"
+                            :value="formule.nom"
+                        >
+                            {{ formule.nom }}
+                            ({{ valeur_total(formule.produits) }}€)
+                        </option>
+                        <option class="text-red-600" value="Non Merci">
+                            Non merci
+                        </option>
+                    </select>
+                    <div
+                        v-if="form.errors.formule2"
+                        class="text-sm text-red-500 mt-1"
+                    >
+                        {{ form.errors.formule2 }}
                     </div>
                 </section>
 
@@ -265,11 +286,11 @@ function montrer_disparait() {
                         @input="adjustHeight"
                         name="message"
                         id="message"
-                        v-model="form.Commentaire"
+                        v-model="form.commentaire"
                         placeholder="Votre commentaire"
                     ></textarea>
-                    <p v-show="form.errors.Commentaire">
-                        {{ form.errors.Commentaire }}
+                    <p v-show="form.errors.commentaire">
+                        {{ form.errors.commentaire }}
                     </p>
                 </section>
 

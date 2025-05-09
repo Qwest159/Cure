@@ -17,6 +17,7 @@ let form = useForm({
     description: props.chambre.description,
     prix: props.chambre.prix,
     jours: props.chambre.jours,
+    disponible: props.chambre.disponible,
 });
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
@@ -100,30 +101,57 @@ function handlefilechange(event) {
                     </div>
                 </div>
 
+                <div>
+                    <label>Disponible</label>
+
+                    <div class="grouper">
+                        <input
+                            type="radio"
+                            id="true"
+                            :value="1"
+                            v-model="form.disponible"
+                            name="disponible"
+                        />
+                        <label for="true">Oui</label>
+
+                        <input
+                            type="radio"
+                            id="false"
+                            :value="0"
+                            v-model="form.disponible"
+                            name="disponible"
+                        />
+                        <label for="false">Non</label>
+                    </div>
+                    <p
+                        v-show="form.errors.disponible"
+                        class="text-sm text-red-500 mt-1"
+                    >
+                        {{ form.errors.disponible }}
+                    </p>
+                </div>
+
                 <div class="">
                     <div>
-                        <div class="">
-                            <div>
-                                <label
-                                    for="img_path"
-                                    class="block text-sm font-medium text-gray-700"
-                                    >Image</label
-                                >
-                                <input
-                                    type="file"
-                                    id="img_path"
-                                    name="img_path"
-                                    @change="handlefilechange"
-                                />
-                                <div
-                                    v-if="form.errors.img_path"
-                                    class="text-sm text-red-500 mt-1"
-                                >
-                                    {{ form.errors.img_path }}
-                                </div>
-                            </div>
+                        <label
+                            for="img_path"
+                            class="block text-sm font-medium text-gray-700"
+                            >Image</label
+                        >
+                        <input
+                            type="file"
+                            id="img_path"
+                            name="img_path"
+                            @change="handlefilechange"
+                        />
+                        <div
+                            v-if="form.errors.img_path"
+                            class="text-sm text-red-500 mt-1"
+                        >
+                            {{ form.errors.img_path }}
                         </div>
                     </div>
+
                     <figure class="">
                         <h3 class="font-bold text-xl">Image actuel</h3>
                         <img

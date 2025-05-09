@@ -7,21 +7,25 @@
 
 <p>Bonjour Virginie,</p>
 
-<p>Nom: {{$donnée["Nom"]}} {{$donnée["Prénom"]}}</p>
-<p>Email: {{$donnée["Email"]}}</p>
-<p>Téléphone: {{$donnée["Téléphone"]}}</p>
-<p>Nombre de personne: {{$donnée["Nombres"]}}</p>
-<p>Chambre souhaitée: {{$donnée["Chambre"]}} </p>
+<p>Nom: {{$donnée["nom"]}} {{$donnée["prénom"]}}</p>
+<p>Email: {{$donnée["email"]}}</p>
+<p>Téléphone: {{$donnée["téléphone"]}}</p>
+<p>Nombre de personne: {{$donnée["nombres"]}}</p>
+<p>Chambre souhaitée: {{$donnée["chambre"]}} </p>
 
-@if ($donnée["Cure"] === "Oui")
-<p>Type de formule: {{$donnée["Formule"]}}</p>
+@if ($donnée["cure"] === "Oui")
+    <p>Type de formule numéro 1: {{ $donnée["formule1"] }}</p>
+    @if ($donnée["nombres"] === "2")
+        <p>Type de formule numéro 2: {{ $donnée["formule2"] }}</p>
+    @endif
 @else
-<p>Type de formule: Aucune</p>
+    <p>Type de formule: Aucune</p>
 @endif
 
 
-@if ($donnée["Commentaire"])
-<p>Commentaire: {{$donnée["Commentaire"]}}</p>
+
+@if ($donnée["commentaire"])
+<p>Commentaire: {{$donnée["commentaire"]}}</p>
 @endif
 <p>Bonne journée :D</p>
 </body>

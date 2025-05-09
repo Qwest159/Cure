@@ -8,10 +8,6 @@ typographie paragraphe => Roboto
 */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@100..900&display=swap");
 
-[x-cloak] {
-    display: none;
-}
-
 :root {
     --couleur_blue: #00bfdf;
     --couleur_orange: #f9cc5a;
@@ -38,16 +34,29 @@ li {
     font-family: "Roboto", sans-serif;
     @apply text-2xl;
 }
-
-nav {
+/* ------NAVIGATION---- */
+nav .nav_background {
     background-color: var(--couleur_blue);
 }
-nav .nav_text:hover {
-    color: var(--couleur_orange);
+nav a:hover,
+footer a {
+    color: var(--couleur_orange) !important;
 }
-nav a {
+nav a,
+footer a {
     @apply text-xl !important;
     @apply font-bold !important;
+    @apply text-white !important;
+    cursor: pointer;
+}
+nav #tel {
+    position: absolute;
+    right: 5vh;
+    top: 17px;
+}
+nav .lien {
+    border-top: solid white 0.1em !important;
+    padding-top: 0.5em !important;
 }
 
 #description_accueil {
@@ -90,7 +99,7 @@ article#description_accueil #h2_description {
 #contactez {
     align-self: center;
 }
-button:hover {
+button:hover:not(.button_svg) {
     background-color: var(--couleur_orange_hover);
 }
 button:not(nav button) {
@@ -446,11 +455,31 @@ article#contact form button {
     width: 16rem;
     margin: auto;
 }
+article#donnee,
+article#mention {
+    @apply pt-16;
+    @apply mx-12;
+}
 
+article#donnee > h1,
+article#mention > h1 {
+    @apply text-center;
+    @apply my-16;
+}
+article#donnee section,
+article#mention section {
+    @apply my-16;
+}
+
+article#donnee h2 + p,
+article#mention > p {
+    @apply mt-5;
+}
 p#information {
     border: 1px solid rgba(128, 128, 128, 0.548);
     background-color: var(--couleur_argenté);
     margin: auto;
+    text-align: center;
     @apply rounded-xl;
     width: 65%;
     padding: 2em 2em;
@@ -519,4 +548,8 @@ section#devis_fictif div h1 {
     50% {
         transform: translateX(0%);
     }
+}
+
+.nav_profil {
+    background-color: var(--couleur_blue);
 }

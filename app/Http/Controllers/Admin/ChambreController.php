@@ -119,6 +119,8 @@ class ChambreController extends Controller
             'prix' => 'required|string|max:10|min:1',
             'jours' => 'required|string|max:10|min:1',
             'description' => 'required|string|max:150',
+            'disponible' => 'required|boolean',
+
         ]);
         $Chambre->nom = $validatedData['nom'];
 
@@ -148,6 +150,7 @@ class ChambreController extends Controller
         $Chambre->description = $validatedData['description'];
         $Chambre->prix = $validatedData['prix'];
         $Chambre->jours = $validatedData['jours'];
+        $Chambre->disponible = $validatedData['disponible'];
 
         // Sauvegarder les modifications dans la base de données
         $Chambre->save();
