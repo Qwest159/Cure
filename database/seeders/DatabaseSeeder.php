@@ -31,19 +31,19 @@ class DatabaseSeeder extends Seeder
 
         Bien_etre::factory()->create([
             'nom' => 'Aloe Vera ',
-            'img_path' => 'produits/alofa.jpg',
+            'img_path' => 'produits/alofa.webp',
             'description' => 'Choix judidieux, frais et délicatement sucré',
             'disponible' => true,
         ]);
         Bien_etre::factory()->create([
             'nom' => 'Mixte pour tous',
-            'img_path' => 'produits/malosi.jpg',
+            'img_path' => 'produits/malosi.webp',
             'description' => 'Une formule au parfum masculin et féminin, simple et doux pour la peau',
             'disponible' => true,
         ]);
         Bien_etre::factory()->create([
             'nom' => 'Freedom Olofi Fine',
-            'img_path' => 'produits/olofi.jpg',
+            'img_path' => 'produits/olofi.webp',
             'description' => 'Une formule parfaite, idéal pour les massages',
             'disponible' => true,
         ]);
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Chambre::factory()->create([
             'nom' => 'Escadrons',
-            'img_path' => 'chambres/escadons.jpg',
+            'img_path' => 'chambres/escadons.webp',
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Chambre::factory()->create([
             'nom' => 'Prince',
-            'img_path' => 'chambres/prince.jpg',
+            'img_path' => 'chambres/prince.webp',
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',

@@ -44,7 +44,7 @@ const props = defineProps(["formules"]);
                 <figure>
                     <div>
                         <img
-                            src="storage/accueil/location.jpg"
+                            src="storage/accueil/location.webp"
                             alt="Location"
                         />
                         <p>Location</p>
@@ -59,7 +59,7 @@ const props = defineProps(["formules"]);
                 <figure>
                     <div>
                         <img
-                            src="storage/accueil/paysage_accueil.jpg"
+                            src="storage/accueil/paysage_accueil.webp"
                             alt="paysage nature"
                         />
                         <p>Paysage</p>
@@ -74,7 +74,7 @@ const props = defineProps(["formules"]);
                 </figure>
                 <figure>
                     <div>
-                        <img src="storage/accueil/fitness.jpg" alt="fitness" />
+                        <img src="storage/accueil/fitness.webp" alt="fitness" />
                         <p>Fitness</p>
                     </div>
                     <figcaption>
