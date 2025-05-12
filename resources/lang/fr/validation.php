@@ -10,6 +10,12 @@ return [
     'min' => [
         'string' => 'Le champ :attribute doit contenir au moins :min caractères.',
     ],
+    'image' => 'Le champ :attribute doit être une image.',
+    'mimes' => 'Le champ :attribute doit être un fichier de type : :values.',
+    'max' => [
+        'file' => 'Le champ :attribute ne doit pas dépasser :max kilo-octets.',
+    ],
+
     'email' => 'Le champ :attribute doit être une adresse e-mail valide.',
     'in' => 'Le champ :attribute avec la valeur ":input" ne correspond pas à nos enregistrements.',
     'required_if' => 'Le champ :attribute est demandé car le "Type de nettoyage" est : ":value"',

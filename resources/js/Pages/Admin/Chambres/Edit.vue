@@ -13,7 +13,7 @@ let form = useForm({
     nbr_lit: props.chambre.nbr_lit,
     nbr_sdb: props.chambre.nbr_sdb,
     description: props.chambre.description,
-    disponible: props.chambre.disponible,
+    // disponible: props.chambre.disponible,
 });
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
@@ -97,7 +97,7 @@ function handlefilechange(event) {
                     </div>
                 </div>
 
-                <div>
+                <!-- <div>
                     <label>Disponible</label>
 
                     <div class="grouper">
@@ -125,7 +125,7 @@ function handlefilechange(event) {
                     >
                         {{ form.errors.disponible }}
                     </p>
-                </div>
+                </div> -->
 
                 <div class="">
                     <div>

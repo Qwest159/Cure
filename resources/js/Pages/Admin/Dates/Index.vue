@@ -16,10 +16,14 @@ const confirmingdateDeletion = ref(false);
 let affichage_resultat = ref(false);
 
 let selected_date_id = 0;
-let selected_date_nom = "";
-const confirmdateDeletion = (id, nom) => {
+let selected_date_debut = "";
+let selected_date_fin = "";
+let selected_date_pix = "";
+const confirmdateDeletion = (id, debut, fin, prix) => {
     selected_date_id = id;
-    selected_date_nom = nom;
+    selected_date_debut = debut;
+    selected_date_fin = fin;
+    selected_date_pix = prix;
     confirmingdateDeletion.value = true;
 };
 
@@ -124,7 +128,12 @@ function function_rechercher() {
                                 <DangerButton
                                     id="open-modal-button"
                                     @click="
-                                        confirmdateDeletion(date.id, date.nom)
+                                        confirmdateDeletion(
+                                            date.id,
+                                            date.date_debut,
+                                            date.date_fin,
+                                            date.prix
+                                        )
                                     "
                                 >
                                     Supprimer
@@ -139,12 +148,23 @@ function function_rechercher() {
         <DialogModal :show="confirmingdateDeletion" @close="closeModal">
             <template #title>
                 Supprimer
-                {{ selected_date_nom }}</template
-            >
+                <p>
+                    <span class="text-cyan-500">{{ selected_date_debut }}</span>
+                    /
+                    <span class="text-orange-400">{{ selected_date_fin }}</span>
+                    ({{ selected_date_pix }}€)
+                </p>
+            </template>
 
             <template #content>
-                La date <strong>"{{ selected_date_nom }}"</strong> va être
-                supprimée
+                La date
+                <p>
+                    <span class="text-cyan-500">{{ selected_date_debut }}</span>
+                    /
+                    <span class="text-orange-400">{{ selected_date_fin }}</span>
+                    ({{ selected_date_pix }}€)
+                </p>
+                va être supprimée
             </template>
 
             <template #footer>

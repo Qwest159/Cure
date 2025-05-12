@@ -65,7 +65,7 @@ function handlefilechange(event) {
             </button>
             <h2 class="text-red-600 text-center m-auto pt-5">
                 <span class=""
-                    >N'oublie pas de valider "Disponible" lors de la
+                    >N'oubliez pas de valider "Disponible" lors de la
                     modification de la formule.</span
                 >
             </h2>
