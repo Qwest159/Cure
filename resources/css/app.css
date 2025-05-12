@@ -273,6 +273,10 @@ main .h1_titre ~ p.important:hover {
 main .rien {
     padding: 15vh 0em !important;
 }
+/* seulement pour chambre */
+main .rien_long {
+    padding: 19vh 0em !important;
+}
 main .h1_titre ~ p {
     text-align: center;
     @apply mb-12;
@@ -494,11 +498,12 @@ p#information {
     @apply my-9 !important;
 }
 
-p#devis {
+span#devis {
     cursor: pointer;
-    display: block;
-    width: max-content;
-    margin: auto;
+    @apply font-bold;
+}
+span#devis:hover {
+    color: var(--couleur_orange_hover);
 }
 p#croix {
     position: absolute;
@@ -507,7 +512,9 @@ p#croix {
     cursor: pointer;
 }
 /* ----------devis_fictif-------- */
+
 section#devis_fictif {
+    box-shadow: 0px 0px 100px rgb(0, 0, 0);
     background-color: var(--couleur_argenté);
     border-left: 3px solid;
     /* height: 100%; */

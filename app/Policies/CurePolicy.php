@@ -15,7 +15,6 @@ class CurePolicy
     {
         return $user->admin === 1;
     }
-
     /**
      * Determine whether the user can create models.
      */
@@ -43,12 +42,8 @@ class CurePolicy
     // /**
     //  * Determine whether the user can delete the model.
     //  */
-    public function delete(User $user): bool
+    public function destroy(User $user): bool
     {
         return $user->admin === 1;
     }
-
-    // /**
-    //  * Determine whether the user can restore the model.
-    //  */
 }

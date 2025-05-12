@@ -77,13 +77,12 @@ function jour_prix(chambre_id, date_id, dates) {
                     </p>
                 </div>
             </section>
-            <p class="text-center">
+            <p class="text-center my-9">
                 Séduit ? Passez à l’étape suivante en remplissant le
-
                 <a :href="route('contact')" class="font-bold">formulaire</a>.
             </p>
         </article>
-        <p v-else class="rien">Pas de formule pour le moment</p>
+        <p v-else class="rien_long">Pas de chambre pour le moment</p>
     </GuestLayout>
 </template>
 <style scoped></style>

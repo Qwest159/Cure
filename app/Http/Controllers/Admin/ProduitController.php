@@ -33,20 +33,20 @@ class ProduitController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Cure::class);
+
         return Inertia::render('Admin/Produits/Create');
     }
 
     public function store(Request $request)
     {
         // Validation des données
+        Gate::authorize('store', Cure::class);
 
         $validatedData = $request->validate([
             'nom' => 'required|string|max:15|min:1',
             'prix' => 'required|string|max:10|min:1',
         ]);
-
-
-
         // Création et sauvegarde du Produit
 
         $produit = new Produit();
@@ -59,6 +59,7 @@ class ProduitController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('edit', Cure::class);
 
         $produit = Produit::findOrFail($id);
 
@@ -69,6 +70,8 @@ class ProduitController extends Controller
 
     public function update(Request $request, Produit $produit)
     {
+        Gate::authorize('update', Cure::class);
+
         $validatedData = $request->validate([
             'nom' => 'required|string|max:15|min:1',
             'prix' => 'required|string|max:10|min:1',
@@ -83,6 +86,8 @@ class ProduitController extends Controller
     }
     public function destroy($id)
     {
+        Gate::authorize('destroy', Cure::class);
+
         // Gate::authorize('delete', $article);
         $produit = Produit::findOrFail($id);
         $produit->delete();

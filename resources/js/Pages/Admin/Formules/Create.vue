@@ -20,6 +20,7 @@ function succes() {
 
             form = useForm({
                 nom: "",
+                img_path: "",
                 description: "",
             });
 

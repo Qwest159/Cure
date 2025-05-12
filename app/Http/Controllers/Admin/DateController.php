@@ -28,12 +28,15 @@ class DateController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Cure::class);
+
         return Inertia::render('Admin/Dates/Create');
     }
 
     public function store(Request $request)
     {
         // Validation des données
+        Gate::authorize('store', Cure::class);
 
         $validatedData = $request->validate([
             'date_debut' => 'required|date',
@@ -43,7 +46,6 @@ class DateController extends Controller
         ]);
         // Création et sauvegarde du date
         // ------------DATE-------------
-
         function convertDate($date)
         {
             // Séparer la date en année, mois et jour
@@ -65,6 +67,8 @@ class DateController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('edit', Cure::class);
+
         $date = Date::findOrFail($id);
 
         function convertDate_system($date)
@@ -85,6 +89,8 @@ class DateController extends Controller
 
     public function update(Request $request, Date $date)
     {
+        Gate::authorize('update', Cure::class);
+
         $validatedData = $request->validate([
             'date_debut' => 'required|date',
             'date_fin' => 'required|date',
@@ -112,7 +118,7 @@ class DateController extends Controller
     }
     public function destroy($id)
     {
-        // Gate::authorize('delete', $article);
+        Gate::authorize('destroy', Cure::class);
         $date = Date::findOrFail($id);
         $date->delete();
         return redirect()->back();

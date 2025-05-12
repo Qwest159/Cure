@@ -115,22 +115,30 @@ function montrer_disparait() {
             class="element"
             :chambre_detail="props.chambre_dispo"
             :formules="props.formules"
+            :dates="props.dates"
             @ref_devis_disparait="devis = $event"
         />
         <h1 class="h1_titre">Contact</h1>
 
-        <p id="devis" @click="montrer_disparait()">
-            Faites une estimation rapide en cliquant ici.
-        </p>
-
-        <button
+        <p
             v-if="affichage_resultat"
             class="w-full p-2 bg-green-500 text-white text-center"
         >
             Message envoyée
-        </button>
+        </p>
 
-        <article id="contact">
+        <article
+            id="contact"
+            v-show="
+                props.chambre_dispo.length > 0 ||
+                props.formules.length > 0 ||
+                props.dates.length > 0
+            "
+        >
+            <p class="text-center" @click="montrer_disparait()">
+                Faites une estimation rapide en
+                <span id="devis">cliquant ici</span>.
+            </p>
             <form @submit.prevent="succes()" enctype="multipart/form-data">
                 <!-- Nom -->
                 <section id="nom">
@@ -360,6 +368,16 @@ function montrer_disparait() {
                 >.
             </p>
         </article>
+        <p
+            v-show="
+                props.chambre_dispo.length === 0 ||
+                props.formules.length === 0 ||
+                props.dates.length === 0
+            "
+            class="rien_long"
+        >
+            Pas de formulaire pour le moment
+        </p>
     </GuestLayout>
 </template>
 <style scoped></style>

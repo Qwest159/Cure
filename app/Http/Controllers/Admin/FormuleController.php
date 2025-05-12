@@ -23,9 +23,7 @@ class FormuleController extends Controller
     {
 
         Gate::authorize('viewAny', Cure::class);
-
         $formules = Bien_etre::with('produits')->get();
-
         return Inertia::render('Admin/Formules/Index', [
             'formules' => $formules,
         ]);
@@ -35,12 +33,15 @@ class FormuleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Cure::class);
+
         return Inertia::render('Admin/Formules/Create');
     }
 
     public function store(Request $request)
     {
         // Validation des données
+        Gate::authorize('store', Cure::class);
 
         $validatedData = $request->validate([
             'nom' => 'required|string|max:15|min:1',
@@ -63,6 +64,7 @@ class FormuleController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('edit', Cure::class);
 
         $formule = Bien_etre::with('produits')->findOrFail($id);
         return Inertia::render('Admin/Formules/Edit', [
@@ -72,6 +74,8 @@ class FormuleController extends Controller
 
     public function update(Request $request, Bien_etre $formule)
     {
+        Gate::authorize('update', Cure::class);
+
         $validatedData = $request->validate([
             'nom' => 'required|string|max:15|min:1',
             'img_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -94,6 +98,8 @@ class FormuleController extends Controller
     }
     public function destroy($id)
     {
+        Gate::authorize('destroy', Cure::class);
+
         // Gate::authorize('delete', $article);
         $formule = Bien_etre::findOrFail($id);
         $formule->delete();

@@ -25,6 +25,7 @@ function succes() {
             form = useForm({
                 nom: "",
                 nbr_personnes: "",
+                img_path: "",
                 nbr_lit: "",
                 nbr_sdb: "",
                 date_debut: "",

@@ -88,7 +88,7 @@ const props = defineProps(["formules"]);
                 Voir plus
             </button>
         </article>
-        <article id="formules">
+        <article id="formules" v-if="props.formules.length > 0">
             <h1>Les incontournables Bien-Être</h1>
             <section>
                 <figure

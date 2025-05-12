@@ -114,12 +114,12 @@ function valeur_total(tableau_produit) {
                 </button>
             </div>
 
-            <button
+            <p
                 v-if="affichage_resultat"
                 class="w-full p-2 bg-green-500 text-white text-center"
             >
                 Modification réussie
-            </button>
+            </p>
             <form
                 @submit.prevent="succes()"
                 enctype="multipart/form-data"

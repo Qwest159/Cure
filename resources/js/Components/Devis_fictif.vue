@@ -1,12 +1,11 @@
 <script setup>
 import { ref, defineProps, defineEmits } from "@vue/runtime-core";
 import { useForm } from "@inertiajs/vue3";
-const props = defineProps(["chambre_detail", "formules"]);
+const props = defineProps(["chambre_detail", "formules", "dates"]);
 
 const emit = defineEmits(["ref_devis_disparait"]);
 let valeur_total = ref(0);
 let nbr_personne = ref("");
-let chambre_id = ref("");
 let tableaux_donnée = {
     Date_prix: "",
     Formule: "",
@@ -35,10 +34,7 @@ function valeur_séjour(tableaux_donnée) {
     // nombre de personne si 1 alors prix pour deux personne sinon chambre pour deux personnes
     // selection formule prix + choisir si deux personne, deux input, si une personne, une input
 }
-function changement_chambre() {
-    tableaux_donnée["Date_prix"] = "0";
-    valeur_séjour(tableaux_donnée);
-}
+
 function montrer_disparait() {
     const devis_block = document.querySelector(".element");
     devis_block.classList.remove("apparait");
@@ -56,26 +52,14 @@ function montrer_disparait() {
             </p>
             <h1>Devis</h1>
 
-            <label for="chambre">Chambre</label>
-            <select v-model="chambre_id" @change="changement_chambre">
-                <option
-                    v-for="chambre in chambre_detail"
-                    :key="chambre.id"
-                    :value="chambre.id"
-                >
-                    {{ chambre.nom }}
-                </option>
-            </select>
-
             <label for="date"> Date </label>
             <select
-                v-if="chambre_id"
                 class="couleur_option"
                 v-model="tableaux_donnée.Date_prix"
                 @change="valeur_séjour(tableaux_donnée)"
             >
                 <option
-                    v-for="date in chambre_detail[chambre_id - 1].dates"
+                    v-for="date in props.dates"
                     :key="date.id"
                     :value="date.prix"
                 >
@@ -84,7 +68,6 @@ function montrer_disparait() {
                     }}€)
                 </option>
             </select>
-            <p id="date_choisie" v-else>Pas de chambre choisie</p>
 
             <label for="valeur-select">Nombre de personne(s) :</label>
             <select

@@ -112,12 +112,12 @@ function succes() {
                 </button>
             </div>
 
-            <button
+            <p
                 v-if="affichage_resultat"
                 class="w-full p-2 bg-green-500 text-white text-center"
             >
                 Modification réussie
-            </button>
+            </p>
             <form
                 @submit.prevent="succes()"
                 enctype="multipart/form-data"
@@ -153,7 +153,7 @@ function succes() {
                     </p>
                 </div> -->
 
-                <label class="titre_cure">Rajout du date</label>
+                <label class="titre_cure">Rajout des dates</label>
 
                 <select v-model="form.date_id">
                     <option

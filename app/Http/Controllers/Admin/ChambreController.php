@@ -23,12 +23,7 @@ class ChambreController extends Controller
     {
 
         Gate::authorize('viewAny', Cure::class);
-
-
         $chambres = Chambre::with('dates')->get();
-
-
-
         return Inertia::render('Admin/Chambres/Index', [
             'chambres' => $chambres,
         ]);
@@ -38,12 +33,15 @@ class ChambreController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Cure::class);
+
         return Inertia::render('Admin/Chambres/Create');
     }
 
     public function store(Request $request)
     {
         // Validation des données
+        Gate::authorize('store', Cure::class);
 
         $validatedData = $request->validate([
             'nom' => 'required|string|max:15|min:1',
@@ -71,6 +69,8 @@ class ChambreController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('edit', Cure::class);
+
         // dd($Chambre);
         $Chambre = Chambre::findOrFail($id);
 
@@ -81,6 +81,8 @@ class ChambreController extends Controller
 
     public function update(Request $request, Chambre $Chambre)
     {
+        Gate::authorize('update', Cure::class);
+
         $validatedData = $request->validate([
             'nom' => 'required|string|max:15|min:1',
             'img_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -111,6 +113,8 @@ class ChambreController extends Controller
     }
     public function destroy($id)
     {
+        Gate::authorize('destroy', Cure::class);
+
         // Gate::authorize('delete', $article);
         $Chambre = Chambre::findOrFail($id);
         $Chambre->delete();
