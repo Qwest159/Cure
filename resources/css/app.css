@@ -35,11 +35,12 @@ li {
     @apply text-2xl;
 }
 /* ------NAVIGATION---- */
-nav .nav_background {
+.nav_background {
     background-color: var(--couleur_blue);
 }
 nav a:hover,
-footer a {
+footer a:hover,
+p a:hover {
     color: var(--couleur_orange) !important;
 }
 nav a,
@@ -266,8 +267,11 @@ main .h1_titre {
     @apply pb-9;
     text-align: center;
 }
-main .h1_titre ~ p:hover {
+main .h1_titre ~ p.important:hover {
     color: var(--couleur_orange_hover);
+}
+main .rien {
+    padding: 15vh 0em !important;
 }
 main .h1_titre ~ p {
     text-align: center;
@@ -377,7 +381,8 @@ article#contact form {
     grid-template-areas:
         "nom prenom"
         "email tel"
-        "nombres chambre"
+        "date chambre"
+        "nombres ."
         "cure  type_cure"
         "comment comment"
         "bouton bouton";
@@ -407,6 +412,9 @@ article#contact form {
 }
 #type_cure {
     grid-area: type_cure;
+}
+#date {
+    grid-area: date;
 }
 #comment {
     grid-area: comment;
@@ -552,4 +560,12 @@ section#devis_fictif div h1 {
 
 .nav_profil {
     background-color: var(--couleur_blue);
+}
+select.couleur_option option:nth-of-type(2n + 2) {
+    background-color: #d3d3d387;
+}
+
+#date_choisie {
+    color: black !important;
+    @apply text-lg !important;
 }

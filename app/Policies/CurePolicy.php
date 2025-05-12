@@ -17,28 +17,28 @@ class CurePolicy
     }
 
     /**
-     * Determine whether the user can view the model.
-     */
-    // public function view(User $user, Article $article): bool
-    // {
-    //     return false;
-    // }
-
-    /**
      * Determine whether the user can create models.
      */
-    // public function create(User $user): bool
-    // {
-    //     return $user->role->name === \App\Models\Role::AUTHOR || $user->role->name === \App\Models\Role::ADMIN;
-    // }
+    public function create(User $user): bool
+    {
+        return  $user->admin === 1;
+    }
 
+    public function store(User $user): bool
+    {
+        return  $user->admin === 1;
+    }
+    public function edit(User $user): bool
+    {
+        return  $user->admin === 1;
+    }
     // /**
     //  * Determine whether the user can update the model.
     //  */
-    // public function update(User $user, Article $article): bool
-    // {
-    //     return $user->id === $article->user_id  || $user->role->name === \App\Models\Role::ADMIN;
-    // }
+    public function update(User $user): bool
+    {
+        return  $user->admin === 1;
+    }
 
     // /**
     //  * Determine whether the user can delete the model.
@@ -51,16 +51,4 @@ class CurePolicy
     // /**
     //  * Determine whether the user can restore the model.
     //  */
-    // public function restore(User $user, Article $article): bool
-    // {
-    //     return false;
-    // }
-
-    // /**
-    //  * Determine whether the user can permanently delete the model.
-    //  */
-    // public function forceDelete(User $user, Article $article): bool
-    // {
-    //     return false;
-    // }
 }

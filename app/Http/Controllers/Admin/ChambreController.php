@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Models\Chambre;
+use App\Models\Chambre_date;
 use App\Models\Cure;
-
+use App\Models\Date;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -23,7 +24,10 @@ class ChambreController extends Controller
 
         Gate::authorize('viewAny', Cure::class);
 
-        $chambres = Chambre::all();
+
+        $chambres = Chambre::with('dates')->get();
+
+
 
         return Inertia::render('Admin/Chambres/Index', [
             'chambres' => $chambres,
@@ -47,24 +51,8 @@ class ChambreController extends Controller
             'nbr_personnes' => 'required|string|max:5|min:1',
             'nbr_lit' => 'required|string|max:5|min:1',
             'nbr_sdb' => 'required|string|max:5|min:1',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date',
-            'prix' => 'required|string|max:10|min:1',
-            'jours' => 'required|string|max:10|min:1',
             'description' => 'required|string|max:150',
         ]);
-
-
-        // ------------DATE-------------
-
-        function convertDate($date)
-        {
-            // Séparer la date en année, mois et jour
-            list($year, $month, $day) = explode('-', $date);
-
-            // Retourner la date au format DD.MM.YY
-            return $day . '-' . $month . '-' . $year;
-        }
 
         // Création et sauvegarde du Chambre
 
@@ -74,11 +62,7 @@ class ChambreController extends Controller
         $Chambre->nbr_personnes = $validatedData['nbr_personnes'];
         $Chambre->nbr_lit = $validatedData['nbr_lit'];
         $Chambre->nbr_sdb = $validatedData['nbr_sdb'];
-        $Chambre->date_debut = convertDate($validatedData['date_debut']);;
-        $Chambre->date_fin = convertDate($validatedData['date_fin']);
         $Chambre->description = $validatedData['description'];
-        $Chambre->prix = $validatedData['prix'];
-        $Chambre->jours = $validatedData['jours'];
         $Chambre->save();
 
         // Redirection
@@ -90,19 +74,8 @@ class ChambreController extends Controller
         // dd($Chambre);
         $Chambre = Chambre::findOrFail($id);
 
-        function convertDate_system($date)
-        {
-            // Séparer la date en année, mois et jour
-            list($day, $month, $year) = explode('-', $date);
-
-            // Retourner la date au format DD.MM.YY
-            return $year . '-' . $month . '-' . $day;
-        }
-
         return Inertia::render('Admin/Chambres/Edit', [
             'chambre' => $Chambre,
-            'date_fin' => convertDate_system($Chambre['date_fin']),
-            'date_debut' => convertDate_system($Chambre['date_debut']),
         ]);
     }
 
@@ -114,10 +87,6 @@ class ChambreController extends Controller
             'nbr_personnes' => 'required|string|max:5|min:1',
             'nbr_lit' => 'required|string|max:5|min:1',
             'nbr_sdb' => 'required|string|max:5|min:1',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date',
-            'prix' => 'required|string|max:10|min:1',
-            'jours' => 'required|string|max:10|min:1',
             'description' => 'required|string|max:150',
             'disponible' => 'required|boolean',
 
@@ -131,25 +100,8 @@ class ChambreController extends Controller
 
         $Chambre->nbr_personnes = $validatedData['nbr_personnes'];
         $Chambre->nbr_lit = $validatedData['nbr_lit'];
-        $Chambre->nbr_sdb = $validatedData['nbr_sdb'];
-
-
-        function convertDate_serv($date)
-        {
-            // Séparer la date en année, mois et jour
-            list($year, $month, $day) = explode('-', $date);
-
-            // Retourner la date au format DD.MM.YY
-            return $day . '-' . $month . '-' . $year;
-        }
-
-        // Convertir et mettre à jour les dates
-        $Chambre->date_debut = convertDate_serv($validatedData['date_debut']);
-        $Chambre->date_fin = convertDate_serv($validatedData['date_fin']);
-
+        $Chambre->nbr_sdb = $validatedData['nbr_sdb'];;
         $Chambre->description = $validatedData['description'];
-        $Chambre->prix = $validatedData['prix'];
-        $Chambre->jours = $validatedData['jours'];
         $Chambre->disponible = $validatedData['disponible'];
 
         // Sauvegarder les modifications dans la base de données
@@ -163,6 +115,44 @@ class ChambreController extends Controller
         $Chambre = Chambre::findOrFail($id);
         $Chambre->delete();
 
+        return redirect()->back();
+    }
+
+
+
+
+    // -------------Date des chambres -------------
+
+
+    public function edit_date($id)
+    {
+
+        $chambre = Chambre::select('id', 'nom')->with('dates')->findOrFail($id);
+        $dates = Date::all();
+        return Inertia::render('Admin/Chambres/EditDate', [
+            'chambre' =>  $chambre,
+            'dates' =>  $dates,
+        ]);
+    }
+
+    public function update_date(Request $request, $id_chambre)
+    {
+        $validatedData = $request->validate([
+            'date_id' => 'required',
+        ]);
+        $formule_pivot = new Chambre_date();
+        $formule_pivot->chambre_id =  $id_chambre;
+        $formule_pivot->date_id = $validatedData['date_id'];
+
+        $formule_pivot->save();
+
+        return redirect()->back();
+    }
+    public function destroy_date($chambre_id, $date_id)
+    {
+
+        $chambre_date = Chambre_date::where('chambre_id', $chambre_id)->where('date_id', $date_id)->first();
+        $chambre_date->delete();
         return redirect()->back();
     }
 }

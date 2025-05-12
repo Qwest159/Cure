@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Bien_etre;
 use App\Models\Chambre;
+use App\Models\Chambre_date;
+use App\Models\Date;
 use App\Models\FormuleProduit;
 use App\Models\Produit;
 use App\Models\User;
@@ -25,6 +27,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'admin' => true,
         ]);
+
+
         Bien_etre::factory()->create([
             'nom' => 'Aloe Vera ',
             'img_path' => 'produits/alofa.jpg',
@@ -73,12 +77,7 @@ class DatabaseSeeder extends Seeder
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
-            'date_debut' => '02-06-2025',
-            'date_fin' => '07-06-2025',
-            'prix' => '540',
-            'jours' => '5',
-            'disponible' => true,
-            'description' => 'Chambres avec beaucoup de charme, près de la fenêtre et du côté jardin.',
+            'description' => 'Chambres avec beaucoup de charme, près de la fenêtre, côté jardin.',
         ]);
         Chambre::factory()->create([
             'nom' => 'Prince',
@@ -86,11 +85,6 @@ class DatabaseSeeder extends Seeder
             'nbr_personnes' => '2',
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
-            'date_debut' => '02-06-2025',
-            'date_fin' => '07-06-2025',
-            'prix' => '500',
-            'jours' => '5',
-            'disponible' => true,
             'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
         ]);
         FormuleProduit::factory()->create([
@@ -134,19 +128,60 @@ class DatabaseSeeder extends Seeder
             'produit_id' => 5,
         ]);
 
+
+
+        Date::factory()->create([
+            'date_debut' => '02-06-2025',
+            'date_fin' => '06-06-2025',
+            'jours' => '5',
+            'prix' => '500,00',
+        ]);
+        Date::factory()->create([
+            'date_debut' => '10-06-2025',
+            'date_fin' => '14-06-2025',
+            'jours' => '5',
+            'prix' => '540,00',
+        ]);
+        Date::factory()->create([
+            'date_debut' => '02-07-2025',
+            'date_fin' => '06-07-2025',
+            'jours' => '5',
+            'prix' => '600,00',
+        ]);
+        Date::factory()->create([
+            'date_debut' => '10-07-2025',
+            'date_fin' => '14-07-2025',
+            'jours' => '5',
+            'prix' => '640,00',
+        ]);
+
+
+        Chambre_date::factory()->create([
+            'chambre_id' => '1',
+            'date_id' => '1',
+        ]);
+        Chambre_date::factory()->create([
+            'chambre_id' => '2',
+            'date_id' => '1',
+        ]);
+        Chambre_date::factory()->create([
+            'chambre_id' => '1',
+            'date_id' => '2',
+        ]);
+        Chambre_date::factory()->create([
+            'chambre_id' => '2',
+            'date_id' => '2',
+        ]);
+        Chambre_date::factory()->create([
+            'chambre_id' => '1',
+            'date_id' => '3',
+        ]);
+        Chambre_date::factory()->create([
+            'chambre_id' => '1',
+            'date_id' => '4',
+        ]);
+
         // ---------effaceer-------------------------------------------
-        Bien_etre::factory()->create([
-            'nom' => 'Faux',
-            'img_path' => 'produits/olofi.jpg',
-            'description' => 'Une formule parfaite, idéal pour les massages',
-            'disponible' => false,
-        ]);
-        Bien_etre::factory()->create([
-            'nom' => 'vrai',
-            'img_path' => 'produits/olofi.jpg',
-            'description' => 'Une formule parfaite, idéal pour les massages',
-            'disponible' => true,
-        ]);
         Produit::factory()->create([
             'nom' => 'Aloe MSM',
             'prix' => '50,19',
@@ -156,51 +191,6 @@ class DatabaseSeeder extends Seeder
             'prix' => '50,19',
         ]);
 
-
-
-        Chambre::factory()->create([
-            'nom' => 'Pre',
-            'img_path' => 'chambres/prince.jpg',
-            'nbr_personnes' => '2',
-            'nbr_lit' => '1',
-            'nbr_sdb' => '1',
-            'date_debut' => '02-06-2025',
-            'date_fin' => '07-06-2025',
-            'prix' => '500',
-            'jours' => '5',
-            'disponible' => true,
-            'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
-        ]);
-
-
-        Chambre::factory()->create([
-            'nom' => 'Prce',
-            'img_path' => 'chambres/prince.jpg',
-            'nbr_personnes' => '2',
-            'nbr_lit' => '1',
-            'nbr_sdb' => '1',
-            'date_debut' => '02-06-2025',
-            'date_fin' => '07-06-2025',
-            'prix' => '500',
-            'jours' => '5',
-            'disponible' => true,
-            'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
-        ]);
-
-
-        Chambre::factory()->create([
-            'nom' => 'FAUX',
-            'img_path' => 'chambres/prince.jpg',
-            'nbr_personnes' => '2',
-            'nbr_lit' => '1',
-            'nbr_sdb' => '1',
-            'date_debut' => '02-06-2025',
-            'date_fin' => '07-06-2025',
-            'prix' => '500',
-            'jours' => '5',
-            'disponible' => false,
-            'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
-        ]);
         // ------------------------------------------------------------------
     }
 }

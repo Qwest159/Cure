@@ -13,12 +13,12 @@ class Chambre extends Model
         'nbr_personnes',
         'nbr_lit',
         'nbr_sdb',
-        'date_debut',
-        'date_fin',
         'description',
-        'prix',
-        'jours',
     ];
     /** @use HasFactory<\Database\Factories\ChambreFactory> */
     use HasFactory;
+    public function dates()
+    {
+        return $this->belongsToMany(Date::class, 'chambre_dates');
+    }
 }

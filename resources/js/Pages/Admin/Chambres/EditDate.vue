@@ -8,52 +8,58 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import ActionModal from "@/Components/ActionModal.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 // DELETE AVEC MODAL
-const confirmingproduitDeletion = ref(false);
+const confirmingdateDeletion = ref(false);
 
-let selected_produit_id = 0;
-let selected_produit_nom = "";
-const confirmproduitDeletion = (id, nom) => {
-    selected_produit_id = id;
-    selected_produit_nom = nom;
-    confirmingproduitDeletion.value = true;
+let selected_date_id = 0;
+let selected_date_nom = "";
+const confirmdateDeletion = (id, nom) => {
+    selected_date_id = id;
+    selected_date_nom = nom;
+    confirmingdateDeletion.value = true;
 };
 
-function deleteproduit() {
+function deletedate() {
     form.delete(
-        route("cure_formule.destroy_produit", {
-            id: props.formule.id,
-            id_produit: selected_produit_id,
+        route("cure_chambre.destroy_date", {
+            chambre_id: props.chambre.id,
+            date_id: selected_date_id,
         }),
         {
             onSuccess: () => {
                 closeModal();
+                affichage_resultat.value = true;
+                setTimeout(() => {
+                    affichage_resultat.value = false;
+                }, 5000);
             },
         }
     );
 }
 
 const closeModal = () => {
-    confirmingproduitDeletion.value = false;
+    confirmingdateDeletion.value = false;
 };
 
-const props = defineProps(["formule", "produits"]);
+const props = defineProps(["chambre", "dates"]);
 
 // let form = useForm({
-//     nom: props.formule.nom,
-//     img_path: props.formule.img,
-//     description: props.formule.description,
-//     disponible: props.formule.disponible,
+//     nom: props.date.nom,
+//     img_path: props.date.img,
+//     description: props.date.description,
+//     disponible: props.date.disponible,
 // });
 
 let form = useForm({
-    produit_id: "",
+    date_id: "",
 });
+console.log(props.chambre);
+
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
 
 function succes() {
     bouton_envoyer.value = false;
-    form.post(route("cure_formule.update_produit", props.formule.id), {
+    form.post(route("cure_chambre.update_date", props.chambre.id), {
         // Condition avant de passer à onSuccess
         onSuccess: () => {
             // Vérification des données et des erreurs
@@ -74,43 +80,35 @@ function succes() {
         },
     });
 }
-
-function valeur_total(tableau_produit) {
-    let prix_total = 0;
-    tableau_produit.forEach((produit) => {
-        let changement_virgule = produit.prix.replace(",", ".");
-        prix_total += parseFloat(changement_virgule);
-    });
-    return prix_total.toFixed(2).toString().replace(".", ",");
-}
 </script>
 
 <template>
-    <AppLayout title="formule">
+    <AppLayout title="Date">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Modification de la formule
-                <span class="text-orange-400">{{ formule.nom }}</span>
+                Modification de la date
+                <span class="text-orange-400">{{ chambre.nom }}</span>
             </h2>
         </template>
 
-        <!-- Création d'une formule -->
+        <!-- Création d'une date-->
         <article class="max-w-5xl m-auto p-9">
             <div class="flex justify-between gap-20">
                 <button
                     class="my-4"
-                    @click="() => $inertia.get(route('cure_formule'))"
+                    @click="() => $inertia.get(route('cure_chambre'))"
                 >
                     Retour en arrière
                 </button>
+
                 <button
                     class="inline-flex items-center justify-center my-4 bg-green-600 hover:bg-green-500 border border-transparent rounded-xl self-center"
                     @click="
                         () =>
-                            $inertia.get(route('cure_formule.edit', formule.id))
+                            $inertia.get(route('cure_chambre.edit', chambre.id))
                     "
                 >
-                    Voir la formule
+                    Voir la chambre
                 </button>
             </div>
 
@@ -155,41 +153,46 @@ function valeur_total(tableau_produit) {
                     </p>
                 </div> -->
 
-                <label class="titre_cure">Rajout du produit</label>
+                <label class="titre_cure">Rajout du date</label>
 
-                <select v-model="form.produit_id">
+                <select v-model="form.date_id">
                     <option
-                        v-for="produit in produits"
-                        :key="produit.id"
-                        :value="produit.id"
+                        v-for="date in dates"
+                        :key="date.id"
+                        :value="date.id"
                     >
-                        {{ produit.nom }}
+                        {{ date.date_debut }} / {{ date.date_fin }} ({{
+                            date.prix
+                        }}€)
                     </option>
                 </select>
 
                 <ul>
-                    Produits:
+                    dates:
                 </ul>
                 <li
-                    v-for="produit in formule.produits"
-                    :key="produit.id"
+                    v-for="date in chambre.dates"
+                    :key="date.id"
                     id="gsm_li"
                     class="flex text_button"
                 >
                     <span
                         class="relative pl-4 pr-2 before:content-['•'] before:absolute before:left-0 before:text-black"
-                        >{{ produit.nom }}
+                    >
+                        <span class="text-cyan-500">{{ date.date_debut }}</span>
+                        /
+                        <span class="text-orange-400">{{ date.date_fin }}</span>
                     </span>
-                    ({{ produit.prix }}€)
+                    ({{ date.prix }}€)
                     <ActionModal>
                         <template #content>
                             <div class="ml-5">
                                 <DangerButton
                                     id="open-modal-button"
                                     @click="
-                                        confirmproduitDeletion(
-                                            produit.id,
-                                            produit.nom
+                                        confirmdateDeletion(
+                                            date.id,
+                                            date.date_debut / date.date_fin
                                         )
                                     "
                                 >
@@ -199,11 +202,6 @@ function valeur_total(tableau_produit) {
                         </template>
                     </ActionModal>
                 </li>
-
-                <p class="">
-                    Valeur totale de la formule:
-                    {{ valeur_total(formule.produits) }}€
-                </p>
 
                 <!-- Bouton -->
                 <button
@@ -218,15 +216,15 @@ function valeur_total(tableau_produit) {
                 </button>
             </form>
         </article>
-        <DialogModal :show="confirmingproduitDeletion" @close="closeModal">
+        <DialogModal :show="confirmingdateDeletion" @close="closeModal">
             <template #title>
                 Supprimer
-                {{ selected_produit_nom }}</template
+                {{ selected_date_nom }}</template
             >
 
             <template #content>
-                La produit <strong>"{{ selected_produit_nom }}"</strong> va être
-                supprimée de la formule
+                La date <strong>"{{ selected_date_nom }}"</strong> va être
+                supprimée de la date
             </template>
 
             <template #footer>
@@ -237,7 +235,7 @@ function valeur_total(tableau_produit) {
                     :class="{
                         'opacity-25': form.processing,
                     }"
-                    @click="deleteproduit()"
+                    @click="deletedate()"
                 >
                     Supprimer
                 </DangerButton>

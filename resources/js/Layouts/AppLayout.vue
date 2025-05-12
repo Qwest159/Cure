@@ -37,13 +37,10 @@ const logout = () => {
 
         <Banner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="">
+        <div class="min-h-screen n">
+            <nav class="nav_background">
                 <!-- Primary Navigation Menu -->
-                <div
-                    id="back"
-                    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nav_background"
-                >
+                <div id="back" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
@@ -69,6 +66,13 @@ const logout = () => {
                                 >
                                     Chambre
                                 </NavLink>
+                                <NavLink
+                                    :href="route('cure_date')"
+                                    :active="route().current('cure_date')"
+                                >
+                                    Date
+                                </NavLink>
+
                                 <NavLink
                                     :href="route('cure_formule')"
                                     :active="route().current('cure_formule')"
@@ -313,7 +317,7 @@ const logout = () => {
                         <!-- Hamburger -->
                         <div class="-me-2 flex items-center sm:hidden">
                             <button
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out button_svg"
                                 @click="
                                     showingNavigationDropdown =
                                         !showingNavigationDropdown
@@ -373,6 +377,12 @@ const logout = () => {
                             :active="route().current('cure_chambre')"
                         >
                             Chambre
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            :href="route('cure_date')"
+                            :active="route().current('cure_date')"
+                        >
+                            Date
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
                             :href="route('cure_formule')"

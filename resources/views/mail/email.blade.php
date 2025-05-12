@@ -11,7 +11,7 @@
 <p>Email: {{$donnée["email"]}}</p>
 <p>Téléphone: {{$donnée["téléphone"]}}</p>
 <p>Nombre de personne: {{$donnée["nombres"]}}</p>
-<p>Chambre souhaitée: {{$donnée["chambre"]}} </p>
+<p>Chambre souhaitée: {{$donnée["chambre"]}} {{$donnée["date"]}}</p>
 
 @if ($donnée["cure"] === "Oui")
     <p>Type de formule numéro 1: {{ $donnée["formule1"] }}</p>

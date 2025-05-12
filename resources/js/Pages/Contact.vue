@@ -7,12 +7,13 @@ import { defineProps, ref, onMounted } from "@vue/runtime-core";
 // agrandir le text area auto
 const textarea = ref(null);
 
-const props = defineProps(["flash", "chambre_dispo", "formules"]);
+const props = defineProps(["chambre_dispo", "formules", "dates"]);
 
 function adjustHeight() {
     textarea.value.style.height = "auto";
     textarea.value.style.height = textarea.value.scrollHeight + "px";
 }
+
 onMounted(adjustHeight);
 
 // définir les données
@@ -25,6 +26,7 @@ let form = useForm({
     nombres: "",
     cure: "",
     chambre: "",
+    date: "",
     formule1: "",
     formule2: "",
     commentaire: "",
@@ -43,6 +45,22 @@ function valeur_total(tableau_produit) {
     return prix_total.toFixed(2).toString().replace(".", ",");
 }
 
+let dateRecherche = ref([]);
+
+// Fonction de recherche
+function function_rechercher() {
+    form.chambre = "";
+    const [date_debut, date_fin] = form.date.toLowerCase().split(" / ");
+    dateRecherche.value = props.chambre_dispo.filter((chambre) => {
+        return chambre.dates.some((date) => {
+            return (
+                date.date_debut.toLowerCase().includes(date_debut) &&
+                date.date_fin.toLowerCase().includes(date_fin)
+            );
+        });
+    });
+}
+
 function succes() {
     bouton_envoyer.value = false;
 
@@ -57,6 +75,7 @@ function succes() {
                 nombres: "",
                 cure: "",
                 chambre: "",
+                date: "",
                 formule1: "",
                 formule2: "",
                 commentaire: "",
@@ -101,7 +120,7 @@ function montrer_disparait() {
         <h1 class="h1_titre">Contact</h1>
 
         <p id="devis" @click="montrer_disparait()">
-            Faire une estimation rapide
+            Faites une estimation rapide en cliquant ici.
         </p>
 
         <button
@@ -170,7 +189,7 @@ function montrer_disparait() {
                 <!-- Nombres -->
 
                 <section id="nombres">
-                    <label for="Nombres">Nombres Adultes <span>*</span></label>
+                    <label for="Nombres">Nombre d'adultes <span>*</span></label>
                     <select v-model="form.nombres">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -180,27 +199,54 @@ function montrer_disparait() {
                     </p>
                 </section>
 
+                <!-- date -->
+                <section id="date">
+                    <label for="date"> Date <span>*</span></label>
+                    <select
+                        class="couleur_option"
+                        v-model="form.date"
+                        @change="function_rechercher"
+                    >
+                        <option
+                            v-for="date in props.dates"
+                            :key="date.id"
+                            :value="`${date.date_debut} / ${date.date_fin}`"
+                        >
+                            {{ date.date_debut }} / {{ date.date_fin }}
+                        </option>
+                    </select>
+                    <p
+                        v-if="form.errors.date"
+                        class="text-sm text-red-500 mt-1"
+                    >
+                        {{ form.errors.date }}
+                    </p>
+                </section>
+
                 <!-- chambre -->
                 <section id="chambre">
                     <label for="chambre"> Chambre <span>*</span></label>
-                    <select v-model="form.chambre" class="">
+                    <select
+                        v-model="form.chambre"
+                        class=""
+                        v-if="dateRecherche.length > 0"
+                    >
                         <option
-                            v-for="chambre in chambre_dispo"
+                            v-for="chambre in dateRecherche"
                             :key="chambre.id"
-                            :value="`${chambre.nom} | ${chambre.date_debut} / ${chambre.date_fin}`"
+                            :value="chambre.nom"
                         >
-                            {{ chambre.nom }} {{ chambre.date_debut }} /
-                            {{ chambre.date_fin }}
+                            {{ chambre.nom }}
                         </option>
                     </select>
-                    <div
+                    <p v-else>Date inexsistante</p>
+                    <p
                         v-if="form.errors.chambre"
                         class="text-sm text-red-500 mt-1"
                     >
                         {{ form.errors.chambre }}
-                    </div>
+                    </p>
                 </section>
-
                 <!-- Cure -->
                 <section id="cure">
                     <label id="titre_cure">Cure Complète <span>*</span></label>
@@ -306,11 +352,12 @@ function montrer_disparait() {
 
             <p id="information">
                 Pour toute information complémentaire, veuillez me contacter au
-                <a href="tel:+1234567890" class="hover:bg-red-700"
-                    >234 567 890</a
+                <a href="tel:+1234567890" class=""
+                    ><strong>234 567 890</strong></a
                 >
                 ou bien par émail :
-                <a href="tfe@hotmail.be.">tfe@hotmail.be.</a>
+                <a href="tfe@hotmail.be."><strong>tfe@hotmail.be</strong></a
+                >.
             </p>
         </article>
     </GuestLayout>

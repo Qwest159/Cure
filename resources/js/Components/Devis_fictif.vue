@@ -6,8 +6,9 @@ const props = defineProps(["chambre_detail", "formules"]);
 const emit = defineEmits(["ref_devis_disparait"]);
 let valeur_total = ref(0);
 let nbr_personne = ref("");
+let chambre_id = ref("");
 let tableaux_donnée = {
-    Chambre: "",
+    Date_prix: "",
     Formule: "",
     Formule2: "",
 };
@@ -20,7 +21,7 @@ function valeur_total_produits(tableau_produit) {
     return prix_total.toFixed(2).toString().replace(".", ",");
 }
 
-function valeur_rajout(tableaux_donnée) {
+function valeur_séjour(tableaux_donnée) {
     valeur_total.value = 0;
     nbr_personne.value === "1"
         ? (tableaux_donnée.Formule2 = "0")
@@ -33,6 +34,10 @@ function valeur_rajout(tableaux_donnée) {
 
     // nombre de personne si 1 alors prix pour deux personne sinon chambre pour deux personnes
     // selection formule prix + choisir si deux personne, deux input, si une personne, une input
+}
+function changement_chambre() {
+    tableaux_donnée["Date_prix"] = "0";
+    valeur_séjour(tableaux_donnée);
 }
 function montrer_disparait() {
     const devis_block = document.querySelector(".element");
@@ -52,26 +57,41 @@ function montrer_disparait() {
             <h1>Devis</h1>
 
             <label for="chambre">Chambre</label>
-            <select
-                v-model="tableaux_donnée.Chambre"
-                @change="valeur_rajout(tableaux_donnée)"
-            >
+            <select v-model="chambre_id" @change="changement_chambre">
                 <option
                     v-for="chambre in chambre_detail"
                     :key="chambre.id"
-                    :value="chambre.prix"
+                    :value="chambre.id"
                 >
-                    {{ chambre.nom }} {{ chambre.date_debut }} /
-                    {{ chambre.date_fin }}
+                    {{ chambre.nom }}
                 </option>
             </select>
 
-            <label for="valeur-select">Nombre de personnes :</label>
+            <label for="date"> Date </label>
+            <select
+                v-if="chambre_id"
+                class="couleur_option"
+                v-model="tableaux_donnée.Date_prix"
+                @change="valeur_séjour(tableaux_donnée)"
+            >
+                <option
+                    v-for="date in chambre_detail[chambre_id - 1].dates"
+                    :key="date.id"
+                    :value="date.prix"
+                >
+                    {{ date.date_debut }} / {{ date.date_fin }} ({{
+                        date.prix
+                    }}€)
+                </option>
+            </select>
+            <p id="date_choisie" v-else>Pas de chambre choisie</p>
+
+            <label for="valeur-select">Nombre de personne(s) :</label>
             <select
                 v-model="nbr_personne"
                 id="valeur-select"
                 name="valeur-select"
-                @change="valeur_rajout(tableaux_donnée)"
+                @change="valeur_séjour(tableaux_donnée)"
             >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -82,7 +102,7 @@ function montrer_disparait() {
             <select
                 v-model="tableaux_donnée.Formule"
                 v-show="nbr_personne >= '1'"
-                @change="valeur_rajout(tableaux_donnée)"
+                @change="valeur_séjour(tableaux_donnée)"
             >
                 <option
                     v-for="formule in formules"
@@ -96,7 +116,7 @@ function montrer_disparait() {
             <select
                 v-model="tableaux_donnée.Formule2"
                 v-show="nbr_personne >= '2'"
-                @change="valeur_rajout(tableaux_donnée)"
+                @change="valeur_séjour(tableaux_donnée)"
             >
                 <option
                     v-for="formule in formules"

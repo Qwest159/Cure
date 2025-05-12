@@ -4,7 +4,7 @@ import { ref, defineProps } from "@vue/runtime-core";
 
 import AppLayout from "@/Layouts/AppLayout.vue";
 
-const props = defineProps(["chambre", "date_fin", "date_debut"]);
+const props = defineProps(["chambre"]);
 
 let form = useForm({
     nom: props.chambre.nom,
@@ -12,11 +12,7 @@ let form = useForm({
     nbr_personnes: props.chambre.nbr_personnes,
     nbr_lit: props.chambre.nbr_lit,
     nbr_sdb: props.chambre.nbr_sdb,
-    date_debut: props.date_debut,
-    date_fin: props.date_fin,
     description: props.chambre.description,
-    prix: props.chambre.prix,
-    jours: props.chambre.jours,
     disponible: props.chambre.disponible,
 });
 let bouton_envoyer = ref(true);

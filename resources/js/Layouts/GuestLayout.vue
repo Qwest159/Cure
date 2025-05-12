@@ -33,12 +33,7 @@ const showingNavigationDropdown = ref(false);
                                 <ApplicationMark />
                             </Link>
                         </div>
-                        <a
-                            id="tel"
-                            class="items-center border-b-2 border-transparent text-base font-medium leading-5 text-white focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-                            href="tel:+1234567890"
-                            >Tél: 234 567 890</a
-                        >
+
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:ms-10 sm:flex">
                             <NavLink
@@ -66,6 +61,12 @@ const showingNavigationDropdown = ref(false);
                                 Contact
                             </NavLink>
                         </div>
+                        <a
+                            id="tel"
+                            class="items-center border-b-2 border-transparent text-base font-medium leading-5 text-white focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+                            href="tel:+1234567890"
+                            >Tél: 234 567 890</a
+                        >
                     </div>
 
                     <!-- Hamburger -->
@@ -158,7 +159,7 @@ const showingNavigationDropdown = ref(false);
         <footer>
             <article class="">
                 <section id="reseau">
-                    <h2>Me Contacter</h2>
+                    <h2>Me contacter</h2>
                     <ul>
                         <li>
                             <i class="fa-solid fa-envelope"></i
@@ -171,7 +172,7 @@ const showingNavigationDropdown = ref(false);
                     </ul>
                 </section>
                 <section>
-                    <h2>À PROPOS</h2>
+                    <h2>À propos</h2>
                     <ul>
                         <li>
                             <a

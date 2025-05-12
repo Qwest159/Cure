@@ -53,8 +53,16 @@ typographie paragraphe => Roboto
     article#contact {
         @apply w-4/6 !important;
     }
+    .wrap {
+        @apply flex-wrap;
+    }
 }
+
 @media (max-width: 800px) {
+    #nav_back a {
+        @apply text-lg !important;
+        @apply px-1 !important;
+    }
     nav #tel {
         position: static !important;
         margin: auto !important;
@@ -62,11 +70,11 @@ typographie paragraphe => Roboto
 
     /* -----------accueil---------------- */
     h1,
-    h2,
-    nav {
+    h2 {
         @apply text-3xl;
     }
-    button,
+
+    button:not(.plusieurs),
     p:not(form p),
     figcaption,
     li,

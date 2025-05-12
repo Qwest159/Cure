@@ -18,7 +18,17 @@ function valeur_total(tableau_produit) {
 <template>
     <GuestLayout title="Les formules bien-être"
         ><h1 class="h1_titre">Les formules bien-être</h1>
-        <article id="bien_être">
+        <p>
+            Pour d'autres produits, n'hésitez pas à jeter un œil sur mon
+            <a
+                href="http://310002138977.fbo.foreverliving.com/bel/fr-be/home"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-bold"
+                >site de vente.</a
+            >
+        </p>
+        <article id="bien_être" v-if="form.formules.length > 0">
             <section
                 v-for="formule in form.formules"
                 :key="formule.id"
@@ -49,16 +59,7 @@ function valeur_total(tableau_produit) {
                 </p>
             </section>
         </article>
-        <p class="important">
-            <a
-                href="http://310002138977.fbo.foreverliving.com/bel/fr-be/home"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Pour d'autres produits, n'hésitez pas à jeter un œil sur mon
-                site de vente.</a
-            >
-        </p>
+        <p v-else class="rien">Pas de formule pour le moment</p>
     </GuestLayout>
 </template>
 <style scoped></style>

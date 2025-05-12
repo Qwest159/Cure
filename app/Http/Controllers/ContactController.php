@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\Email;
 use App\Models\Bien_etre;
 use App\Models\Chambre;
+use App\Models\Date;
 use Illuminate\Mail\Mailable;
 
 use Illuminate\Http\Request;
@@ -17,9 +18,11 @@ class ContactController extends Controller
     {
         $jetstream = auth()->check() ? $this->getJetstreamInfo() : null;
 
-        $chambre_dispo = Chambre::select("id", "nom", "date_debut", "date_fin", "prix")
-            ->where("disponible", true)
-            ->get();
+
+
+        $chambre_dispo = Chambre::select("id", "nom")->with(['dates'])->get();
+
+        $dates = Date::all();
 
         $formules = Bien_etre::with('produits')->where("disponible", true)
             ->get();
@@ -29,6 +32,7 @@ class ContactController extends Controller
             'jetstream' => $jetstream,
             'chambre_dispo' => $chambre_dispo,
             'formules' => $formules,
+            'dates' => $dates,
             'auth' => auth()->user(),
         ]);
     }
@@ -42,6 +46,7 @@ class ContactController extends Controller
             'téléphone' => 'required|string|min:6|max:20',
             'nombres' => 'required|integer|min:1|max:10',
             'chambre' => 'required',
+            'date' => 'required',
             'cure' => 'required|string|in:Oui,Non',
             'formule1' => 'nullable|string|required_if:Cure,Oui',
             'formule2' => 'nullable|string',
@@ -60,56 +65,11 @@ class ContactController extends Controller
             $tableau_données_nettoyées[$key] = netoyageCharactere($value);
         }
 
-        // dd($tableau_données_nettoyées);
-
-
-        // ------------DATE-------------
-
-        // function convertDate($date)
-        // {
-        //     // Séparer la date en année, mois et jour
-        //     list($year, $month, $day) = explode('-', $date);
-
-        //     // Retourner la date au format DD.MM.YY
-        //     return $day . '-' . $month . '-' . $year;
-        // }
-
-
-        // $date_nettoyée = netoyageCharactere($validatedData['Date']);
-        // if ($date_nettoyée <= date("Y-m-d")) {
-        //     return back()->with('date', "La date " . convertDate($date_nettoyée) . " est invalide");
-        // }
-        // DETSINAIRE ICIIIIIIIIIIIIIIIIIIIIII
 
         if ($tableau_données_nettoyées) {
             Mail::to('projet-php@qwesty.be')->send(new Email($tableau_données_nettoyées));
         }
 
-
-
-
         redirect()->back();
-
-
-        // foreach ($donnée['image'] as $imagePath) {
-        //     Storage::delete($imagePath);
-        // }
-
-
-        // if ($request->hasFile('images')) {
-        //     for ($i = 0; $i < count($request->file('images')); $i++) {
-        //         $image = Image_temp::make();
-        //         $path = $request->file('images')[$i]->store('images', 'public');
-
-        //         // Enregistre le chemin de l'image dans la base de données
-        //         $image->img_path = $path;
-
-        //         $donnée["image"][$i] = $path;
-        //         $image->save();
-        //     }
-        // }
-
-
-        // Mail::to('projet-php@qwesty.be')->send(new Email($donnée));
     }
 }

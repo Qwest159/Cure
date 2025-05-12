@@ -84,8 +84,6 @@ class FormuleController extends Controller
         if ($request->hasFile('img_path')) {
             $formule->img_path = $request->file('img_path')->store('produits', 'public');
         }
-
-
         $formule->description = $validatedData['description'];
         $formule->disponible = $validatedData['disponible'];
 
@@ -104,7 +102,7 @@ class FormuleController extends Controller
     }
 
 
-
+    // -------------PRODUIT DES FORMULES -------------
 
 
     public function edit_produit($id)
@@ -121,11 +119,11 @@ class FormuleController extends Controller
     public function update_produit(Request $request, $id_formule)
     {
         $validatedData = $request->validate([
-            'produit' => 'required',
+            'produit_id' => 'required',
         ]);
         $formule_pivot = new FormuleProduit();
         $formule_pivot->bien_etre_id =  $id_formule;
-        $formule_pivot->produit_id = $validatedData['produit'];
+        $formule_pivot->produit_id = $validatedData['produit_id'];
 
         $formule_pivot->save();
 

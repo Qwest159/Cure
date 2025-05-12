@@ -20,12 +20,7 @@ return new class extends Migration
             $table->string('nbr_personnes');
             $table->string('nbr_lit');
             $table->string('nbr_sdb');
-            $table->string('date_debut');
-            $table->string('date_fin');
             $table->string('description');
-            $table->string('prix');
-            $table->string('jours');
-            $table->boolean('disponible')->default(true);
             $table->timestamps();
         });
     }

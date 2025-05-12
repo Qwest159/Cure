@@ -12,6 +12,7 @@ use App\Models\Chambre;
 use App\Http\Controllers\Admin\ChambreController as AdminChambreController;
 use App\Http\Controllers\Admin\FormuleController as AdminFormuleController;
 use App\Http\Controllers\Admin\ProduitController as AdminProduitController;
+use App\Http\Controllers\Admin\DateController as AdminDateController;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,8 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/cure_virginie', [CureController::class, 'index'])->name('cure_accueil');
+
+
     // ----- Chambre-----
     Route::get('/cure_chambre', [AdminChambreController::class, 'index'])->name('cure_chambre');
     Route::get('/cure_chambre/create', [AdminChambreController::class, "create"])->name('cure_chambre.create');
@@ -59,6 +62,27 @@ Route::middleware([
 
 
 
+
+    // --------Date des chambres------------
+
+    // Création des Dates
+    Route::get('/cure_date', [AdminDateController::class, 'index'])->name('cure_date');
+    Route::get('/cure_date/create', [AdminDateController::class, "create"])->name('cure_date.create');
+    Route::post('/cure_date/store', [AdminDateController::class, "store"])->name('cure_date.store');
+    Route::get('/cure_date/edit/{id}', [AdminDateController::class, "edit"])->name('cure_date.edit');
+    Route::post('/cure_date/update/{date}', [AdminDateController::class, "update"])->name('cure_date.update');
+    Route::delete('/cure_date/destroy/{id}', [AdminDateController::class, 'destroy'])->name('cure_date.destroy');
+
+
+
+    // INFO DES CHAMBRE + DATE
+
+    Route::get('/cure_chambre/edit/date/{id}', [AdminChambreController::class, "edit_date"])->name('cure_chambre.edit_date');
+    Route::post(
+        '/cure_chambre/update/date/{chambre_id}',
+        [AdminChambreController::class, "update_date"]
+    )->name('cure_chambre.update_date');
+    Route::delete('/cure_chambre/destroy/date/{chambre_id}/{date_id}', [AdminChambreController::class, 'destroy_date'])->name('cure_chambre.destroy_date');
 
 
 

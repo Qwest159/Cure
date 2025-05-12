@@ -9,24 +9,24 @@ import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import ActionModal from "@/Components/ActionModal.vue";
 
-const props = defineProps(["produits"]);
+const props = defineProps(["dates"]);
 const form = useForm(props);
 // DELETE AVEC MODAL
-const confirmingproduitDeletion = ref(false);
+const confirmingdateDeletion = ref(false);
 let affichage_resultat = ref(false);
 
-let selected_produit_id = 0;
-let selected_produit_nom = "";
-const confirmproduitDeletion = (id, nom) => {
-    selected_produit_id = id;
-    selected_produit_nom = nom;
-    confirmingproduitDeletion.value = true;
+let selected_date_id = 0;
+let selected_date_nom = "";
+const confirmdateDeletion = (id, nom) => {
+    selected_date_id = id;
+    selected_date_nom = nom;
+    confirmingdateDeletion.value = true;
 };
 
-function deleteproduit() {
-    form.delete(route("cure_produit.destroy", selected_produit_id), {
+function deletedate() {
+    form.delete(route("cure_date.destroy", selected_date_id), {
         onSuccess: () => {
-            produitRecherche = props.produits;
+            dateRecherche = props.dates;
             searchinput.value = "";
             closeModal();
             affichage_resultat.value = true; // Afficher le message "Veuillez patienter"
@@ -39,28 +39,31 @@ function deleteproduit() {
 }
 
 const closeModal = () => {
-    confirmingproduitDeletion.value = false;
+    confirmingdateDeletion.value = false;
 };
 
 let searchinput = ref("");
 
 // Résultats de la recherche
-let produitRecherche = ref(props.produits);
+let dateRecherche = ref(props.dates);
 
 // Fonction de recherche
 function function_rechercher() {
     const searchValue = searchinput.value.toLowerCase();
-    produitRecherche.value = props.produits.filter((produit) => {
-        return produit.nom.toLowerCase().includes(searchValue);
+    dateRecherche.value = props.dates.filter((date) => {
+        return (
+            date.date_debut.toLowerCase().includes(searchValue),
+            date.date_fin.toLowerCase().includes(searchValue)
+        );
     });
 }
 </script>
 
 <template>
-    <AppLayout title="produits">
+    <AppLayout title="dates">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Les produits
+                Les dates
             </h2>
         </template>
 
@@ -71,16 +74,16 @@ function function_rechercher() {
             name="search"
             id="search"
             v-model="searchinput"
-            placeholder="Rechercher un produit"
+            placeholder="Rechercher une date"
             @input="function_rechercher"
         />
 
         <button
             class="my-4"
-            id="produit_recherche"
-            @click="() => $inertia.get(route('cure_produit.create'))"
+            id="date_recherche"
+            @click="() => $inertia.get(route('cure_date.create'))"
         >
-            Ajouter produit
+            Ajouter date
         </button>
         <button
             v-if="affichage_resultat"
@@ -92,21 +95,23 @@ function function_rechercher() {
             class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
             <section
-                v-for="produit in produitRecherche"
-                :key="produit.id"
+                v-for="date in dateRecherche"
+                :key="date.id"
                 class="border-4 p-4"
             >
-                <p>Nom: {{ produit.nom }}</p>
-                <p>Prix : {{ produit.prix }}€</p>
+                <h2 class="text-2xl">Date :</h2>
+                <p>
+                    <span class="text-cyan-500">{{ date.date_debut }}</span>
+                    /
+                    <span class="text-orange-400">{{ date.date_fin }}</span>
+                </p>
+                <p>Prix : {{ date.prix }}€</p>
                 <div class="flex space-x-4 mt-4">
                     <!-- Bouton Modifier -->
                     <button
                         class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150 plusieurs"
                         @click="
-                            () =>
-                                $inertia.get(
-                                    route('cure_produit.edit', produit.id)
-                                )
+                            () => $inertia.get(route('cure_date.edit', date.id))
                         "
                     >
                         Modifier
@@ -119,10 +124,7 @@ function function_rechercher() {
                                 <DangerButton
                                     id="open-modal-button"
                                     @click="
-                                        confirmproduitDeletion(
-                                            produit.id,
-                                            produit.nom
-                                        )
+                                        confirmdateDeletion(date.id, date.nom)
                                     "
                                 >
                                     Supprimer
@@ -134,14 +136,14 @@ function function_rechercher() {
             </section>
         </article>
 
-        <DialogModal :show="confirmingproduitDeletion" @close="closeModal">
+        <DialogModal :show="confirmingdateDeletion" @close="closeModal">
             <template #title>
                 Supprimer
-                {{ selected_produit_nom }}</template
+                {{ selected_date_nom }}</template
             >
 
             <template #content>
-                La produit <strong>"{{ selected_produit_nom }}"</strong> va être
+                La date <strong>"{{ selected_date_nom }}"</strong> va être
                 supprimée
             </template>
 
@@ -153,7 +155,7 @@ function function_rechercher() {
                     :class="{
                         'opacity-25': form.processing,
                     }"
-                    @click="deleteproduit()"
+                    @click="deletedate()"
                 >
                     Supprimer
                 </DangerButton>

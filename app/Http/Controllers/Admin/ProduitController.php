@@ -86,7 +86,6 @@ class ProduitController extends Controller
         // Gate::authorize('delete', $article);
         $produit = Produit::findOrFail($id);
         $produit->delete();
-
         return redirect()->back();
     }
 }

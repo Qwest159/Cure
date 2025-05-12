@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Contact>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Chambre_date>
  */
-class ContactFactory extends Factory
+class Chambre_DateFactory extends Factory
 {
     /**
      * Define the model's default state.

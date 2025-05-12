@@ -17,7 +17,7 @@ const props = defineProps(["formules"]);
                 <span class="block">de bien-être durable ?</span>
             </h1>
             <h2 id="h2_description">
-                Retrouver votre équilibre et coachez-vous
+                Retrouvez votre équilibre et coachez-vous
             </h2>
             <button
                 id="contactez"

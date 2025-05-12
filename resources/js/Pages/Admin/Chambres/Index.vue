@@ -90,24 +90,36 @@ function function_rechercher() {
             Supprimer réussi
         </button>
         <article
-            class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text_button"
         >
             <section
                 v-for="chambre in chambreRecherche"
                 :key="chambre.id"
-                class="border-4 p-4"
+                class="border-4 p-4 space-y-2 grid"
             >
-                <p>Nom: {{ chambre.nom }} ({{ chambre.prix }}€)</p>
-                <p>
-                    Date :
+                <p>Nom: {{ chambre.nom }}</p>
+                <h2 class="text-2xl my-2">Date :</h2>
+                <p v-for="chambre in chambre.dates" :key="chambre.id">
                     <span class="text-cyan-500">{{ chambre.date_debut }}</span>
                     /
                     <span class="text-orange-400">{{ chambre.date_fin }}</span>
+                    ({{ chambre.prix }}€)
                 </p>
-                <div class="flex space-x-4 mt-4">
+                <div class="flex flex-wrap space-x-4 m-auto items-center wrap">
+                    <button
+                        class="inline-flex items-center justify-center px-4 py-2 bg-violet-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-violet-500 active:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 transition ease-in-out duration-150 plusieurs"
+                        @click="
+                            () =>
+                                $inertia.get(
+                                    route('cure_chambre.edit_date', chambre.id)
+                                )
+                        "
+                    >
+                        Date
+                    </button>
                     <!-- Bouton Modifier -->
                     <button
-                        class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                        class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150 plusieurs"
                         @click="
                             () =>
                                 $inertia.get(
