@@ -51,8 +51,8 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                 <h2>Propriétaire du Site</h2>
                 <p><strong>Nom de l’entreprise :</strong> Cure&amp;Airbnb</p>
                 <p>
-                    <strong>Adresse :</strong> 12 Rue de l’Énergie, 1000
-                    Bruxelles, Belgique
+                    <strong>Adresse :</strong>Avenue Fronsny (1060 Bruxelles),
+                    Belgique
                 </p>
                 <p>
                     <strong>Numéro de téléphone : </strong>

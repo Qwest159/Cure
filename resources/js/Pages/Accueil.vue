@@ -111,7 +111,7 @@ const props = defineProps(["formules"]);
                 >
                     <img
                         :src="`storage/${formule.img_path}`"
-                        :alt="formule.nom"
+                        :alt="formule.description"
                     />
                     <figcaption>{{ formule.nom }}</figcaption>
                 </figure>

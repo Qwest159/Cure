@@ -38,11 +38,14 @@ const logout = () => {
         <Banner />
 
         <div class="min-h-screen n">
-            <nav class="nav_background">
+            <nav class="fixed w-full z-50">
                 <!-- Primary Navigation Menu -->
-                <div id="back" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    id="nav_back"
+                    class="mx-auto px-4 sm:px-6 lg:px-8 nav_background"
+                >
                     <div class="flex justify-between h-16">
-                        <div class="flex">
+                        <div class="flex w-full py-2">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('cure_accueil')">
@@ -52,7 +55,7 @@ const logout = () => {
 
                             <!-- Navigation Links -->
                             <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex"
                             >
                                 <NavLink
                                     :href="route('cure_accueil')"
@@ -237,7 +240,7 @@ const logout = () => {
                                                 $page.props.jetstream
                                                     .managesProfilePhotos
                                             "
-                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition"
+                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition w-9"
                                         >
                                             <img
                                                 class="size-8 rounded-full object-cover"
@@ -399,7 +402,9 @@ const logout = () => {
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
+                    <div
+                        class="pt-4 pb-1 border-t border-gray-200 nav_background"
+                    >
                         <div class="flex items-center px-4">
                             <div
                                 v-if="

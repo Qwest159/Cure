@@ -38,7 +38,7 @@ function valeur_total(tableau_produit) {
                 <figure>
                     <img
                         :src="`storage/${formule.img_path}`"
-                        :alt="formule.nom"
+                        :alt="formule.description"
                     />
                 </figure>
                 <h2>{{ formule.nom }}</h2>

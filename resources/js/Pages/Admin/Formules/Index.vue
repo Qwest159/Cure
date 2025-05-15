@@ -105,7 +105,7 @@ function valeur_total(tableau_produit) {
             <section
                 v-for="formule in formuleRecherche"
                 :key="formule.id"
-                class="border-4 p-4 space-y-2 grid"
+                class="border-4 p-3 space-y-2 grid"
             >
                 <p>Nom: {{ formule.nom }}</p>
                 <ul>
@@ -124,10 +124,10 @@ function valeur_total(tableau_produit) {
                     {{ valeur_total(formule.produits) }}€
                 </p>
                 <p :class="`${formule.disponible ? 'text-green-500' : 'text-red-600' }`">Disponible : {{ formule.disponible ? "Oui" : "Non" }}</p>
-                <div class="flex space-x-4 m-auto items-center wrap">
+                <div class="flex  w-full justify-evenly items-center wrap">
 
                     <button
-                        class="inline-flex items-center justify-center px-4 py-2 bg-pink-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-600 active:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:ring-offset-2 transition ease-in-out duration-150 self-center plusieurs"
+                        class="inline-flex items-center justify-center px-4 <py-2 bg-pink-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-600 active:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600 focus:ring-offset-2 transition ease-in-out duration-150 self-center plusieurs"
                         @click="
                             () =>
                                 $inertia.get(

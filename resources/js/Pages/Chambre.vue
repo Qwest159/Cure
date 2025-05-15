@@ -30,7 +30,7 @@ function jour_prix(chambre_id, date_id, dates) {
                 <figure id="partie_gauche">
                     <img
                         :src="`storage/${chambre.img_path}`"
-                        :alt="chambre.nom"
+                        :alt="chambre.description"
                     />
                 </figure>
                 <div id="partie_droite">
