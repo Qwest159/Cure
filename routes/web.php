@@ -31,10 +31,10 @@ Route::get('/Mentions_légales', [AccueilController::class, 'Mentions_légales']
 Route::get('/Données_personnelles', [AccueilController::class, 'Données_personnelles'])->name('donnees_personnelles');
 
 // ----------PARTIE CHANGEMENT DE LIEN------------
-Route::get('/connexion1234', [AuthenticatedSessionController::class, 'create'])
+Route::get('/connexion_virginie39', [AuthenticatedSessionController::class, 'create'])
     ->middleware(['guest'])
     ->name('login');
-Route::post('/connexion1234', [AuthenticatedSessionController::class, 'store'])
+Route::post('/connexion_virginie39', [AuthenticatedSessionController::class, 'store'])
     ->middleware(['guest']);
 
 
@@ -46,8 +46,6 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/cure_virginie', [CureController::class, 'index'])->name('cure_accueil');
-
-
     // ----- Chambre-----
     Route::get('/cure_chambre', [AdminChambreController::class, 'index'])->name('cure_chambre');
     Route::get('/cure_chambre/create', [AdminChambreController::class, "create"])->name('cure_chambre.create');

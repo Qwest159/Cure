@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             // ou se trouve l'image
             $table->string('nom');
-            // path = /storage/$section/$nom_image
             $table->string('img_path');
             $table->string('nbr_personnes');
             $table->string('nbr_lit');
             $table->string('nbr_sdb');
             $table->string('description');
+            $table->boolean('disponible')->default(false);
             $table->timestamps();
         });
     }

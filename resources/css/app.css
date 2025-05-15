@@ -259,7 +259,9 @@ footer article section {
 footer article section h2 {
     @apply pb-5;
 }
-
+footer i {
+    padding-right: 0.3em;
+}
 /* ----------Bien-être Formule------------- */
 
 main .h1_titre {

@@ -116,14 +116,14 @@ function valeur_total(tableau_produit) {
                     :key="produit.id"
                     class=""
                 >
-                    {{ produit.nom }}
+                    {{ produit.nom }} ({{ produit.prix }}€)
                 </li>
 
                 <p class="">
                     Valeur totale de la formule:
                     {{ valeur_total(formule.produits) }}€
                 </p>
-                <p>Disponible : {{ formule.disponible ? "Oui" : "Non" }}</p>
+                <p :class="`${formule.disponible ? 'text-green-500' : 'text-red-600' }`">Disponible : {{ formule.disponible ? "Oui" : "Non" }}</p>
                 <div class="flex space-x-4 m-auto items-center wrap">
 
                     <button

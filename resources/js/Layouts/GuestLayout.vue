@@ -35,7 +35,7 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <!-- Navigation Links -->
-                        <div class="hidden space-x-8 sm:ms-10 sm:flex">
+                        <div class="hidden space-x-8 sm:ms-7 sm:flex">
                             <NavLink
                                 :href="route('accueil')"
                                 :active="route().current('accueil')"
@@ -64,9 +64,10 @@ const showingNavigationDropdown = ref(false);
                         <a
                             id="tel"
                             class="items-center border-b-2 border-transparent text-base font-medium leading-5 text-white focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-                            href="tel:+1234567890"
-                            >Tél: 234 567 890</a
+                            href="tel:+32477602634"
+                            ><i class="fa-solid fa-phone"></i> 0477 60 26 34</a
                         >
+                        <a href=""></a>
                     </div>
 
                     <!-- Hamburger -->
@@ -163,11 +164,13 @@ const showingNavigationDropdown = ref(false);
                     <ul>
                         <li>
                             <i class="fa-solid fa-envelope"></i
-                            ><a href="http://"> email</a>
+                            ><a href="mailto:virginievandenbemden@gmail.com"
+                                >virginie@gmail.com</a
+                            >
                         </li>
                         <li>
                             <i class="fa-solid fa-phone"></i
-                            ><a href="http://"> téléphone</a>
+                            ><a href="tel:+32477602634">0477 60 26 34</a>
                         </li>
                     </ul>
                 </section>
@@ -203,16 +206,22 @@ const showingNavigationDropdown = ref(false);
                     <ul>
                         <li>
                             <i class="fa-brands fa-facebook text-2xl"></i>
-                            <a href="http://"> Cure&airbnsta.com</a>
+                            <a
+                                target="_blank"
+                                href="https://www.facebook.com/groups/731075020780670"
+                                >virgine@facebook</a
+                            >
                         </li>
-                        <li>
+                        <!-- <li>
                             <i class="fa-brands fa-instagram text-2xl"></i
                             ><a href="http://"> facebook.Cure&A.com</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </section>
             </article>
-            <h3 class="text-center pt-5">© Cure, Made by Duchesne R.</h3>
+            <h3 class="text-center pt-5">
+                © Cure & Airbnb, made by Duchesne R.
+            </h3>
         </footer>
     </div>
 </template>

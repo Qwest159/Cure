@@ -71,8 +71,9 @@ function jour_prix(chambre_id, date_id, dates) {
                     </p>
                     <p v-show="prix_change[chambre.id]" id="jours_prix">
                         <strong>
-                            {{ prix_change[chambre.id] }}€
-                            {{ jours_change[chambre.id] }} jours
+                            {{ prix_change[chambre.id] }}€ /
+                            {{ jours_change[chambre.id] }} jours /
+                            <span class="text-red-500">ALL IN</span>
                         </strong>
                     </p>
                 </div>

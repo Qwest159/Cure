@@ -19,7 +19,8 @@ function valeur_total(tableau_produit) {
     <GuestLayout title="Les formules bien-être"
         ><h1 class="h1_titre">Les formules bien-être</h1>
         <p>
-            Pour d'autres produits, n'hésitez pas à jeter un œil sur mon
+            Les produits inclus dans les formules sont également disponibles
+            individuellement sur mon
             <a
                 href="http://310002138977.fbo.foreverliving.com/bel/fr-be/home"
                 target="_blank"

@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
 
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Virginie',
+            'email' => 'virginiecure9@email.com',
             'admin' => true,
         ]);
 
@@ -78,6 +78,8 @@ class DatabaseSeeder extends Seeder
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
             'description' => 'Chambres avec beaucoup de charme, près de la fenêtre, côté jardin.',
+            'disponible' => true,
+
         ]);
         Chambre::factory()->create([
             'nom' => 'Prince',
@@ -86,6 +88,8 @@ class DatabaseSeeder extends Seeder
             'nbr_lit' => '1',
             'nbr_sdb' => '1',
             'description' => 'Chambre exceptionnelle qui vous redonnera énergie et vitalité pour atteindre une forme olympique.',
+            'disponible' => true,
+
         ]);
         FormuleProduit::factory()->create([
             'bien_etre_id' => 1,

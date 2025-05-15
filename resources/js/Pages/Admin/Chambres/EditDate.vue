@@ -11,10 +11,14 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 const confirmingdateDeletion = ref(false);
 
 let selected_date_id = 0;
-let selected_date_nom = "";
-const confirmdateDeletion = (id, nom) => {
+let selected_date_debut = "";
+let selected_date_fin = "";
+let selected_date_prix = "";
+const confirmdateDeletion = (id, debut, fin, prix) => {
     selected_date_id = id;
-    selected_date_nom = nom;
+    selected_date_debut = debut;
+    selected_date_fin = fin;
+    selected_date_prix = prix;
     confirmingdateDeletion.value = true;
 };
 
@@ -166,9 +170,19 @@ function succes() {
                         }}€)
                     </option>
                 </select>
-
+                <!-- Bouton -->
+                <button
+                    class="bouton m-auto"
+                    v-show="bouton_envoyer"
+                    type="submit"
+                >
+                    Envoyer
+                </button>
+                <button class="bouton m-auto" disabled v-show="!bouton_envoyer">
+                    Veuillez patienter
+                </button>
                 <ul>
-                    dates:
+                    Dates :
                 </ul>
                 <li
                     v-for="date in chambre.dates"
@@ -192,7 +206,9 @@ function succes() {
                                     @click="
                                         confirmdateDeletion(
                                             date.id,
-                                            date.date_debut / date.date_fin
+                                            date.date_debut,
+                                            date.date_fin,
+                                            date.prix
                                         )
                                     "
                                 >
@@ -202,29 +218,27 @@ function succes() {
                         </template>
                     </ActionModal>
                 </li>
-
-                <!-- Bouton -->
-                <button
-                    class="bouton m-auto"
-                    v-show="bouton_envoyer"
-                    type="submit"
-                >
-                    Envoyer
-                </button>
-                <button class="bouton m-auto" disabled v-show="!bouton_envoyer">
-                    Veuillez patienter
-                </button>
             </form>
         </article>
         <DialogModal :show="confirmingdateDeletion" @close="closeModal">
             <template #title>
-                Supprimer
-                {{ selected_date_nom }}</template
+                <p>
+                    <span class="text-cyan-500">{{ selected_date_debut }}</span>
+                    /
+                    <span class="text-orange-400">{{ selected_date_fin }}</span>
+                    ({{ selected_date_prix }}€)
+                </p></template
             >
 
             <template #content>
-                La date <strong>"{{ selected_date_nom }}"</strong> va être
-                supprimée de la date
+                La date
+                <p>
+                    <span class="text-cyan-500">{{ selected_date_debut }}</span>
+                    /
+                    <span class="text-orange-400">{{ selected_date_fin }}</span>
+                    ({{ selected_date_prix }}€)
+                </p>
+                va être supprimée
             </template>
 
             <template #footer>

@@ -65,8 +65,8 @@ function handlefilechange(event) {
             </button>
             <h2 class="text-red-600 text-center m-auto pt-5">
                 <span class=""
-                    >N'oubliez pas de valider "Disponible" lors de la
-                    modification de la formule.</span
+                    >N'oubliez pas de valider "Disponible" dans modification de
+                    la formule.</span
                 >
             </h2>
             <button
@@ -103,7 +103,7 @@ function handlefilechange(event) {
                 <div class="">
                     <div>
                         <label
-                            for="nom"
+                            for="img"
                             class="block text-sm font-medium text-gray-700"
                             >Image</label
                         >

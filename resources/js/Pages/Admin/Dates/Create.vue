@@ -49,7 +49,7 @@ function succes() {
     <AppLayout title="date">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Création d'un date
+                Création d'une date
             </h2>
         </template>
 

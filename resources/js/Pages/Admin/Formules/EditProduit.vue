@@ -125,36 +125,6 @@ function valeur_total(tableau_produit) {
                 enctype="multipart/form-data"
                 class="space-y-6 p-5 flex flex-col border-2 rounded-xl"
             >
-                <!-- <div>
-                    <label>Disponible</label>
-
-                    <div class="grouper">
-                        <input
-                            type="radio"
-                            id="true"
-                            :value="1"
-                            v-model="form.disponible"
-                            name="disponible"
-                        />
-                        <label for="true">Oui</label>
-
-                        <input
-                            type="radio"
-                            id="false"
-                            :value="0"
-                            v-model="form.disponible"
-                            name="disponible"
-                        />
-                        <label for="false">Non</label>
-                    </div>
-                    <p
-                        v-show="form.errors.disponible"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.disponible }}
-                    </p>
-                </div> -->
-
                 <label class="titre_cure">Rajout du produit</label>
 
                 <select v-model="form.produit_id">
@@ -166,7 +136,17 @@ function valeur_total(tableau_produit) {
                         {{ produit.nom }}
                     </option>
                 </select>
-
+                <!-- Bouton -->
+                <button
+                    class="bouton m-auto"
+                    v-show="bouton_envoyer"
+                    type="submit"
+                >
+                    Envoyer
+                </button>
+                <button class="bouton m-auto" disabled v-show="!bouton_envoyer">
+                    Veuillez patienter
+                </button>
                 <ul>
                     Produits:
                 </ul>
@@ -204,18 +184,6 @@ function valeur_total(tableau_produit) {
                     Valeur totale de la formule:
                     {{ valeur_total(formule.produits) }}€
                 </p>
-
-                <!-- Bouton -->
-                <button
-                    class="bouton m-auto"
-                    v-show="bouton_envoyer"
-                    type="submit"
-                >
-                    Envoyer
-                </button>
-                <button class="bouton m-auto" disabled v-show="!bouton_envoyer">
-                    Veuillez patienter
-                </button>
             </form>
         </article>
         <DialogModal :show="confirmingproduitDeletion" @close="closeModal">

@@ -18,12 +18,12 @@ let affichage_resultat = ref(false);
 let selected_date_id = 0;
 let selected_date_debut = "";
 let selected_date_fin = "";
-let selected_date_pix = "";
+let selected_date_prix = "";
 const confirmdateDeletion = (id, debut, fin, prix) => {
     selected_date_id = id;
     selected_date_debut = debut;
     selected_date_fin = fin;
-    selected_date_pix = prix;
+    selected_date_prix = prix;
     confirmingdateDeletion.value = true;
 };
 
@@ -152,7 +152,7 @@ function function_rechercher() {
                     <span class="text-cyan-500">{{ selected_date_debut }}</span>
                     /
                     <span class="text-orange-400">{{ selected_date_fin }}</span>
-                    ({{ selected_date_pix }}€)
+                    ({{ selected_date_prix }}€)
                 </p>
             </template>
 
@@ -162,7 +162,7 @@ function function_rechercher() {
                     <span class="text-cyan-500">{{ selected_date_debut }}</span>
                     /
                     <span class="text-orange-400">{{ selected_date_fin }}</span>
-                    ({{ selected_date_pix }}€)
+                    ({{ selected_date_prix }}€)
                 </p>
                 va être supprimée
             </template>

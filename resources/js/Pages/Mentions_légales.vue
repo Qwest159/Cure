@@ -6,6 +6,47 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
         <article id="mention" class="">
             <h1>Mentions Légales</h1>
 
+            <h2>Crédits</h2>
+            <p>
+                Les photos utilisées sur ce site proviennent de la plateforme
+                <a href="https://www.pexels.com/fr-fr/" target="_blank"
+                    >Pexels</a
+                >
+                et sont libres de droits.
+            </p>
+            <p>
+                Photo de
+                <a
+                    href="https://www.pexels.com/fr-fr/photo/30018989/"
+                    target="_blank"
+                    >Alexander Mass</a
+                ><br />
+                Photo de
+                <a
+                    href="https://www.pexels.com/fr-fr/photo/paysage-montagnes-nature-nuageux-143577/"
+                    target="_blank"
+                    >Markus Spiske</a
+                ><br />
+                Photo de
+                <a
+                    href="https://www.pexels.com/fr-fr/photo/maison-en-bois-blanc-et-brun-pres-des-arbres-nus-sous-le-ciel-blanc-3935333/"
+                    target="_blank"
+                    >Curtis Adams</a
+                ><br />
+                Photo de
+                <a
+                    href="https://www.pexels.com/fr-fr/photo/guirlandes-lumineuses-accrochees-au-cadre-de-lit-1329711/"
+                    target="_blank"
+                    >Tan Danh</a
+                ><br />
+                Photo de
+                <a
+                    href="https://www.pexels.com/fr-fr/photo/couvre-lit-vert-1879061/"
+                    target="_blank"
+                    >Dmitry Zvolskiy</a
+                >
+            </p>
+
             <section>
                 <h2>Propriétaire du Site</h2>
                 <p><strong>Nom de l’entreprise :</strong> Cure&amp;Airbnb</p>
@@ -13,22 +54,29 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                     <strong>Adresse :</strong> 12 Rue de l’Énergie, 1000
                     Bruxelles, Belgique
                 </p>
-                <p><strong>Numéro de téléphone :</strong> 0474 196555</p>
+                <p>
+                    <strong>Numéro de téléphone : </strong>
+                    <a href="tel:+32477602634">
+                        <strong>0477 60 26 34</strong></a
+                    >
+                </p>
                 <p>
                     <strong>Adresse email :</strong>
-                    <a href="mailto:info@viriginie.be">info@viriginie.be</a>
+                    <a href="mailto:virginievandenbemden@gmail.com"
+                        ><strong> virginievandenbemden@gmail.com</strong></a
+                    >
                 </p>
                 <p><strong>Numéro de TVA :</strong> BE 0555123.456.789</p>
             </section>
 
             <section>
                 <h2>Hébergeur du Site</h2>
-                <p><strong>Nom :</strong> WebyuiHosting Belgium</p>
+                <p><strong>Nom :</strong> OVH SAS</p>
                 <p>
-                    <strong>Adresse :</strong> 46 Avenue de l’Internet, 105440
-                    Bruxelles, Belgique
+                    <strong>Adresse :</strong> 2 Rue Kellermann, 59100 Roubaix,
+                    France
                 </p>
-                <p><strong>Numéro de téléphone :</strong> +32 2 987 654 33</p>
+                <p><strong>Numéro de téléphone :</strong> +33 9 72 10 10 07</p>
             </section>
 
             <section>

@@ -28,7 +28,6 @@ function succes() {
                 img_path: "",
                 nbr_lit: "",
                 nbr_sdb: "",
-                date_debut: "",
                 description: "",
             });
 
@@ -71,6 +70,12 @@ function handlefilechange(event) {
             >
                 Retour en arrière
             </button>
+            <h2 class="text-red-600 text-center m-auto pt-5">
+                <span class=""
+                    >N'oubliez pas de valider "Disponible" dans la modification
+                    de la chambre pour la faire apparaitre.</span
+                >
+            </h2>
             <button
                 v-if="affichage_resultat"
                 class="w-full p-2 bg-green-500 text-white text-center"
@@ -105,7 +110,7 @@ function handlefilechange(event) {
                 <div class="">
                     <div>
                         <label
-                            for="nom"
+                            for="img"
                             class="block text-sm font-medium text-gray-700"
                             >Image</label
                         >

@@ -13,7 +13,7 @@ let form = useForm({
     nbr_lit: props.chambre.nbr_lit,
     nbr_sdb: props.chambre.nbr_sdb,
     description: props.chambre.description,
-    // disponible: props.chambre.disponible,
+    disponible: props.chambre.disponible,
 });
 let bouton_envoyer = ref(true);
 let affichage_resultat = ref(false);
@@ -97,7 +97,7 @@ function handlefilechange(event) {
                     </div>
                 </div>
 
-                <!-- <div>
+                <div>
                     <label>Disponible</label>
 
                     <div class="grouper">
@@ -125,8 +125,7 @@ function handlefilechange(event) {
                     >
                         {{ form.errors.disponible }}
                     </p>
-                </div> -->
-
+                </div>
                 <div class="">
                     <div>
                         <label
@@ -215,86 +214,6 @@ function handlefilechange(event) {
                         class="text-sm text-red-500 mt-1"
                     >
                         {{ form.errors.nbr_sdb }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="date_debut"
-                        class="block text-sm font-medium text-gray-700"
-                        >Date de début</label
-                    >
-                    <input
-                        type="date"
-                        id="date_debut"
-                        v-model="form.date_debut"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.date_debut"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.date_debut }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="date_fin"
-                        class="block text-sm font-medium text-gray-700"
-                        >Date de fin</label
-                    >
-                    <input
-                        type="date"
-                        id="date_fin"
-                        v-model="form.date_fin"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.date_fin"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.date_fin }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="prix"
-                        class="block text-sm font-medium text-gray-700"
-                        >Prix</label
-                    >
-                    <input
-                        type="text"
-                        id="prix"
-                        v-model="form.prix"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.prix"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.prix }}
-                    </div>
-                </div>
-
-                <div>
-                    <label
-                        for="jours"
-                        class="block text-sm font-medium text-gray-700"
-                        >Nombre de jour</label
-                    >
-                    <input
-                        type="text"
-                        id="jours"
-                        v-model="form.jours"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    />
-                    <div
-                        v-if="form.errors.jours"
-                        class="text-sm text-red-500 mt-1"
-                    >
-                        {{ form.errors.jours }}
                     </div>
                 </div>
 

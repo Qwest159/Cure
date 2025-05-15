@@ -34,6 +34,19 @@ const props = defineProps(["formules"]);
                 à un programme complet : alimentation saine, sport quotidien et
                 ressourcement au cœur de la campagne.
             </p>
+            <p class="pt-5">
+                Le but est simple : choisir une
+                <a
+                    class="cursor-pointer font-bold"
+                    @click="() => $inertia.get(route('bien_etre'))"
+                    >formule bien-être</a
+                >,
+                <a
+                    class="cursor-pointer font-bold"
+                    @click="() => $inertia.get(route('chambre'))"
+                    >une chambre</a
+                >, et je m'occupe du reste !
+            </p>
         </article>
         <article id="univers">
             <h1>
@@ -109,16 +122,20 @@ const props = defineProps(["formules"]);
         </article>
         <article id="localisation">
             <h1>Localisation</h1>
+            <p>Rue du Molignat 6, 5377 Somme-Leuze</p>
             <section>
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d81694.43245120201!2d5.339842000000001!3d50.21813585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c026825ad1d17b%3A0xfbf7763207a668ea!2s6900%20Marche-en-Famenne!5e0!3m2!1sfr!2sbe!4v1745522564920!5m2!1sfr!2sbe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2548.023910413767!2d5.361518776251386!3d50.31014587156579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c04c80fe1e21a7%3A0x281b2499ad73424e!2sRue%20du%20Molignat%206%2C%205377%20Somme-Leuze!5e0!3m2!1sfr!2sbe!4v1747243790292!5m2!1sfr!2sbe"
                     style="border: 0"
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
             </section>
-            <p>Le transport de la gare à mon domicile est offert.</p>
+            <p>
+                <i class="fa-solid fa-car"></i> Le transport de la gare à mon
+                domicile est offert.
+            </p>
         </article>
     </GuestLayout>
 </template>

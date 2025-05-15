@@ -82,7 +82,6 @@ function succes() {
             });
 
             affichage_resultat.value = true;
-
             // Réinitialise après 5 secondes
             setTimeout(() => {
                 affichage_resultat.value = false;
@@ -336,12 +335,13 @@ function montrer_disparait() {
                 <section id="comment">
                     <label for="commentaire">Commentaire</label>
                     <textarea
+                        class="overflow-hidden"
                         ref="textarea"
                         @input="adjustHeight"
                         name="message"
                         id="message"
                         v-model="form.commentaire"
-                        placeholder="Votre commentaire"
+                        placeholder="Allergies ? Végan / Végétarien ? N'hésitez pas à laisser un commentaire"
                     ></textarea>
                     <p v-show="form.errors.commentaire">
                         {{ form.errors.commentaire }}
@@ -360,12 +360,12 @@ function montrer_disparait() {
 
             <p id="information">
                 Pour toute information complémentaire, veuillez me contacter au
-                <a href="tel:+1234567890" class=""
-                    ><strong>234 567 890</strong></a
-                >
+                <a href="tel:+32477602634"><strong>0477 60 26 34</strong></a>
                 ou bien par émail :
-                <a href="tfe@hotmail.be."><strong>tfe@hotmail.be</strong></a
-                >.
+                <a href="mailto:virginievandenbemden@gmail.com"
+                    ><strong>virginie@gmail.com</strong></a
+                >
+                .
             </p>
         </article>
         <p

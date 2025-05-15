@@ -90,7 +90,7 @@ class ChambreController extends Controller
             'nbr_lit' => 'required|string|max:5|min:1',
             'nbr_sdb' => 'required|string|max:5|min:1',
             'description' => 'required|string|max:150',
-            // 'disponible' => 'required|boolean',
+            'disponible' => 'required|boolean',
 
         ]);
         $Chambre->nom = $validatedData['nom'];
@@ -104,7 +104,7 @@ class ChambreController extends Controller
         $Chambre->nbr_lit = $validatedData['nbr_lit'];
         $Chambre->nbr_sdb = $validatedData['nbr_sdb'];;
         $Chambre->description = $validatedData['description'];
-        // $Chambre->disponible = $validatedData['disponible'];
+        $Chambre->disponible = $validatedData['disponible'];
 
         // Sauvegarder les modifications dans la base de données
         $Chambre->save();
@@ -154,7 +154,6 @@ class ChambreController extends Controller
     }
     public function destroy_date($chambre_id, $date_id)
     {
-
         $chambre_date = Chambre_date::where('chambre_id', $chambre_id)->where('date_id', $date_id)->first();
         $chambre_date->delete();
         return redirect()->back();
